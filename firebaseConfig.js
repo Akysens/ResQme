@@ -17,10 +17,11 @@ const firebaseConfig = {
   messagingSenderId: process.env.FIREBASE_messagingSenderId,
   appId: process.env.FIREBASE_appId,
   measurementId: process.env.FIREBASE_measurementId,
-  databaseURL: process.env.FIREBASE_databaseURL,
+  databaseURL: process.env.FIREBASE_database_URL,
 };
 
 // Initialize Firebase
+console.log(firebaseConfig);
 const app = initializeApp(firebaseConfig);
 const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(AsyncStorage),
