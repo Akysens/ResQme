@@ -1,29 +1,17 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useStoreActions } from "easy-peasy";
-
-import { View, StyleSheet } from "react-native";
-import {
-  Button,
-  TextInput,
-  Text,
-  Checkbox,
-  IconButton,
-  HelperText,
-} from "react-native-paper";
+import { View, StyleSheet, Text } from "react-native";
+import { Button, TextInput, HelperText } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-import LottieView from "lottie-react-native";
-
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { auth, db } from "@firebaseConfig";
 
-export default function SignUpScreen({ navigation }) {
+export default function SignupScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [pass, setPassword] = useState("");
   const [phoneNum, setPhoneNumber] = useState("");
-
   const [error, setErrMsg] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -45,12 +33,20 @@ export default function SignUpScreen({ navigation }) {
         email,
         id,
         phoneNum,
-        mode: "Idle",
+        mode: "victim"
       };
 
       // Add to users collection
       await setDoc(doc(collection(db, "users"), id), user);
       setUser(user);
+      // if (user.mode == "victim") {
+      //   navigation.navigate("Victim_Screen");
+      // }
+      // else {
+      //   navigation.navigate("SAR_Team_Screen");
+      // }
+      
+      navigation.navigate("SAR_Team_Screen");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         setErrMsg("Email already in use !");
@@ -63,25 +59,9 @@ export default function SignUpScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={style.signInView}>
-      <Text variant="displayLarge">⛑️ ResQme</Text>
-      <LottieView
-        autoPlay
-        style={{
-          width: 200,
-          height: 200,
-          marginVertical: 15,
-        }}
-        source={require("@assets/login.json")}
-      />
-      <View style={style.formCard}>
+    <SafeAreaView style={style.container}>
+      <Text style={style.title}>HelpHub</Text>
         <View>
-          <TextInput
-            mode={"outlined"}
-            label={"Email"}
-            onChangeText={(input) => setEmail(input)}
-            value={email}
-          />
           <HelperText
             type="error"
             visible={error !== null}
@@ -93,7 +73,16 @@ export default function SignUpScreen({ navigation }) {
           </HelperText>
         </View>
         <TextInput
+            mode={"outlined"}
+            label={"Email"}
+            onChangeText={(input) => setEmail(input)}
+            value={email}
+            style={style.input}
+          />
+          
+        <TextInput
           mode={"outlined"}
+          style={style.input}
           label={"Password"}
           secureTextEntry={true}
           onChangeText={(input) => setPassword(input)}
@@ -102,12 +91,14 @@ export default function SignUpScreen({ navigation }) {
         <TextInput
           mode={"outlined"}
           label={"Name"}
+          style={style.input}
           onChangeText={(input) => setName(input)}
           value={name}
         />
         <TextInput
           label={"Phone Number"}
           mode={"outlined"}
+          style={style.input}
           keyboardType="numeric"
           onChangeText={(number) => setPhoneNumber(number)}
           value={phoneNum}
@@ -122,15 +113,16 @@ export default function SignUpScreen({ navigation }) {
         >
           Sign Up !
         </Button>
+      <View style={style.signupButton}>
+        <Button
+          onPress={() => navigation.navigate("Login_Screen")}
+          style={{
+            marginTop: 30,
+          }}
+        >
+          Already have an account? Login
+        </Button>
       </View>
-      <Button
-        onPress={() => navigation.navigate("login")}
-        style={{
-          marginTop: 30,
-        }}
-      >
-        Already have an account? Login
-      </Button>
     </SafeAreaView>
   );
 }
@@ -142,12 +134,33 @@ const style = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  formCard: {
-    width: "85%",
-    rowGap: 3,
-  },
   signInButton: {
     marginTop: 20,
-    alignSelf: "flex-end",
+    alignSelf: "flex-right",
   },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
+  },
+  input: {
+    width: '85%',
+    marginBottom: 10,
+  },
+  button: {
+    marginTop: 10,
+  },
+  signupButton: {
+    marginTop: 20,
+  },
+  signupButtonText: {
+    color: '#0066cc',
+  },
+  error: {
+    color: 'red',
+  }
 });

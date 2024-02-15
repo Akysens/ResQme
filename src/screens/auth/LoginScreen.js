@@ -1,127 +1,96 @@
-import React from "react";
+import React, { useState } from 'react';
+import { Text, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
+import { TextInput, Button } from 'react-native-paper';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth, db } from '@firebaseConfig'; 
 
-import { useState } from "react";
-import { useStoreActions } from "easy-peasy";
-
-import { View, StyleSheet } from "react-native";
-import { Button, TextInput, HelperText, Text } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
-
-import LottieView from "lottie-react-native";
-
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@firebaseConfig";
-
-export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [pass, setPassword] = useState("");
-
-  const [error, setErrMsg] = useState(null);
+function LoginScreen({ navigation }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setErrorMsg] = useState(null);
   const [loading, setLoading] = useState(false);
+  let validLogin = true;
 
   const handleLogin = async () => {
     try {
       setLoading(true);
-      await signInWithEmailAndPassword(auth, email, pass);
+      await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
       console.warn(error);
-      if (
-        error.code === "auth/wrong-password" ||
-        error.code === "auth/user-not-found"
-      ) {
-        setErrMsg("Check Your Credentials");
-      }
+      validLogin = false;
+      setErrorMsg("Error. Invalid credentials");
     } finally {
       setLoading(false);
+    }
+
+    if (validLogin) {
+      // if (mode == "SAR") {
+        navigation.navigate('SAR_Team_Screen');
+    // }
     }
   };
 
   return (
-    <SafeAreaView style={style.signInView}>
-      <Text variant="displayLarge">⛑️ ResQme</Text>
-      <LottieView
-        autoPlay
-        style={{
-          width: 200,
-          height: 200,
-          marginVertical: 15,
-        }}
-        source={require("@assets/login.json")}
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>HelpHub</Text>
+      <TextInput
+        label="Email"
+        value={email}
+        onChangeText={setEmail}
+        style={styles.input}
       />
-      <View style={style.formCard}>
-        <View>
-          <TextInput
-            style={style.formInput}
-            mode={"outlined"}
-            label={"Email"}
-            onChangeText={(input) => setEmail(input)}
-            value={email}
-          />
-          <HelperText
-            type="error"
-            visible={error !== null}
-            style={{
-              display: error !== null ? "flex" : "none",
-            }}
-          >
-            {error}
-          </HelperText>
-        </View>
-
-        <View>
-          <TextInput
-            style={style.formInput}
-            mode={"outlined"}
-            label={"Password"}
-            secureTextEntry={true}
-            onChangeText={(input) => setPassword(input)}
-            value={pass}
-          />
-          <HelperText
-            type="error"
-            visible={error !== null}
-            style={{
-              display: error !== null ? "flex" : "none",
-            }}
-          >
-            {error}
-          </HelperText>
-        </View>
-        <Button
-          style={style.signInButton}
-          onPress={handleLogin}
-          mode="contained"
-          icon="login"
-          loading={loading}
-        >
-          Login
-        </Button>
-      </View>
+      <TextInput
+        label="Password"
+        value={password}
+        secureTextEntry
+        onChangeText={setPassword}
+        style={styles.input}
+      />
+      {error && <Text style={styles.error}>{error}</Text>}
       <Button
-        onPress={() => navigation.navigate("signup")}
-        style={{
-          marginTop: 30,
-        }}
+        mode="contained"
+        onPress={handleLogin}
+        style={styles.button}
+        disabled={loading}
       >
-        New Here? Sign Up
+        Log in
       </Button>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('SignUp_Screen')}
+        style={styles.signupButton}
+      >
+        <Text style={styles.signupButtonText}>Need an account?</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
 
-const style = StyleSheet.create({
-  signInView: {
-    padding: 15,
+const styles = StyleSheet.create({
+  container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  formCard: {
-    width: "85%",
-    rowGap: 3,
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
   },
-  signInButton: {
+  input: {
+    width: '80%',
+    marginBottom: 10,
+  },
+  button: {
+    marginTop: 10,
+  },
+  signupButton: {
     marginTop: 20,
-    alignSelf: "flex-end",
+  },
+  signupButtonText: {
+    color: '#0066cc',
+  },
+  error: {
+    color: 'red',
   },
 });
+
+export default LoginScreen;
