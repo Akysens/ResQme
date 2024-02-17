@@ -24,7 +24,7 @@ function LoginScreen({ navigation }) {
         const userData = userProfile.data();
         // Check the user's mode and navigate accordingly
         if (userData.mode === "victim") {
-          navigation.navigate("Victim_Screen");
+          navigation.navigate("Slider_Screen");
         } else {
           navigation.navigate("SAR_Screen");
         }

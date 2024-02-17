@@ -18,14 +18,7 @@ const AdviceBox = ({ item, index }) => {
   );
 };
 
-// const ChangeScreenAndStopSound = () => {
-  
-
-//   navigation.navigate('HelpSlider');
-//   togglePlay();
-// }
-
-const Victim_Screen = () => {
+const Advice_Screen = () => {
   const navigation = useNavigation();
 
   const [needHelp, setNeedHelp] = useState(false);
@@ -58,19 +51,19 @@ const Victim_Screen = () => {
   const advices = [
     {
       text: "Try not to shout randomly, shouting randomly can block dust and respiratory tract. Additionally, prolonged shouting causes loss of energy and hoarseness.",
-      image: require('@assets/favicon.png'),
+      image: require('@assets/NoShouting.png'),
     }, 
     {
       text: "Ensure you use a tissue or your clothing to cover both your mouth and nose.",
-      image: require('@assets/favicon.png'),
+      image: require('@assets/CoverMouth.png'),
     },
     {
       text: "Refrain from igniting anything flambable.",
-      image: require('@assets/favicon.png'),
+      image: require('@assets/NoFire.png'),
     },
     {
       text: "Find a tool to make sound outside by hitting concrete blocks in the coming hours.",
-      image: require('@assets/favicon.png'),
+      image: require('@assets/ToolNoise.png'),
     },
   ];
 
@@ -95,11 +88,17 @@ return (
         autoplayInterval={5000}
       />
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.exitButton} onPress={() => { this.navigation.navigate('HelpSlider'); this.togglePlay();}}>
-          <Image source={require('@assets/Bell.png')}/>
+        <TouchableOpacity style={styles.exitButton} onPress={() => {
+          if (isPlaying) {
+            togglePlay();
+          }
+          navigation.navigate('Slider_Screen');
+        }
+        }>
+          <Image style={styles.buttonImage} source={require('@assets/Exit.png')}/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.warningButton} onPress={togglePlay}>
-          {/* Icon or text for play sound button */}
+          <Image style={styles.buttonImage} source={require('@assets/Bell.png')}/>
         </TouchableOpacity>
       </View>
     </View>
@@ -111,6 +110,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  buttonImage: {
+    flex: 1,
+    aspectRatio: 1.5, 
+    resizeMode: 'contain',
+    top: 10,
+    width: '100%', // Adjust the width as needed
+    height: '100%', // Adjust the height as needed
+    marginBottom: 20, // Adjust the margin as needed
+    borderRadius: 10, // Optional for rounded corners
   },
   helpNotif: {
     position: 'absolute',
@@ -156,23 +165,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     padding: 20,
+    bottom: 50,
   },
   warningButton: {
-    width: 50, // Adjust the size as needed
-    height: 50, // Adjust the size as needed
-    backgroundColor: '#FF0000', // Adjust the color as needed
+    width: 75, // Adjust the size as needed
+    height: 75, // Adjust the size as needed
+    backgroundColor: '#de3333', // Adjust the color as needed
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
   },
   exitButton: {
-    width: 50, // Adjust the size as needed
-    height: 50, // Adjust the size as needed
-    backgroundColor: 'black', // Adjust the color as needed
+    width: 75, // Adjust the size as needed
+    height: 75, // Adjust the size as needed
+    backgroundColor: '#7f65bf',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
   },
 });
 
-export default Victim_Screen;
+export default Advice_Screen;
