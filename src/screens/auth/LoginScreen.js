@@ -3,6 +3,8 @@ import { Text, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '@firebaseConfig'; 
+import { doc, getDoc } from 'firebase/firestore';
+
 
 function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
@@ -14,21 +16,30 @@ function LoginScreen({ navigation }) {
   const handleLogin = async () => {
     try {
       setLoading(true);
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCreds = await signInWithEmailAndPassword(auth, email, password);
+      // Fetch user profile data using userCreds.user.uid
+      const userDoc = doc(db, "users", userCreds.user.uid); // Assuming 'users' is your collection
+      const userProfile = await getDoc(userDoc);
+  
+      if (userProfile.exists()) {
+        const userData = userProfile.data();
+        // Check the user's mode and navigate accordingly
+        if (userData.mode === "victim") {
+          navigation.navigate("Volunteer_Screen");
+        } else {
+          navigation.navigate("SAR_Screen");
+        }
+      } else {
+        console.log("No such document!");
+      }
     } catch (error) {
       console.warn(error);
-      validLogin = false;
       setErrorMsg("Error. Invalid credentials");
     } finally {
       setLoading(false);
     }
-
-    if (validLogin) {
-      // if (mode == "SAR") {
-        navigation.navigate('SAR_Team_Screen');
-    // }
-    }
   };
+  
 
   return (
     <SafeAreaView style={styles.container}>

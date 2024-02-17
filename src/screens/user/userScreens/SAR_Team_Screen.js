@@ -7,7 +7,7 @@ import * as Location from 'expo-location'
 const { width, height } = Dimensions.get('window');
 
 // Clicking on one of these on the map will bring up 2 options kinda obstructed by the bottom bar (Android)
-const VolunteerMapScreen = ({ navigation }) => {
+const SAR_Screen = ({ navigation }) => {
   const dummyData = [
     { id: 1, latitude: 37.78825, longitude: -122.4324, title: 'Need Food' },
     // ... other pins
@@ -115,4 +115,4 @@ const styles = StyleSheet.create({
   // Add other styles for navBar items and bottom sheet details as required
 });
 
-export default VolunteerMapScreen;
+export default SAR_Screen;
