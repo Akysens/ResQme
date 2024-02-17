@@ -3,45 +3,85 @@ package expo.modules.helphubnearby
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 
+import android.content.Context;
+import com.google.android.gms.nearby.Nearby;
+import com.google.android.gms.nearby.connection.AdvertisingOptions;
+import com.google.android.gms.nearby.connection.BandwidthInfo;
+import com.google.android.gms.nearby.connection.ConnectionInfo;
+import com.google.android.gms.nearby.connection.ConnectionLifecycleCallback;
+import com.google.android.gms.nearby.connection.ConnectionOptions;
+import com.google.android.gms.nearby.connection.ConnectionResolution;
+import expo.modules.kotlin.activityresult.AppContextActivityResultLauncher
+import com.google.android.gms.nearby.connection.ConnectionType;
+import com.google.android.gms.nearby.connection.DiscoveredEndpointInfo;
+import com.google.android.gms.nearby.connection.DiscoveryOptions;
+import com.google.android.gms.nearby.connection.EndpointDiscoveryCallback;
+import com.google.android.gms.nearby.connection.Payload;
+import com.google.android.gms.nearby.connection.PayloadCallback;
+import com.google.android.gms.nearby.connection.PayloadTransferUpdate;
+import com.google.android.gms.nearby.connection.Strategy;
+import com.google.android.gms.nearby.connection.ConnectionsClient;
+import expo.modules.kotlin.AppContext
+import expo.modules.kotlin.exception.Exceptions
+import java.nio.charset.StandardCharsets.UTF_8
+
 class HelphubNearbyModule : Module() {
-  // Each module class must implement the definition function. The definition consists of components
-  // that describes the module's functionality and behavior.
-  // See https://docs.expo.dev/modules/module-api for more details about available components.
+  private val context: Context
+    get() = appContext.reactContext ?: throw Exceptions.ReactContextLost()
+
   override fun definition() = ModuleDefinition {
-    // Sets the name of the module that JavaScript code will use to refer to the module. Takes a string as an argument.
-    // Can be inferred from module's class name, but it's recommended to set it explicitly for clarity.
-    // The module will be accessible from `requireNativeModule('HelphubNearby')` in JavaScript.
     Name("HelphubNearby")
 
-    // Sets constant properties on the module. Can take a dictionary or a closure that returns a dictionary.
-    Constants(
-      "PI" to Math.PI
-    )
-
-    // Defines event names that the module can send to JavaScript.
-    Events("onChange")
-
-    // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
-    Function("hello") {
-      "Hello world! 👋"
+    Function("getTheme") {
+      return@Function "system"
     }
 
-    // Defines a JavaScript function that always returns a Promise and whose native code
-    // is by default dispatched on the different thread than the JavaScript runtime runs on.
-    AsyncFunction("setValueAsync") { value: String ->
-      // Send an event to JavaScript.
-      sendEvent("onChange", mapOf(
-        "value" to value
-      ))
+    class ClientMessage() {
+
     }
 
-    // Enables the module to be used as a native view. Definition components that are accepted as part of
-    // the view definition: Prop, Events.
-    View(HelphubNearbyView::class) {
-      // Defines a setter for the `name` prop.
-      Prop("name") { view: HelphubNearbyView, prop: String ->
-        println(prop)
+    val STRATEGY = Strategy.P2P_CLUSTER
+
+    lateinit var connectionsClient : ConnectionsClient
+
+    val REQUEST_CODE_REQUIRED_PERMISSIONS = 1
+
+    val messages : HashMap<String, String> = HashMap()
+
+    OnCreate {
+      connectionsClient = Nearby.getConnectionsClient(context);
+    }
+
+    fun sendPayload(endpointId : String, message : String) {
+      Payload.fromBytes(message.toByteArray(UTF_8)).let {
+        connectionsClient.sendPayload(endpointId, it)
       }
     }
+
+    val payloadCallback : PayloadCallback = object : PayloadCallback() {
+      override fun onPayloadReceived(endpointId: String, payload: Payload) {
+        payload.asBytes()?.let {
+          messages[endpointId] = String(it, UTF_8)
+        }
+      }
+
+      override fun onPayloadTransferUpdate(endpointId: String, update: PayloadTransferUpdate) {
+      }
+    }
+
+    val connectionLifecycleCallback : ConnectionLifecycleCallback = object : ConnectionLifecycleCallback() {
+      override fun onConnectionInitiated(p0: String, p1: ConnectionInfo) {
+      }
+
+      override fun onConnectionResult(p0: String, p1: ConnectionResolution) {
+
+      }
+
+      override fun onDisconnected(p0: String) {
+
+      }
+
+    }
+
   }
 }
