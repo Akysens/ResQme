@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screens/auth/LoginScreen'; 
 import SignupScreen from './screens/auth/SignInScreen';
-import Volunteer_Screen from './screens/user/userScreens/Volunteer';
+import Victim_Screen from './screens/user/userScreens/Victim_Screen';
 import SAR_Screen from './screens/user/userScreens/SAR_Team_Screen';
 import { LogBox } from 'react-native';
 
@@ -38,8 +38,8 @@ function App() {
           options={{ headerShown: false }} />
 
         <Stack.Screen
-          name="Volunteer_Screen"
-          component={Volunteer_Screen}
+          name="Victim_Screen"
+          component={Victim_Screen}
           options={{ headerShown: false }} />
 
         </Stack.Navigator>

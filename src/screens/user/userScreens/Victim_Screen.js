@@ -25,7 +25,7 @@ const AdviceBox = ({ item, index }) => {
 //   togglePlay();
 // }
 
-const Volunteer_Screen = () => {
+const Victim_Screen = () => {
   const navigation = useNavigation();
 
   const [needHelp, setNeedHelp] = useState(false);
@@ -175,4 +175,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Volunteer_Screen;
+export default Victim_Screen;
