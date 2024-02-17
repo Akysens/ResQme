@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet, SafeAreaView, Image } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '@firebaseConfig'; 
@@ -11,7 +11,6 @@ function LoginScreen({ navigation }) {
   const [password, setPassword] = useState('');
   const [error, setErrorMsg] = useState(null);
   const [loading, setLoading] = useState(false);
-  let validLogin = true;
 
   const handleLogin = async () => {
     try {
@@ -43,7 +42,8 @@ function LoginScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>HelpHub</Text>
+      <Image source={require("@assets/logo.png")} style={styles.logo} />
+      {/* <Text style={styles.title}>HelpHub</Text> */}
       <TextInput
         label="Email"
         value={email}
@@ -101,6 +101,10 @@ const styles = StyleSheet.create({
   },
   error: {
     color: 'red',
+  },
+  logo: {
+    width: 250,
+    height: 250,
   },
 });
 

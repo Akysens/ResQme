@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useStoreActions } from "easy-peasy";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 import { Button, TextInput, HelperText, Checkbox } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -48,7 +48,8 @@ export default function SignupScreen({ navigation }) {
 
   return (
     <SafeAreaView style={style.container}>
-      <Text style={style.title}>HelpHub</Text>
+      <Image source={require('@assets/logo.png')} style={style.logo} />
+      {/* <Text style={style.title}>HelpHub</Text> */}
       <View>
         <HelperText
           type="error"
@@ -92,8 +93,10 @@ export default function SignupScreen({ navigation }) {
         maxLength={15}
       />
 
-      <View style={{ marginVertical: 10 }}>
-        <Text>Please check this if you are a rescuer</Text>
+      <View style={{ flexDirection: 'row', 
+      alignItems: 'center',
+      marginVertical: 10}}>
+        <Text style={style.TextInput}>Please check this if you are a rescuer</Text>
         <Checkbox
           status={isRescuer ? 'checked' : 'unchecked'}
           onPress={() => {
@@ -110,23 +113,65 @@ export default function SignupScreen({ navigation }) {
       >
         Sign Up
       </Button>
+
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Login_Screen')}
+        style={style.signupButton}
+      >
+        <Text style={style.signupButtonText}>Already have an account?</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
 
 const style = StyleSheet.create({
-  signInView: {
-    padding: 15,
+  container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#fff'
   },
-  formCard: {
-    width: "85%",
-    rowGap: 3,
+  // title: {
+  //   fontSize: 24,
+  //   fontWeight: 'bold',
+  //   color: '#000',
+  //   marginBottom: 40,
+  // },
+  input: {
+    width: '100%',
+    marginBottom: 10,
   },
-  signInButton: {
+  button: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#6200ee',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
     marginTop: 20,
-    alignSelf: "flex-end",
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '500',
+  },
+  loginText: {
+    marginTop: 20,
+    color: '#000',
+  },
+  loginClickableText: {
+    color: '#6200ee',
+    fontWeight: 'bold',
+  },
+  logo: {
+    width: 250,
+    height: 250,
+  },
+  signupButton: {
+    marginTop: 20,
+  },
+  signupButtonText: {
+    color: '#0066cc',
   },
 });
