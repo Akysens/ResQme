@@ -8,6 +8,8 @@ import SAR_Screen from './screens/user/userScreens/SAR_Team_Screen';
 import { LogBox } from 'react-native';
 import Slider_Screen from './screens/user/userScreens/Slider_Screen';
 import Advice_Screen from './screens/user/userScreens/Advice_Screen';
+import OfflineMode from './screens/user/userScreens/OfflineMode';
+import NetInfo from '@react-native-community/netinfo';
 
 
 // STATE PROVIDER (easy-peasy)
@@ -43,6 +45,10 @@ function App() {
           name="Slider_Screen"
           component={Slider_Screen}
           options={{ headerShown: false }} />
+
+        {() => {NetInfo.fetch().then(state => {
+          console.log("Is connected?", state.isConnected);
+        })}}
 
         <Stack.Screen
           name="Advice_Screen"
