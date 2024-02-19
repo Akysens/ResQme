@@ -6,15 +6,44 @@ import HelphubNearbyModule from './src/HelphubNearbyModule';
 import HelphubNearbyView from './src/HelphubNearbyView';
 import { ChangeEventPayload, HelphubNearbyViewProps } from './src/HelphubNearby.types';
 
-// Get the native constant value.
-export const PI = HelphubNearbyModule.PI;
-
-export function hello(): string {
-  return HelphubNearbyModule.hello();
+export function sendPayload(endpoint: string, payload: string) {
+  HelphubNearbyModule.sendPayload(endpoint, payload);
 }
 
-export async function setValueAsync(value: string) {
-  return await HelphubNearbyModule.setValueAsync(value);
+export function startAdvertising(name: string) {
+  HelphubNearbyModule.startAdvertising(name);
+}
+
+export function stopAdvertising() {
+  HelphubNearbyModule.stopAdvertising();
+}
+
+export function startDiscovery() {
+  HelphubNearbyModule.startDiscovery();
+}
+
+export function stopDiscovery() {
+  HelphubNearbyModule.stopDiscovery();
+}
+
+export function requestConnection(endpoint: string) {
+  HelphubNearbyModule.requestConnection(endpoint);
+}
+
+export function getMessages() {
+  HelphubNearbyModule.getMessages();
+}
+
+export function getEndpointMessage(endpoint: string) {
+  HelphubNearbyModule.getEndpointMessage(endpoint)
+}
+
+export function getDiscoveredEndpoints() {
+  HelphubNearbyModule.getDiscoveredEndpoints()
+}
+
+export function getConnectedEndpoints() {
+  HelphubNearbyModule.getConnectedEndpoints();
 }
 
 const emitter = new EventEmitter(HelphubNearbyModule ?? NativeModulesProxy.HelphubNearby);
