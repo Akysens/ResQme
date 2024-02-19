@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 
 // UI
-import { SafeAreaView, View, StyleSheet, Alert } from "react-native";
+import { SafeAreaView, View, StyleSheet, Alert, FlatList, Pressable } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from "@expo/vector-icons";
 import { SwipeButton } from "react-native-expo-swipe-button";
@@ -34,22 +34,52 @@ export default function OfflineMode() {
         }
     });
 
-    useEffect(() => {
-    }, [])
-
     return (
         <View style={styles.container}>
-            <Text>hello world</Text>
+            <View style={styles.safeArea}>
+                <Text style={styles.header}>Offline Mode</Text>
+                <FlatList style={styles.deviceList}>
+                    <View style={styles.deviceListItem}>
+                        <Text>a</Text>
+                    </View>
+                </FlatList>
+            </View>
         </View>
     )
-
-    navigation.na
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#1a1625",
+    },
+    safeArea: {
+        flex: 1,
         padding: 20,
         marginTop: 20,
     },
+    header: {
+        fontSize: 21,
+        fontWeight: "bold",
+        color: "#e0e0e0",
+        textAlign: "center",
+    },
+    deviceList: {
+        marginTop: 20,
+        marginBottom: 20,
+        padding: 10,
+        borderColor: "#46424f",
+        borderRadius: 5,
+        borderWidth: 1,
+        elevation: 5,
+    },
+    deviceListItem: {
+        margin: 10,
+        backgroundColor: "#46424f",
+        borderColor: "#2f2b3a",
+        borderWidth: 1,
+        borderCurve: 5,
+        width: "100%",
+        height: 50,
+    }
 })
