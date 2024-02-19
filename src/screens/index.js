@@ -16,6 +16,7 @@ import { doc, getDoc } from "firebase/firestore";
 
 // State
 import { useStoreActions } from "easy-peasy";
+import NetInfo from "@react-native-community/netinfo";
 
 SplashScreen.preventAutoHideAsync();
 export default function RootNavigator() {
