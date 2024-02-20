@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-nati
 
 
 const Profile_Screen = ({ route }) => {
-  const { userDetails } = route.params;
+  const { userDetails, medDetails } = route.params;
 
   return (
     <ScrollView style={styles.container}>
@@ -13,11 +13,14 @@ const Profile_Screen = ({ route }) => {
         </TouchableOpacity>
       </View>
 
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>PERSONAL INFORMATION</Text>
+      </View>
+
       <View style={styles.infoContainer}>
         <Text style={styles.infoText}>Name: {userDetails.name}</Text>
         <Text style={styles.infoText}>Email: {userDetails.email}</Text>
         <Text style={styles.infoText}>Phone Number: {userDetails.phoneNum}</Text>
-        <Text style={styles.infoText}>Address (Not Shared to Anyone Except SAR)</Text>
       </View>
 
       <View style={styles.section}>
@@ -25,13 +28,13 @@ const Profile_Screen = ({ route }) => {
       </View>
 
       <View style={styles.infoContainer}>
-        <Text style={styles.infoText}>Blood Type</Text>
-        <Text style={styles.infoText}>Emergency Contact Name</Text>
-        <Text style={styles.infoText}>Emergency Contact Phone #</Text>
-        <Text style={styles.infoText}>Emergency Contact Email</Text>
-        <Text style={styles.infoText}>Gender</Text>
-        <Text style={styles.infoText}>Weight</Text>
-        <Text style={styles.infoText}>Height</Text>
+        <Text style={styles.infoText}>Blood Type: {medDetails.BloodType}</Text>
+        <Text style={styles.infoText}>Emergency Contact Name: {medDetails.EmergencyContactName}</Text>
+        <Text style={styles.infoText}>Emergency Contact Phone #: {medDetails.EmergencyContactNumber}</Text>
+        <Text style={styles.infoText}>Emergency Contact Email: {medDetails.EmergencyContactEmail}</Text>
+        <Text style={styles.infoText}>Gender: {medDetails.Gender}</Text>
+        <Text style={styles.infoText}>Weight: {medDetails.Weight} kg</Text>
+        <Text style={styles.infoText}>Height: {medDetails.Height} cm</Text>
       </View>
 
       <TouchableOpacity style={styles.logoutButton}>

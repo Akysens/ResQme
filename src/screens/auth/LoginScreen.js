@@ -17,11 +17,17 @@ export default function LoginScreen({ navigation }) {
       setLoading(true);
       const userCreds = await signInWithEmailAndPassword(auth, email, password);
       const userDoc = doc(db, "users", userCreds.user.uid);
+      const userMedDoc = doc(db, "usersMedicalInfo", userCreds.user.uid);
+      const userMedProfile = await getDoc(userMedDoc);
       const userProfile = await getDoc(userDoc);
       if (userProfile.exists()) {
         const userData = userProfile.data();
+        const userMedData = userMedProfile.data();
         // Passing userData as a prop so we can extract info for pf screen
-        navigation.navigate("Profile_Screen", { userDetails: userData });
+        navigation.navigate("Profile_Screen", { 
+          userDetails: userData,
+          medDetails: userMedData,
+        });
       } else {
         console.log("No such document!");
       }
