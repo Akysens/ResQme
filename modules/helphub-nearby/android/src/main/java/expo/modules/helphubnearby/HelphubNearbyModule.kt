@@ -51,13 +51,7 @@ class HelphubNearbyModule : Module() {
       connectionsClient = Nearby.getConnectionsClient(context);
     }
 
-    Events("onNewDeviceDiscovered")
-
-    Events("onConnectionUpdate")
-
-    Events("onPayloadTransferUpdate")
-
-    Events("onNewConnectionInitiated")
+    Events("onNewDeviceDiscovered", "onConnectionUpdate", "onPayloadTransferUpdate", "onNewConnectionInitiated")
 
     fun sendPayload(endpointId : String, message : String) {
       Payload.fromBytes(message.toByteArray(UTF_8)).let {
@@ -113,7 +107,6 @@ class HelphubNearbyModule : Module() {
         connectedEndpoints.remove(endpointId);
         messages.remove(endpointId);
       }
-
     }
 
     val endpointDiscoveryCallback = object : EndpointDiscoveryCallback() {
