@@ -44,8 +44,8 @@ class HelphubNearbyModule : Module() {
     val REQUEST_CODE_REQUIRED_PERMISSIONS = 1
 
     val messages : HashMap<String, String> = HashMap()
-    val connectedEndpoints : MutableList<String> = mutableListOf<String>()
-    val discoveredEndpoints : MutableList<String> = mutableListOf<String>()
+    val connectedEndpoints : MutableMap<String, String> = mutableMapOf<String, String>()
+    val discoveredEndpoints : MutableMap<String, String> = mutableMapOf<String, String>()
 
     OnCreate {
       connectionsClient = Nearby.getConnectionsClient(context);
@@ -87,8 +87,10 @@ class HelphubNearbyModule : Module() {
         when (resolution.status.statusCode) {
           ConnectionsStatusCodes.STATUS_OK -> {
             Log.d(TAG, "Succesfully connected to endpoint $endpointId")
-            connectedEndpoints.add(endpointId)
-            discoveredEndpoints.remove(endpointId)
+            if (discoveredEndpoints.containsKey(endpointId)) {
+              connectedEndpoints[endpointId] = discoveredEndpoints[endpointId]!!
+              discoveredEndpoints.remove(endpointId)
+            }
             connectionsClient.stopAdvertising()
             connectionsClient.stopDiscovery()
           }
@@ -104,21 +106,28 @@ class HelphubNearbyModule : Module() {
       }
 
       override fun onDisconnected(endpointId: String) {
-        connectedEndpoints.remove(endpointId);
-        messages.remove(endpointId);
+        if (connectedEndpoints.containsKey(endpointId)) {
+          connectedEndpoints.remove(endpointId);
+          messages.remove(endpointId);
+        }
       }
     }
 
     val endpointDiscoveryCallback = object : EndpointDiscoveryCallback() {
       override fun onEndpointFound(endpointId: String, info: DiscoveredEndpointInfo) {
-        Log.d(TAG, "Discovered: $endpointId")
-        discoveredEndpoints.add(endpointId)
-        this@HelphubNearbyModule.sendEvent("onNewDeviceDiscovered", bundleOf("endpointId" to endpointId,
-          "serviceId" to info.serviceId, "endpointName" to info.endpointName))
+        if (!discoveredEndpoints.containsKey((endpointId))) {
+          discoveredEndpoints[endpointId] = info.endpointName;
+          this@HelphubNearbyModule.sendEvent(
+            "onNewDeviceDiscovered", bundleOf(
+              "endpointId" to endpointId,
+              "serviceId" to info.serviceId, "endpointName" to info.endpointName))
+        }
       }
 
       override fun onEndpointLost(endpointId: String) {
-        discoveredEndpoints.remove(endpointId)
+        if (discoveredEndpoints.contains(endpointId)) {
+          discoveredEndpoints.remove(endpointId)
+        }
       }
     }
 

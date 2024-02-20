@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 
 // UI
-import { SafeAreaView, View, StyleSheet, Alert, FlatList, Pressable } from "react-native";
+import { SafeAreaView, View, StyleSheet, Alert, FlatList, Pressable, TextInput } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from "@expo/vector-icons";
 import { SwipeButton } from "react-native-expo-swipe-button";
@@ -50,32 +50,68 @@ function NearbyDevice({endpointId}) {
 }
 
 export default function OfflineMode() {
-    [discoveredDevices, setDiscoveredDevices] = useState([null])
+    [discoveredDevices, setDiscoveredDevices] = useState([null]);
+    [userName, setUserName] = useState("HelphubUser");
+    [warned, setWarned] = useState(false);
+    [advertising, setAdvertising] = useState(false);
+    [discovering, setDiscovering] = useState(false);
 
-    Alert.alert(
-        "No internet connection!",
-        "App will now switch to offline mode."
-    );
+
+    if (!warned) {
+        Alert.alert(
+            "No internet connection!",
+            "App will now switch to offline mode."
+        );
+        setWarned(true);
+    }
+
+    const startAdvertising = () => {
+        Nearby.startAdvertising(userName);
+        setAdvertising(true);
+    }
+
+    const stopAdvertising = () => {
+        Nearby.stopAdvertising();
+        setAdvertising(false);
+    }
+
+    const startDiscovering = () => {
+        Nearby.startDiscovery();
+        setAdvertising(true);
+    }
+
+    const stopDiscovering = () => {
+        Nearby.stopDiscovery();
+        setAdvertising(false);
+    }
 
     // const navigation = useNavigation();
 
-    const unsubscribe = NetInfo.addEventListener((state) => {
-        if (state.isInternetReachable === true) {
-            Alert.alert(
-                "Internet found!",
-                "App will now switch to normal mode"
-            )
+    /* 
+    useEffect(() => {
+        const subscription = NetInfo.addEventListener((state) => {
+            if (state.isInternetReachable === true) {
+                Alert.alert(
+                    "Internet found!",
+                    "App will now switch to normal mode"
+                )
+    
+                // navigation.navigate("Login_Screen");
+            }
+        });
 
-            // navigation.navigate("Login_Screen");
-        }
-    });
+        return () => subscription();
+    }, [])
 
-    const onNewDeviceDiscovered = Nearby.addDeviceDiscoveryListener((event) => {
-        console.log(event.endpointId);
-        console.log(event.endpointName);
-
-        setDiscoveredDevices(Nearby.getDiscoveredEndpoints());
-    })
+    */
+    useEffect(() => {
+        const onNewDeviceDiscovered = Nearby.addDeviceDiscoveryListener((event) => {
+            console.log(event.endpointId);
+            console.log(event.endpointName);
+    
+            setDiscoveredDevices(Nearby.getDiscoveredEndpoints());
+        });
+    }, [])
 
     return (
         <View style={styles.container}>
@@ -83,22 +119,28 @@ export default function OfflineMode() {
                 <Text style={styles.header}>Offline Mode</Text>
                 <View style={styles.deviceList}>
                     <FlatList 
-                        renderItem={({item}) => <NearbyDevice endpointId={item} />}
+                        renderItem={({item}) => <NearbyDevice endpointId={item.endpointName} />}
                         data={discoveredDevices}
                     >
                     </FlatList>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <NewButton primary={true}
-                        onPress={() => Nearby.startDiscovery("test")}>
+                    <NewButton primary={!discovering}
+                        onPress={(discovering ? stopDiscovering : startDiscovering)}>
                         <Text>Discover</Text>
                     </NewButton>
-                    <NewButton primary={true}
-                        onPress={() => Nearby.startAdvertising("test")}>
+                    <NewButton primary={!advertising}
+                        onPress={advertising ? stopAdvertising : startAdvertising}>
                         <Text>Advertise</Text>
                     </NewButton>
                 </View>
-            </View>
+                <TextInput
+                    style={styles.nameInput}
+                    placeholder="Type your name here."
+                    onChangeText={newText => setUserName(newText)}
+                    defaultValue={userName}
+                />
+                </View>
         </View>
     )
 }
@@ -173,4 +215,12 @@ const styles = StyleSheet.create({
         borderWidth: 0,
         backgroundColor: "#FC5185",
     },
+    nameInput: {
+        height: 50,
+        paddingHorizontal: 10,
+        borderColor: "#2f2b3a",
+        borderWidth: 1,
+        borderRadius: 5,
+        color: "gray",
+    }
 })

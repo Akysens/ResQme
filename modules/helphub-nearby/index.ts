@@ -11,7 +11,6 @@ export function sendPayload(endpoint: string, payload: string) {
 }
 
 export function startAdvertising(name: string) {
-  console.log("Advertisement started.");
   HelphubNearbyModule.startAdvertising(name);
 }
 
@@ -20,7 +19,6 @@ export function stopAdvertising() {
 }
 
 export function startDiscovery() {
-  console.log("Discovery started.");
   HelphubNearbyModule.startDiscovery();
 }
 
@@ -41,7 +39,6 @@ export function getEndpointMessage(endpoint: string) {
 }
 
 export function getDiscoveredEndpoints() {
-  console.log("discovered");
   return HelphubNearbyModule.getDiscoveredEndpoints();
 }
 
