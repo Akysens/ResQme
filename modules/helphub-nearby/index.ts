@@ -3,7 +3,6 @@ import { NativeModulesProxy, EventEmitter, Subscription } from 'expo-modules-cor
 // Import the native module. On web, it will be resolved to HelphubNearby.web.ts
 // and on native platforms to HelphubNearby.ts
 import HelphubNearbyModule from './src/HelphubNearbyModule';
-import HelphubNearbyView from './src/HelphubNearbyView';
 import { InfoPayload } from './src/HelphubNearby.types';
 
 
