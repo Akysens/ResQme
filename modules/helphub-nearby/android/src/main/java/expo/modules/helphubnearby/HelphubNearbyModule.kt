@@ -77,15 +77,18 @@ class HelphubNearbyModule : Module() {
       }
 
       override fun onPayloadTransferUpdate(endpointId: String, update: PayloadTransferUpdate) {
+        this@HelphubNearbyModule.sendEvent("onPayloadTransferUpdate", bundleOf("endpointId" to endpointId, "info" to update))
       }
     }
 
     val connectionLifecycleCallback : ConnectionLifecycleCallback = object : ConnectionLifecycleCallback() {
       override fun onConnectionInitiated(endpointId: String, info: ConnectionInfo) {
+        this@HelphubNearbyModule.sendEvent("onNewConnectionInitiated", bundleOf("endpointId" to endpointId, "info" to info))
         connectionsClient.acceptConnection(endpointId, payloadCallback)
       }
 
       override fun onConnectionResult(endpointId: String, resolution: ConnectionResolution) {
+        this@HelphubNearbyModule.sendEvent("onConnectionUpdate", bundleOf("endpointId" to endpointId, "info" to resolution))
         when (resolution.status.statusCode) {
           ConnectionsStatusCodes.STATUS_OK -> {
             Log.d(TAG, "Succesfully connected to endpoint $endpointId")

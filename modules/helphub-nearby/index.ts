@@ -4,7 +4,8 @@ import { NativeModulesProxy, EventEmitter, Subscription } from 'expo-modules-cor
 // and on native platforms to HelphubNearby.ts
 import HelphubNearbyModule from './src/HelphubNearbyModule';
 import HelphubNearbyView from './src/HelphubNearbyView';
-import { DeviceDiscoveryPayload } from './src/HelphubNearby.types';
+import { InfoPayload } from './src/HelphubNearby.types';
+import { Info } from 'luxon';
 
 
 export function sendPayload(endpoint: string, payload: string) {
@@ -50,7 +51,18 @@ export function getConnectedEndpoints() {
 
 const emitter = new EventEmitter(HelphubNearbyModule);
 
-export function addDeviceDiscoveryListener(listener: (event: DeviceDiscoveryPayload) => void) : Subscription {
+export function addDeviceDiscoveryListener(listener: (event: InfoPayload) => void) : Subscription {
   return emitter.addListener("onNewDeviceDiscovered", listener);
 }
 
+export function addConnectionUpdateListener(listener: (event: InfoPayload) => void) : Subscription {
+  return emitter.addListener("onConnectionUpdate", listener);
+}
+
+export function addPayloadUpdateListener(listener: (event: InfoPayload) => void) : Subscription {
+  return emitter.addListener("onPayloadTransferUpdate", listener);
+}
+
+export function addNewConnectionListener(listener: (event: InfoPayload) => void) : Subscription {
+  return emitter.addListener("onNewConnectionInitiated", listener);
+}
