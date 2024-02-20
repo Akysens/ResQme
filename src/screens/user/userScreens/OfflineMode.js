@@ -41,16 +41,17 @@ function NewButton({primary = true, children = null, onPress = null}) {
 
 }
 
-function NearbyDevice({endpointId}) {
+function NearbyDevice({endpointName, endpointId}) {
     return (
         <View style={styles.deviceListItem}>
+            <Text>{endpointName}</Text>
             <Text>{endpointId}</Text>
         </View>
     );
 }
 
 export default function OfflineMode() {
-    [discoveredDevices, setDiscoveredDevices] = useState([null]);
+    [discoveredDevices, setDiscoveredDevices] = useState(null);
     [userName, setUserName] = useState("HelphubUser");
     [warned, setWarned] = useState(false);
     [advertising, setAdvertising] = useState(false);
@@ -77,12 +78,12 @@ export default function OfflineMode() {
 
     const startDiscovering = () => {
         Nearby.startDiscovery();
-        setAdvertising(true);
+        setDiscovering(true);
     }
 
     const stopDiscovering = () => {
         Nearby.stopDiscovery();
-        setAdvertising(false);
+        setDiscovering(false);
     }
 
     // const navigation = useNavigation();
@@ -106,10 +107,8 @@ export default function OfflineMode() {
     */
     useEffect(() => {
         const onNewDeviceDiscovered = Nearby.addDeviceDiscoveryListener((event) => {
-            console.log(event.endpointId);
-            console.log(event.endpointName);
-    
             setDiscoveredDevices(Nearby.getDiscoveredEndpoints());
+            console.log();
         });
     }, [])
 
@@ -119,7 +118,10 @@ export default function OfflineMode() {
                 <Text style={styles.header}>Offline Mode</Text>
                 <View style={styles.deviceList}>
                     <FlatList 
-                        renderItem={({item}) => <NearbyDevice endpointId={item.endpointName} />}
+                        renderItem={({device}) => {
+                            console.log(device.keys[0]);
+                            return <NearbyDevice endpointName={device.keys[0]} endpointId={device.values[0]} />;
+                        }}
                         data={discoveredDevices}
                     >
                     </FlatList>

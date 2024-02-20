@@ -42,10 +42,6 @@ export function getDiscoveredEndpoints() {
   return HelphubNearbyModule.getDiscoveredEndpoints();
 }
 
-export function getConnectedEndpoints() {
-  return HelphubNearbyModule.getConnectedEndpoints();
-}
-
 const emitter = new EventEmitter(HelphubNearbyModule);
 
 export function addDeviceDiscoveryListener(listener: (event: DiscoveredEndpointType) => void) : Subscription {

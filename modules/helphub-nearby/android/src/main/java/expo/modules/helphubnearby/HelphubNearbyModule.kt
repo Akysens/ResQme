@@ -4,7 +4,9 @@ import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 
 import android.content.Context;
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.connection.AdvertisingOptions;
@@ -40,12 +42,13 @@ class HelphubNearbyModule : Module() {
 
     lateinit var connectionsClient : ConnectionsClient
 
+    data class EndpointInfo(val id: String, val name: String)
+
     val SERVICE_ID = "helphub"
     val REQUEST_CODE_REQUIRED_PERMISSIONS = 1
 
-    val messages : HashMap<String, String> = HashMap()
-    val connectedEndpoints : MutableMap<String, String> = mutableMapOf<String, String>()
-    val discoveredEndpoints : MutableMap<String, String> = mutableMapOf<String, String>()
+    val messages : HashMap<String, String> = hashMapOf<String, String>()
+    val discoveredEndpoints : MutableList<EndpointInfo> = mutableListOf<EndpointInfo>()
 
     OnCreate {
       connectionsClient = Nearby.getConnectionsClient(context);
@@ -87,10 +90,7 @@ class HelphubNearbyModule : Module() {
         when (resolution.status.statusCode) {
           ConnectionsStatusCodes.STATUS_OK -> {
             Log.d(TAG, "Succesfully connected to endpoint $endpointId")
-            if (discoveredEndpoints.containsKey(endpointId)) {
-              connectedEndpoints[endpointId] = discoveredEndpoints[endpointId]!!
-              discoveredEndpoints.remove(endpointId)
-            }
+            messages[endpointId] = ""
             connectionsClient.stopAdvertising()
             connectionsClient.stopDiscovery()
           }
@@ -106,17 +106,14 @@ class HelphubNearbyModule : Module() {
       }
 
       override fun onDisconnected(endpointId: String) {
-        if (connectedEndpoints.containsKey(endpointId)) {
-          connectedEndpoints.remove(endpointId);
-          messages.remove(endpointId);
-        }
+        messages.remove(endpointId)
       }
     }
 
     val endpointDiscoveryCallback = object : EndpointDiscoveryCallback() {
       override fun onEndpointFound(endpointId: String, info: DiscoveredEndpointInfo) {
-        if (!discoveredEndpoints.containsKey((endpointId))) {
-          discoveredEndpoints[endpointId] = info.endpointName;
+        if (!discoveredEndpoints.contains(EndpointInfo(endpointId, info.endpointName))) {
+          discoveredEndpoints.add(EndpointInfo(endpointId, info.endpointName))
           this@HelphubNearbyModule.sendEvent(
             "onNewDeviceDiscovered", bundleOf(
               "endpointId" to endpointId,
@@ -124,10 +121,9 @@ class HelphubNearbyModule : Module() {
         }
       }
 
+      @RequiresApi(Build.VERSION_CODES.N)
       override fun onEndpointLost(endpointId: String) {
-        if (discoveredEndpoints.contains(endpointId)) {
-          discoveredEndpoints.remove(endpointId)
-        }
+        discoveredEndpoints.removeIf { it.id == endpointId }
       }
     }
 
@@ -194,10 +190,7 @@ class HelphubNearbyModule : Module() {
     Function("getDiscoveredEndpoints") {
       return@Function discoveredEndpoints
     }
-
-    Function("getConnectedEndpoints") {
-      return@Function connectedEndpoints
-    }
   }
 }
+
 
