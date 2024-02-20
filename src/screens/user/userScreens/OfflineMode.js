@@ -41,12 +41,17 @@ function NewButton({primary = true, children = null, onPress = null}) {
 
 }
 
-function NearbyDevice({endpointName, endpointId}) {
+function NearbyDevice({endpointName, endpointId, setSelected}) {
     return (
-        <View style={styles.deviceListItem}>
-            <Text>{endpointName}</Text>
-            <Text>{endpointId}</Text>
-        </View>
+        <Pressable
+            onPressOut={() => setSelected(endpointId)}
+            android_ripple={{color: "#3FC1C9", foreground: true}}
+        >
+            <View style={styles.deviceListItem}>
+                <Text style={styles.deviceListItemText}>{endpointName}</Text>
+                <Text style={styles.deviceListItemText}>{endpointId}</Text>
+            </View>
+        </Pressable>
     );
 }
 
@@ -56,7 +61,7 @@ export default function OfflineMode() {
     [warned, setWarned] = useState(false);
     [advertising, setAdvertising] = useState(false);
     [discovering, setDiscovering] = useState(false);
-
+    [selected, setSelected] = useState(null);
 
     if (!warned) {
         Alert.alert(
@@ -118,9 +123,8 @@ export default function OfflineMode() {
                 <Text style={styles.header}>Offline Mode</Text>
                 <View style={styles.deviceList}>
                     <FlatList 
-                        renderItem={({device}) => {
-                            console.log(device.keys[0]);
-                            return <NearbyDevice endpointName={device.keys[0]} endpointId={device.values[0]} />;
+                        renderItem={({item}) => {
+                            return <NearbyDevice endpointId={item.id} endpointName={item.name} setSelected={setSelected}/>;
                         }}
                         data={discoveredDevices}
                     >
@@ -136,6 +140,7 @@ export default function OfflineMode() {
                         <Text>Advertise</Text>
                     </NewButton>
                 </View>
+                <Text style={{color: "white"}}>Selected: {selected}</Text>
                 <TextInput
                     style={styles.nameInput}
                     placeholder="Type your name here."
@@ -184,6 +189,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         width: "100%",
         height: 60,
+        color: "white",
     },
     buttonContainer: {
         flex: 1,
@@ -224,5 +230,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         color: "gray",
+    },
+    deviceListItemText: {
+        color: "white",
     }
 })
