@@ -4,9 +4,9 @@ import { TextInput, Button } from 'react-native-paper';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '@firebaseConfig'; 
 import { doc, getDoc } from 'firebase/firestore';
+import Profile_Screen from '../user/userScreens/Profile';
 
-
-function LoginScreen({ navigation }) {
+export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setErrorMsg] = useState(null);
@@ -16,18 +16,12 @@ function LoginScreen({ navigation }) {
     try {
       setLoading(true);
       const userCreds = await signInWithEmailAndPassword(auth, email, password);
-      // Fetch user profile data using userCreds.user.uid
-      const userDoc = doc(db, "users", userCreds.user.uid); // Assuming 'users' is your collection
+      const userDoc = doc(db, "users", userCreds.user.uid);
       const userProfile = await getDoc(userDoc);
-  
       if (userProfile.exists()) {
         const userData = userProfile.data();
-        // Check the user's mode and navigate accordingly
-        if (userData.mode === "victim") {
-          navigation.navigate("Slider_Screen");
-        } else {
-          navigation.navigate("SAR_Screen");
-        }
+        // Passing userData as a prop so we can extract info for pf screen
+        navigation.navigate("Profile_Screen", { userDetails: userData });
       } else {
         console.log("No such document!");
       }
@@ -43,7 +37,6 @@ function LoginScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <Image source={require("@assets/logo.png")} style={styles.logo} />
-      {/* <Text style={styles.title}>HelpHub</Text> */}
       <TextInput
         label="Email"
         value={email}
@@ -82,10 +75,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-  },
   input: {
     width: '80%',
     marginBottom: 10,
@@ -107,5 +96,3 @@ const styles = StyleSheet.create({
     height: 250,
   },
 });
-
-export default LoginScreen;

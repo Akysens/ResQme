@@ -9,6 +9,7 @@ import { LogBox, Alert } from 'react-native';
 import Slider_Screen from './screens/user/userScreens/Slider_Screen';
 import Advice_Screen from './screens/user/userScreens/Advice_Screen';
 import OfflineMode from './screens/user/userScreens/OfflineMode';  
+import Profile_Screen from './screens/user/userScreens/Profile';
 import NetInfo from "@react-native-community/netinfo";
 
 
@@ -84,6 +85,11 @@ function App() {
         <Stack.Screen
           name="Advice_Screen"
           component={Advice_Screen}
+          options={{ headerShown: false }} />
+
+        <Stack.Screen
+          name="Profile_Screen"
+          component={Profile_Screen}
           options={{ headerShown: false }} />
 
         </Stack.Navigator>

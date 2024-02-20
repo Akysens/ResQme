@@ -5,7 +5,6 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // UIr
-import Profile from "./Profile";
 import MedicalInfo from "./MedicalInfo";
 import ProfileInfo from "./ProfileInfo";
 
@@ -19,7 +18,6 @@ export default function ProfileStack() {
         headerShown: false,
       }}
     >
-      <Screen name="Default" component={Profile} />
       <Screen name="ProfileInfo" component={ProfileInfo} />
       <Screen name="MedicalInfo" component={MedicalInfo} />
     </Navigator>
