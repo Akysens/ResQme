@@ -41,15 +41,17 @@ function NewButton({primary = true, children = null, onPress = null}) {
 
 }
 
-function NearbyDevice({text}) {
+function NearbyDevice({endpointId}) {
     return (
         <View style={styles.deviceListItem}>
-            <Text>{text}</Text>
+            <Text>{endpointId}</Text>
         </View>
     );
 }
 
 export default function OfflineMode() {
+    [discoveredDevices, setDiscoveredDevices] = useState([null])
+
     Alert.alert(
         "No internet connection!",
         "App will now switch to offline mode."
@@ -71,6 +73,8 @@ export default function OfflineMode() {
     const onNewDeviceDiscovered = Nearby.addDeviceDiscoveryListener((event) => {
         console.log(event.endpointId);
         console.log(event.info);
+
+        setDiscoveredDevices(Nearby.getDiscoveredEndpoints());
     })
 
     return (
@@ -79,8 +83,8 @@ export default function OfflineMode() {
                 <Text style={styles.header}>Offline Mode</Text>
                 <View style={styles.deviceList}>
                     <FlatList 
-                        renderItem={({item}) => <NearbyDevice text={item.text} />}
-                        data={[{ text: "lol"}]}
+                        renderItem={({item}) => <NearbyDevice endpointId={item.endpointId} />}
+                        data={discoveredDevices}
                     >
                     </FlatList>
                 </View>

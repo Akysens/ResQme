@@ -34,19 +34,19 @@ export function requestConnection(endpoint: string) {
 }
 
 export function getMessages() {
-  HelphubNearbyModule.getMessages();
+  return HelphubNearbyModule.getMessages();
 }
 
 export function getEndpointMessage(endpoint: string) {
-  HelphubNearbyModule.getEndpointMessage(endpoint)
+  return HelphubNearbyModule.getEndpointMessage(endpoint)
 }
 
 export function getDiscoveredEndpoints() {
-  HelphubNearbyModule.getDiscoveredEndpoints()
+  return HelphubNearbyModule.getDiscoveredEndpoints()
 }
 
 export function getConnectedEndpoints() {
-  HelphubNearbyModule.getConnectedEndpoints();
+  return HelphubNearbyModule.getConnectedEndpoints();
 }
 
 const emitter = new EventEmitter(HelphubNearbyModule);
