@@ -19,9 +19,9 @@ export function stopAdvertising() {
   HelphubNearbyModule.stopAdvertising();
 }
 
-export function startDiscovery(name: string) {
+export function startDiscovery() {
   console.log("Discovery started.");
-  HelphubNearbyModule.startDiscovery(name);
+  HelphubNearbyModule.startDiscovery();
 }
 
 export function stopDiscovery() {

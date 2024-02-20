@@ -145,9 +145,9 @@ class HelphubNearbyModule : Module() {
         }
     }
 
-    fun startDiscovery(name : String) {
+    fun startDiscovery() {
       val discoveryOptions : DiscoveryOptions = DiscoveryOptions.Builder().setStrategy(STRATEGY).build()
-      connectionsClient.startDiscovery(name, endpointDiscoveryCallback, discoveryOptions)
+      connectionsClient.startDiscovery(SERVICE_ID, endpointDiscoveryCallback, discoveryOptions)
         .addOnSuccessListener {
           Log.d(TAG, "Discovery started successfully.")
         }.addOnFailureListener {
@@ -168,7 +168,7 @@ class HelphubNearbyModule : Module() {
     }
 
     Function("startDiscovery") {
-      name : String -> startDiscovery(name)
+      startDiscovery()
     }
 
     Function("stopDiscovery") {
