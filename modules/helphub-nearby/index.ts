@@ -5,7 +5,6 @@ import { NativeModulesProxy, EventEmitter, Subscription } from 'expo-modules-cor
 import HelphubNearbyModule from './src/HelphubNearbyModule';
 import HelphubNearbyView from './src/HelphubNearbyView';
 import { InfoPayload } from './src/HelphubNearby.types';
-import { Info } from 'luxon';
 
 
 export function sendPayload(endpoint: string, payload: string) {
@@ -13,6 +12,7 @@ export function sendPayload(endpoint: string, payload: string) {
 }
 
 export function startAdvertising(name: string) {
+  console.log("Advertisement started.");
   HelphubNearbyModule.startAdvertising(name);
 }
 

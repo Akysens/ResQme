@@ -83,7 +83,7 @@ export default function OfflineMode() {
                 <Text style={styles.header}>Offline Mode</Text>
                 <View style={styles.deviceList}>
                     <FlatList 
-                        renderItem={({item}) => <NearbyDevice endpointId={item.endpointId} />}
+                        renderItem={({item}) => <NearbyDevice endpointId={item} />}
                         data={discoveredDevices}
                     >
                     </FlatList>
@@ -92,6 +92,10 @@ export default function OfflineMode() {
                     <NewButton primary={true}
                         onPress={() => Nearby.startDiscovery("test")}>
                         <Text>Discover</Text>
+                    </NewButton>
+                    <NewButton primary={true}
+                        onPress={() => Nearby.startAdvertising("test")}>
+                        <Text>Advertise</Text>
                     </NewButton>
                 </View>
             </View>
@@ -140,6 +144,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flex: 1,
         flexDirection: "row",
+        justifyContent: "space-between",
     },
     buttonPrimary: {
         width: 140,
