@@ -77,18 +77,19 @@ class HelphubNearbyModule : Module() {
       }
 
       override fun onPayloadTransferUpdate(endpointId: String, update: PayloadTransferUpdate) {
-        this@HelphubNearbyModule.sendEvent("onPayloadTransferUpdate", bundleOf("endpointId" to endpointId, "info" to update))
+        this@HelphubNearbyModule.sendEvent("onPayloadTransferUpdate", bundleOf("endpointId" to endpointId, "status" to update.status))
       }
     }
 
     val connectionLifecycleCallback : ConnectionLifecycleCallback = object : ConnectionLifecycleCallback() {
       override fun onConnectionInitiated(endpointId: String, info: ConnectionInfo) {
-        this@HelphubNearbyModule.sendEvent("onNewConnectionInitiated", bundleOf("endpointId" to endpointId, "info" to info))
+        this@HelphubNearbyModule.sendEvent("onNewConnectionInitiated", bundleOf("endpointId" to endpointId, "endpointName" to info.endpointName,
+          "authenticationToken" to info.authenticationDigits, "isIncomingConnection" to info.isIncomingConnection))
         connectionsClient.acceptConnection(endpointId, payloadCallback)
       }
 
       override fun onConnectionResult(endpointId: String, resolution: ConnectionResolution) {
-        this@HelphubNearbyModule.sendEvent("onConnectionUpdate", bundleOf("endpointId" to endpointId, "info" to resolution))
+        this@HelphubNearbyModule.sendEvent("onConnectionUpdate", bundleOf("endpointId" to endpointId, "status" to resolution.status.statusMessage))
         when (resolution.status.statusCode) {
           ConnectionsStatusCodes.STATUS_OK -> {
             Log.d(TAG, "Succesfully connected to endpoint $endpointId")
@@ -119,7 +120,8 @@ class HelphubNearbyModule : Module() {
       override fun onEndpointFound(endpointId: String, info: DiscoveredEndpointInfo) {
         Log.d(TAG, "Discovered: $endpointId")
         discoveredEndpoints.add(endpointId)
-        this@HelphubNearbyModule.sendEvent("onNewDeviceDiscovered", bundleOf("endpointId" to endpointId, "info" to info))
+        this@HelphubNearbyModule.sendEvent("onNewDeviceDiscovered", bundleOf("endpointId" to endpointId,
+          "serviceId" to info.serviceId, "endpointName" to info.endpointName))
       }
 
       override fun onEndpointLost(endpointId: String) {

@@ -3,7 +3,7 @@ import { NativeModulesProxy, EventEmitter, Subscription } from 'expo-modules-cor
 // Import the native module. On web, it will be resolved to HelphubNearby.web.ts
 // and on native platforms to HelphubNearby.ts
 import HelphubNearbyModule from './src/HelphubNearbyModule';
-import { InfoPayload } from './src/HelphubNearby.types';
+import { ConnectionInfoType, ConnectionResolutionType, DiscoveredEndpointType, InfoPayload, PayloadUpdateType } from './src/HelphubNearby.types';
 
 
 export function sendPayload(endpoint: string, payload: string) {
@@ -51,18 +51,18 @@ export function getConnectedEndpoints() {
 
 const emitter = new EventEmitter(HelphubNearbyModule);
 
-export function addDeviceDiscoveryListener(listener: (event: InfoPayload) => void) : Subscription {
+export function addDeviceDiscoveryListener(listener: (event: DiscoveredEndpointType) => void) : Subscription {
   return emitter.addListener("onNewDeviceDiscovered", listener);
 }
 
-export function addConnectionUpdateListener(listener: (event: InfoPayload) => void) : Subscription {
+export function addConnectionUpdateListener(listener: (event: ConnectionResolutionType) => void) : Subscription {
   return emitter.addListener("onConnectionUpdate", listener);
 }
 
-export function addPayloadUpdateListener(listener: (event: InfoPayload) => void) : Subscription {
+export function addPayloadUpdateListener(listener: (event: PayloadUpdateType) => void) : Subscription {
   return emitter.addListener("onPayloadTransferUpdate", listener);
 }
 
-export function addNewConnectionListener(listener: (event: InfoPayload) => void) : Subscription {
+export function addNewConnectionListener(listener: (event: ConnectionInfoType) => void) : Subscription {
   return emitter.addListener("onNewConnectionInitiated", listener);
 }
