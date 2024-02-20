@@ -26,8 +26,8 @@ export function stopDiscovery() {
   HelphubNearbyModule.stopDiscovery();
 }
 
-export function requestConnection(endpoint: string) {
-  HelphubNearbyModule.requestConnection(endpoint);
+export function requestConnection(name : string, endpoint: string) {
+  HelphubNearbyModule.requestConnection(name, endpoint);
 }
 
 export function getMessages() {

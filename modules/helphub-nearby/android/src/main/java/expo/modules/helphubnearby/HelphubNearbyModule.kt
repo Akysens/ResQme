@@ -5,6 +5,7 @@ import expo.modules.kotlin.modules.ModuleDefinition
 
 import android.content.Context;
 import android.os.Build
+import android.os.Bundle
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
@@ -48,7 +49,7 @@ class HelphubNearbyModule : Module() {
     val REQUEST_CODE_REQUIRED_PERMISSIONS = 1
 
     val messages : HashMap<String, String> = hashMapOf<String, String>()
-    val discoveredEndpoints : MutableList<EndpointInfo> = mutableListOf<EndpointInfo>()
+    val discoveredEndpoints : MutableSet<Bundle> = mutableSetOf<Bundle>();
 
     OnCreate {
       connectionsClient = Nearby.getConnectionsClient(context);
@@ -112,23 +113,23 @@ class HelphubNearbyModule : Module() {
 
     val endpointDiscoveryCallback = object : EndpointDiscoveryCallback() {
       override fun onEndpointFound(endpointId: String, info: DiscoveredEndpointInfo) {
-        if (!discoveredEndpoints.contains(EndpointInfo(endpointId, info.endpointName))) {
-          discoveredEndpoints.add(EndpointInfo(endpointId, info.endpointName))
+          discoveredEndpoints.add(bundleOf("id" to endpointId, "name" to info.endpointName))
           this@HelphubNearbyModule.sendEvent(
             "onNewDeviceDiscovered", bundleOf(
               "endpointId" to endpointId,
               "serviceId" to info.serviceId, "endpointName" to info.endpointName))
-        }
       }
 
       @RequiresApi(Build.VERSION_CODES.N)
       override fun onEndpointLost(endpointId: String) {
-        discoveredEndpoints.removeIf { it.id == endpointId }
+        discoveredEndpoints.removeIf {
+          it.getString("id") == endpointId
+        }
       }
     }
 
-    fun requestConnection(endpointId : String) {
-      connectionsClient.requestConnection("Device", endpointId, connectionLifecycleCallback)
+    fun requestConnection(name : String, endpointId : String) {
+      connectionsClient.requestConnection(name, endpointId, connectionLifecycleCallback)
         .addOnSuccessListener {
           Log.d(TAG, "Requested connection to endpoint $endpointId.")
         } .addOnFailureListener {
@@ -176,7 +177,7 @@ class HelphubNearbyModule : Module() {
     }
 
     Function("requestConnection") {
-      endpoint : String -> requestConnection(endpoint)
+      name : String, endpoint : String -> requestConnection(name, endpoint)
     }
 
     Function("getMessages") {

@@ -108,7 +108,7 @@ export default function OfflineMode() {
     useEffect(() => {
         const onNewDeviceDiscovered = Nearby.addDeviceDiscoveryListener((event) => {
             setDiscoveredDevices(Nearby.getDiscoveredEndpoints());
-            console.log();
+            console.log(discoveredDevices);
         });
     }, [])
 
