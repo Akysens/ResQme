@@ -34,7 +34,7 @@ export default function SignupScreen({ navigation }) {
       await setDoc(doc(collection(db, "users"), id), user);
       setUser(user);
 
-      navigation.navigate("Login_Screen");
+      navigation.navigate("Medical_Screen", { id: id });
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         setErrMsg("Email already in use !");
@@ -49,7 +49,6 @@ export default function SignupScreen({ navigation }) {
   return (
     <SafeAreaView style={style.container}>
       <Image source={require('@assets/logo.png')} style={style.logo} />
-      {/* <Text style={style.title}>HelpHub</Text> */}
       <View>
         <HelperText
           type="error"
@@ -106,7 +105,7 @@ export default function SignupScreen({ navigation }) {
       </View>
 
       <Button
-        style={style.signInButton}
+        style={style.button}
         onPress={handleSignUp}
         mode="contained"
         loading={loading}
@@ -115,7 +114,7 @@ export default function SignupScreen({ navigation }) {
       </Button>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate('Login_Screen')}
+        onPress={() => navigation.navigate('Login_Screen')} // Make sure the screen name is correct
         style={style.signupButton}
       >
         <Text style={style.signupButtonText}>Already have an account?</Text>
@@ -132,12 +131,6 @@ const style = StyleSheet.create({
     padding: 20,
     backgroundColor: '#fff'
   },
-  // title: {
-  //   fontSize: 24,
-  //   fontWeight: 'bold',
-  //   color: '#000',
-  //   marginBottom: 40,
-  // },
   input: {
     width: '100%',
     marginBottom: 10,
@@ -155,14 +148,6 @@ const style = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: '500',
-  },
-  loginText: {
-    marginTop: 20,
-    color: '#000',
-  },
-  loginClickableText: {
-    color: '#6200ee',
-    fontWeight: 'bold',
   },
   logo: {
     width: 250,

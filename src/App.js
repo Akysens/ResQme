@@ -5,18 +5,19 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screens/auth/LoginScreen'; 
 import SignupScreen from './screens/auth/SignInScreen';
 import SAR_Screen from './screens/user/userScreens/SAR_Team_Screen';
-import { LogBox, Alert } from 'react-native';
+import { LogBox } from 'react-native';
 import Slider_Screen from './screens/user/userScreens/Slider_Screen';
 import Advice_Screen from './screens/user/userScreens/Advice_Screen';
 import OfflineMode from './screens/user/userScreens/OfflineMode';  
 import Profile_Screen from './screens/user/userScreens/Profile';
+import Medical_Screen from './screens/user/userScreens/Medical_Info_Screen';
 import NetInfo from "@react-native-community/netinfo";
 
 
 // STATE PROVIDER (easy-peasy)
 import { StoreProvider } from "easy-peasy";
 import store from "./state";
-import { app } from '../firebaseConfig';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -90,6 +91,11 @@ function App() {
         <Stack.Screen
           name="Profile_Screen"
           component={Profile_Screen}
+          options={{ headerShown: false }} />
+
+        <Stack.Screen 
+          name="Medical_Screen" 
+          component={Medical_Screen}
           options={{ headerShown: false }} />
 
         </Stack.Navigator>
