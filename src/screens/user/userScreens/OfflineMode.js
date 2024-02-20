@@ -72,7 +72,7 @@ export default function OfflineMode() {
 
     const onNewDeviceDiscovered = Nearby.addDeviceDiscoveryListener((event) => {
         console.log(event.endpointId);
-        console.log(event.info);
+        console.log(event.endpointName);
 
         setDiscoveredDevices(Nearby.getDiscoveredEndpoints());
     })
