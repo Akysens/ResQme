@@ -41,7 +41,8 @@ export function getEndpointMessage(endpoint: string) {
 }
 
 export function getDiscoveredEndpoints() {
-  return HelphubNearbyModule.getDiscoveredEndpoints()
+  console.log("discovered");
+  return HelphubNearbyModule.getDiscoveredEndpoints();
 }
 
 export function getConnectedEndpoints() {

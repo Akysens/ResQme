@@ -117,6 +117,7 @@ class HelphubNearbyModule : Module() {
 
     val endpointDiscoveryCallback = object : EndpointDiscoveryCallback() {
       override fun onEndpointFound(endpointId: String, info: DiscoveredEndpointInfo) {
+        Log.d(TAG, "Discovered: $endpointId")
         discoveredEndpoints.add(endpointId)
         this@HelphubNearbyModule.sendEvent("onNewDeviceDiscovered", bundleOf("endpointId" to endpointId, "info" to info))
       }

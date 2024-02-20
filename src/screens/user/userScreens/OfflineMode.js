@@ -57,7 +57,7 @@ export default function OfflineMode() {
         "App will now switch to offline mode."
     );
 
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
 
     const unsubscribe = NetInfo.addEventListener((state) => {
         if (state.isInternetReachable === true) {
@@ -66,7 +66,7 @@ export default function OfflineMode() {
                 "App will now switch to normal mode"
             )
 
-            navigation.navigate("Login_Screen");
+            // navigation.navigate("Login_Screen");
         }
     });
 
