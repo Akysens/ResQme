@@ -5,6 +5,7 @@ import expo.modules.kotlin.modules.ModuleDefinition
 
 import android.content.Context;
 import android.util.Log
+import androidx.core.os.bundleOf
 import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.connection.AdvertisingOptions;
 import com.google.android.gms.nearby.connection.BandwidthInfo;
@@ -49,6 +50,14 @@ class HelphubNearbyModule : Module() {
     OnCreate {
       connectionsClient = Nearby.getConnectionsClient(context);
     }
+
+    Events("onNewDeviceDiscovered")
+
+    Events("onConnectionUpdate")
+
+    Events("onPayloadTransferUpdate")
+
+    Events("onNewConnectionInitiated")
 
     fun sendPayload(endpointId : String, message : String) {
       Payload.fromBytes(message.toByteArray(UTF_8)).let {
@@ -106,6 +115,7 @@ class HelphubNearbyModule : Module() {
     val endpointDiscoveryCallback = object : EndpointDiscoveryCallback() {
       override fun onEndpointFound(endpointId: String, info: DiscoveredEndpointInfo) {
         discoveredEndpoints.add(endpointId)
+        this@HelphubNearbyModule.sendEvent("onNewDeviceDiscovered", bundleOf("endpointId" to endpointId, "info" to info))
       }
 
       override fun onEndpointLost(endpointId: String) {

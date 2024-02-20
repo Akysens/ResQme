@@ -1,7 +1,4 @@
-export type ChangeEventPayload = {
-  value: string;
-};
-
-export type HelphubNearbyViewProps = {
-  name: string;
-};
+export type DeviceDiscoveryPayload = {
+  endpointId: string,
+  info: string
+}

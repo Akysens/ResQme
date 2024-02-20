@@ -4,7 +4,8 @@ import { NativeModulesProxy, EventEmitter, Subscription } from 'expo-modules-cor
 // and on native platforms to HelphubNearby.ts
 import HelphubNearbyModule from './src/HelphubNearbyModule';
 import HelphubNearbyView from './src/HelphubNearbyView';
-import { ChangeEventPayload, HelphubNearbyViewProps } from './src/HelphubNearby.types';
+import { DeviceDiscoveryPayload } from './src/HelphubNearby.types';
+
 
 export function sendPayload(endpoint: string, payload: string) {
   HelphubNearbyModule.sendPayload(endpoint, payload);
@@ -18,8 +19,9 @@ export function stopAdvertising() {
   HelphubNearbyModule.stopAdvertising();
 }
 
-export function startDiscovery() {
-  HelphubNearbyModule.startDiscovery();
+export function startDiscovery(name: string) {
+  console.log("Discovery started.");
+  HelphubNearbyModule.startDiscovery(name);
 }
 
 export function stopDiscovery() {
@@ -46,10 +48,9 @@ export function getConnectedEndpoints() {
   HelphubNearbyModule.getConnectedEndpoints();
 }
 
-const emitter = new EventEmitter(HelphubNearbyModule ?? NativeModulesProxy.HelphubNearby);
+const emitter = new EventEmitter(HelphubNearbyModule);
 
-export function addChangeListener(listener: (event: ChangeEventPayload) => void): Subscription {
-  return emitter.addListener<ChangeEventPayload>('onChange', listener);
+export function addDeviceDiscoveryListener(listener: (event: DeviceDiscoveryPayload) => void) : Subscription {
+  return emitter.addListener("onNewDeviceDiscovered", listener);
 }
 
-export { HelphubNearbyView, HelphubNearbyViewProps, ChangeEventPayload };

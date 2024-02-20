@@ -15,6 +15,40 @@ import NetInfo from "@react-native-community/netinfo";
 
 import * as Nearby from "../../../../modules/helphub-nearby/index";
 
+
+
+function NewButton({primary = true, children = null, onPress = null}) {
+    return (
+      <Pressable
+        onPressOut={onPress}
+        style={({pressed}) => {
+          if (pressed) {
+            return styles.buttonPressed;
+          }
+          else {
+            if (primary) {
+              return styles.buttonPrimary;
+            }
+  
+            else {
+              return styles.buttonSecondary;
+            }
+          }
+        }}>
+          {children}
+      </Pressable>
+    );
+
+}
+
+function NearbyDevice({text}) {
+    return (
+        <View style={styles.deviceListItem}>
+            <Text>{text}</Text>
+        </View>
+    );
+}
+
 export default function OfflineMode() {
     Alert.alert(
         "No internet connection!",
@@ -34,15 +68,28 @@ export default function OfflineMode() {
         }
     });
 
+    const onNewDeviceDiscovered = Nearby.addDeviceDiscoveryListener((event) => {
+        console.log(event.endpointId);
+        console.log(event.info);
+    })
+
     return (
         <View style={styles.container}>
             <View style={styles.safeArea}>
                 <Text style={styles.header}>Offline Mode</Text>
-                <FlatList style={styles.deviceList}>
-                    <View style={styles.deviceListItem}>
-                        <Text>a</Text>
-                    </View>
-                </FlatList>
+                <View style={styles.deviceList}>
+                    <FlatList 
+                        renderItem={({item}) => <NearbyDevice text={item.text} />}
+                        data={[{ text: "lol"}]}
+                    >
+                    </FlatList>
+                </View>
+                <View style={styles.buttonContainer}>
+                    <NewButton primary={true}
+                        onPress={() => Nearby.startDiscovery("test")}>
+                        <Text>Discover</Text>
+                    </NewButton>
+                </View>
             </View>
         </View>
     )
@@ -55,6 +102,7 @@ const styles = StyleSheet.create({
     },
     safeArea: {
         flex: 1,
+        flexDirection: "column",
         padding: 20,
         marginTop: 20,
     },
@@ -72,14 +120,48 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1,
         elevation: 5,
+        width: "100%",
+        flex: 4,
     },
     deviceListItem: {
-        margin: 10,
+        margin: "auto",
+        padding: 10,
         backgroundColor: "#46424f",
         borderColor: "#2f2b3a",
         borderWidth: 1,
-        borderCurve: 5,
+        borderRadius: 5,
         width: "100%",
-        height: 50,
-    }
+        height: 60,
+    },
+    buttonContainer: {
+        flex: 1,
+        flexDirection: "row",
+    },
+    buttonPrimary: {
+        width: 140,
+        height: 40,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 0,
+        borderWidth: 0,
+        backgroundColor: "#3FC1C9",
+    },
+    buttonPressed: {
+        width: 140,
+        height: 40,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 0,
+        borderWidth: 0,
+        backgroundColor: "#AFAFAF",
+    },
+    buttonSecondary: {
+        width: 140,
+        height: 40,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 0,
+        borderWidth: 0,
+        backgroundColor: "#FC5185",
+    },
 })
