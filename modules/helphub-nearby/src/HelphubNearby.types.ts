@@ -17,7 +17,7 @@ export type PayloadUpdateType = {
 
 export type ConnectionResolutionType = {
   endpointId: string,
-  status: string
+  status: number
 }
 
 export type DiscoveredEndpointType = {

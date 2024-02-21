@@ -30,6 +30,18 @@ export function requestConnection(name : string, endpoint: string) {
   HelphubNearbyModule.requestConnection(name, endpoint);
 }
 
+export function acceptConnection(endpoint: string) {
+  HelphubNearbyModule.acceptConnection(endpoint);
+}
+
+export function rejectConnection(endpoint: string) {
+  HelphubNearbyModule.rejectConnection(endpoint);
+}
+
+export function disconnect(endpoint: string) {
+  HelphubNearbyModule.disconnect(endpoint);
+}
+
 export function getMessages() {
   return HelphubNearbyModule.getMessages();
 }

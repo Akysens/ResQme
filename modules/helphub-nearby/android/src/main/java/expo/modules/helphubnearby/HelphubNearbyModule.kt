@@ -86,7 +86,7 @@ class HelphubNearbyModule : Module() {
       }
 
       override fun onConnectionResult(endpointId: String, resolution: ConnectionResolution) {
-        this@HelphubNearbyModule.sendEvent("onConnectionUpdate", bundleOf("endpointId" to endpointId, "status" to resolution.status.statusMessage))
+        this@HelphubNearbyModule.sendEvent("onConnectionUpdate", bundleOf("endpointId" to endpointId, "status" to resolution.status.statusCode))
         when (resolution.status.statusCode) {
           ConnectionsStatusCodes.STATUS_OK -> {
             Log.d(TAG, "Succesfully connected to endpoint $endpointId")
@@ -136,12 +136,28 @@ class HelphubNearbyModule : Module() {
         }
     }
 
-    fun acceptConnection(endpointId: string) {
+    fun acceptConnection(endpointId: String) {
       connectionsClient.acceptConnection(endpointId, payloadCallback)
       .addOnSuccessListener {
         Log.d(TAG, "Connection accepted from $endpointId.")
       } .addOnFailureListener {
         Log.w(TAG, "Connection accept from $endpointId failed with: $it");
+    }
+
+    fun rejectConnection(endpointId: String) {
+      connectionsClient.rejectConnection(endpointId)
+      .addOnSuccessListener {
+        Log.d(TAG, "Connection rejected from $endpointId.")
+      } .addOnFailureListener {
+        Log.w(TAG, "Connection rejection from $endpointId failed with: $it");
+    }
+
+    fun disconnect(endpointId: String) {
+      connectionsClient.disconnectFromEndpoint(endpointId)
+      .addOnSuccessListener {
+        Log.d(TAG, "Disconnected from $endpointId.")
+      } .addOnFailureListener {
+        Log.w(TAG, "Disconnection from $endpointId failed with: $it");
     }
 
     fun startAdvertising(name : String) {
@@ -189,6 +205,14 @@ class HelphubNearbyModule : Module() {
 
     Function("acceptConnection") {
       endpoint : String -> acceptConnection(endpoint)
+    }
+
+    Function("disconnect") {
+      endpoint : String -> disconnect(endpoint)
+    }
+
+    Function("rejectConnection") {
+      endpoint: String -> rejectConnection(endpoint)
     }
 
     Function("getMessages") {

@@ -41,14 +41,23 @@ function NewButton({primary = true, children = null, onPress = null}) {
 
 }
 
-function NearbyDevice({endpointName, endpointId, setSelected}) {
+function NearbyDevice({endpointName, endpointId, userName}) {
     
     [isConnected, setIsConnected] = useState(false);
+
+    const requestConnection = () => {
+        Nearby.requestConnection(userName, endpointId);
+        Alert.alert("Connection Request", "Connection request was sent.");
+    };
+
+    const disconnectFromEndpoint = () => {
+        Nearby.disconnect(endpointId);
+    }
 
     return (
         <Menu>
             <MenuTrigger>
-                <View style={styles.deviceListItem}>
+                <View style={{...styles.deviceListItem, backgroundColor: isConnected ? "#A1EEBD" : "#46424f"}}>
                     <Text style={styles.deviceListItemText}>{endpointName}</Text>
                     <Text style={styles.deviceListItemText}>{endpointId}</Text>
                 </View>
@@ -56,11 +65,11 @@ function NearbyDevice({endpointName, endpointId, setSelected}) {
             <MenuOptions>
                 {
                     isConnected ? 
-                        (<MenuOption text="Connect"/>) // to-do: onSelect
+                        (<MenuOption text="Connect" onSelect={requestConnection()}/>)
                             : 
                         (   
                             <>
-                                <MenuOption text="Disconnect" onSelect={() => alert("test") }/>
+                                <MenuOption text="Disconnect" onSelect={disconnectFromEndpoint}/>
                                 <MenuOption text="Message" onSelect={() => alert("test") }/>
                             </>
                         )
@@ -77,7 +86,6 @@ export default function OfflineMode() {
     [advertising, setAdvertising] = useState(false);
     [discovering, setDiscovering] = useState(false);
     [selected, setSelected] = useState(null);
-
     if (!warned) {
         Alert.alert(
             "No internet connection!",
@@ -135,10 +143,34 @@ export default function OfflineMode() {
             if (event.isIncomingConnection) {
                 Alert.alert(
                     "Connection Request",
-                    "A connection from " + event.endpointName + " was requested. Authentication token: " + event.authenticationToken
-                    // to do: add accept and reject buttons
+                    "A connection from " + event.endpointName + " was requested. Authentication token: " + event.authenticationToken,
+                    [
+                        {
+                            text: "Accept",
+                            onPress: () => {Nearby.acceptConnection(event.endpointId)},
+                        },
+                        {
+                            text: "Reject",
+                            onPress: () => {Nearby.rejectConnection(event.endpointId)},
+                        }
+                    ]
                 )
             }
+        });
+
+        const onConnectionUpdate = Nearby.addConnectionUpdateListener((event) => {
+            switch (event.status) {
+                case 0:
+                    Alert.alert("Connection Successful", "You successfully connected to endpoint " + event.endpointId);
+                case 15:
+                    Alert.alert("Connection Failed", "Timeout while trying to connect. Error code: ", event.status);
+                case 16:
+                    Alert.alert("Connection Lost", "Connection was cancelled. Error code: ", event.status);
+                case 7:
+                    Alert.alert("Connection Lost", "A network error occurred. Please try again. Error code: ", event.status);
+                case 15:
+                    Alert.alert("Connection Failed", "Timeout while trying to connect. Error code: ", event.status);
+            }           
         })
     }, [])
 
@@ -149,7 +181,7 @@ export default function OfflineMode() {
                 <View style={styles.deviceList}>
                     <FlatList 
                         renderItem={({item}) => {
-                            return <NearbyDevice endpointId={item.id} endpointName={item.name} setSelected={setSelected}/>;
+                            return <NearbyDevice endpointId={item.id} endpointName={item.name} userName={userName}/>;
                         }}
                         data={discoveredDevices}
                     >
