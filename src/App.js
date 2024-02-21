@@ -57,7 +57,7 @@ function App() {
     <MenuProvider>
       <StoreProvider store={store}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName={"OfflineMode"}>
+          <Stack.Navigator initialRouteName={internetReachable ? "Login_Screen" : "OfflineMode"}>
             <Stack.Screen 
             name="Login_Screen" 
             component={LoginScreen}

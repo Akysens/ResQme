@@ -16,6 +16,7 @@ import { useStoreState, useStoreActions } from "easy-peasy";
 import NetInfo from "@react-native-community/netinfo";
 
 import * as Nearby from "../../../../modules/helphub-nearby/index";
+import DialogInput from "react-native-dialog/lib/Input";
 
 function NewButton({primary = true, children = null, onPress = null}) {
     return (
@@ -42,7 +43,9 @@ function NewButton({primary = true, children = null, onPress = null}) {
 }
 
 const NearbyDevice = ({endpointName, endpointId, userName, connectedDevices, setConnectedDevices}) => {
-    
+    [messaging, setMessaging] = useState(false);
+    [message, setMessage] = useState("");
+
     const isConnected = () => {
         return connectedDevices.includes(endpointId);
     }
@@ -57,28 +60,52 @@ const NearbyDevice = ({endpointName, endpointId, userName, connectedDevices, set
         setConnectedDevices(connectedDevices.filter(function(e) {return e !== endpointId}));
     }
 
+    const sendMessage = (payload) => {
+        Nearby.sendPayload(endpointId, payload);
+        setMessaging(false);
+    }
+
+    const openMessagingPanel = () => {
+        setMessaging(true);
+    }
+
+    const handleCancel = () => {
+        setMessaging(false);
+    }
+
     return (
-        <Menu>
-            <MenuTrigger>
-                <View style={{...styles.deviceListItem, backgroundColor: isConnected() ? "#A1EEBD" : "#46424f"}}>
-                    <Text style={styles.deviceListItemText}>{endpointName}</Text>
-                    <Text style={styles.deviceListItemText}>{endpointId}</Text>
-                </View>
-            </MenuTrigger>
-            <MenuOptions>
-                {
-                    !isConnected() ? 
-                        (<MenuOption text="Connect" onSelect={requestConnection}/>)
-                            : 
-                        (   
-                            <>
-                                <MenuOption text="Disconnect" onSelect={disconnectFromEndpoint}/>
-                                <MenuOption text="Message" onSelect={() => alert("test") }/>
-                            </>
-                        )
-                }
-            </MenuOptions>
-        </Menu>
+        <>
+            <Dialog.Container visible={messaging}>
+                <Dialog.Title>Messaging</Dialog.Title>
+                <Dialog.Description>
+                    Last Message from {endpointName}: {Nearby.getEndpointMessage(endpointId)};
+                </Dialog.Description>
+                <Dialog.Input label="Message to be sent" onChangeText={(text) => setMessage(text)}/>
+                <Dialog.Button label="Cancel" onPress={handleCancel}/>
+                <Dialog.Button label="Send" onPress={() => sendMessage(message)}/>
+            </Dialog.Container>
+            <Menu>
+                <MenuTrigger>
+                    <View style={{...styles.deviceListItem, backgroundColor: isConnected() ? "#A1EEBD" : "#46424f"}}>
+                        <Text style={styles.deviceListItemText}>{endpointName}</Text>
+                        <Text style={styles.deviceListItemText}>{endpointId}</Text>
+                    </View>
+                </MenuTrigger>
+                <MenuOptions>
+                    {
+                        !isConnected() ? 
+                            (<MenuOption text="Connect" onSelect={requestConnection}/>)
+                                : 
+                            (   
+                                <>
+                                    <MenuOption text="Disconnect" onSelect={disconnectFromEndpoint}/>
+                                    <MenuOption text="Message" onSelect={openMessagingPanel}/>
+                                </>
+                            )
+                    }
+                </MenuOptions>
+            </Menu>
+        </>
     );
 }
 
@@ -216,6 +243,10 @@ export default function OfflineMode() {
             const onDisconnected = Nearby.addDisconnectionListener((event) => {
                 Alert.alert("Connection Lost", "Disconnected.", [{text: "OK"}]);
                 setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
+            })
+
+            const onPayloadUpdate = Nearby.addPayloadUpdateListener((event) => {
+                console.log("payload",event.status)
             })
         })
     }, [])
