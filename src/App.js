@@ -10,6 +10,7 @@ import Slider_Screen from './screens/user/userScreens/Slider_Screen';
 import Advice_Screen from './screens/user/userScreens/Advice_Screen';
 import OfflineMode from './screens/user/userScreens/OfflineMode';  
 import NetInfo from "@react-native-community/netinfo";
+import { MenuProvider } from "react-native-popup-menu";
 
 
 // STATE PROVIDER (easy-peasy)
@@ -53,42 +54,44 @@ function App() {
   }
 
   return (
-    <StoreProvider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName={"OfflineMode"}>
-          <Stack.Screen 
-          name="Login_Screen" 
-          component={LoginScreen}
-          options={{ headerShown: false }} />
+    <MenuProvider>
+      <StoreProvider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName={"OfflineMode"}>
+            <Stack.Screen 
+            name="Login_Screen" 
+            component={LoginScreen}
+            options={{ headerShown: false }} />
 
-          <Stack.Screen 
-          name="SignUp_Screen" 
-          component={SignupScreen}
-          options={{ headerShown: false }} />
+            <Stack.Screen 
+            name="SignUp_Screen" 
+            component={SignupScreen}
+            options={{ headerShown: false }} />
 
-          <Stack.Screen 
-          name="SAR_Screen" 
-          component={SAR_Screen} 
-          options={{ headerShown: false }} />
+            <Stack.Screen 
+            name="SAR_Screen" 
+            component={SAR_Screen} 
+            options={{ headerShown: false }} />
+
+            <Stack.Screen
+            name="Slider_Screen"
+            component={Slider_Screen}
+            options={{ headerShown: false }} />
+
+            <Stack.Screen
+            name="OfflineMode"
+            component={OfflineMode}
+            options={{ headerShown: false }} />
 
           <Stack.Screen
-          name="Slider_Screen"
-          component={Slider_Screen}
-          options={{ headerShown: false }} />
+            name="Advice_Screen"
+            component={Advice_Screen}
+            options={{ headerShown: false }} />
 
-          <Stack.Screen
-          name="OfflineMode"
-          component={OfflineMode}
-          options={{ headerShown: false }} />
-
-        <Stack.Screen
-          name="Advice_Screen"
-          component={Advice_Screen}
-          options={{ headerShown: false }} />
-
-        </Stack.Navigator>
-      </NavigationContainer>
-    </StoreProvider>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </StoreProvider>
+    </MenuProvider>
   );
 }
 

@@ -8,14 +8,13 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { SwipeButton } from "react-native-expo-swipe-button";
 import { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 import { SegmentedButtons, Banner, Text, Button } from "react-native-paper";
+import { Menu, MenuOptions, MenuOption, MenuTrigger } from "react-native-popup-menu";
 
 // State
 import { useStoreState, useStoreActions } from "easy-peasy";
 import NetInfo from "@react-native-community/netinfo";
 
 import * as Nearby from "../../../../modules/helphub-nearby/index";
-
-
 
 function NewButton({primary = true, children = null, onPress = null}) {
     return (
@@ -42,16 +41,32 @@ function NewButton({primary = true, children = null, onPress = null}) {
 }
 
 function NearbyDevice({endpointName, endpointId, setSelected}) {
+    
+    [isConnected, setIsConnected] = useState(false);
+
     return (
-        <Pressable
-            onPressOut={() => setSelected(endpointId)}
-            android_ripple={{color: "#3FC1C9", foreground: true}}
-        >
-            <View style={styles.deviceListItem}>
-                <Text style={styles.deviceListItemText}>{endpointName}</Text>
-                <Text style={styles.deviceListItemText}>{endpointId}</Text>
-            </View>
-        </Pressable>
+        <Menu>
+            <MenuTrigger>
+                <View style={styles.deviceListItem}>
+                    <Text style={styles.deviceListItemText}>{endpointName}</Text>
+                    <Text style={styles.deviceListItemText}>{endpointId}</Text>
+                </View>
+            </MenuTrigger>
+            <MenuOptions>
+                {
+                    isConnected ? 
+                        (<MenuOption text="Connect" onSelect={() => alert("test") }/>)
+                            : 
+                        (   
+                            <>
+                                <MenuOption text="Disconnect" onSelect={() => alert("test") }/>
+                                <MenuOption text="Message" onSelect={() => alert("test") }/>
+                            </>
+                        )
+                }
+                
+            </MenuOptions>
+        </Menu>
     );
 }
 
