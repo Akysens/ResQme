@@ -152,7 +152,7 @@ export default function OfflineMode() {
                     [
                         {
                             text: "Accept",
-                            onPress: () => {Nearby.acceptConnection(event.endpointId); setConnectedDevices([... event.endpointId]);},
+                            onPress: () => {Nearby.acceptConnection(event.endpointId); setConnectedDevices([...connectedDevices, event.endpointId]);},
                         },
                         {
                             text: "Reject",
@@ -164,21 +164,31 @@ export default function OfflineMode() {
         });
 
         const onConnectionUpdate = Nearby.addConnectionUpdateListener((event) => {
+            console.log(event.status);
             switch (event.status) {
                 case 0:
-                    Alert.alert("Connection Successful", "You successfully connected to endpoint " + event.endpointId);
+                    Alert.alert("Connection Successful", "You successfully connected to endpoint " + event.endpointId, [{text: "OK"}]);
                     setConnectedDevices([... event.endpointId]);
+                    break;
                 case 15:
-                    Alert.alert("Connection Failed", "Timeout while trying to connect. Error code: ", event.status);
+                    Alert.alert("Connection Failed", "Timeout while trying to connect. Error code: " + event.status, [{text: "OK"}]);
                     setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
+                    break;
                 case 16:
-                    Alert.alert("Connection Lost", "Connection was cancelled. Error code: ", event.status);
+                    Alert.alert("Connection Lost", "Connection was cancelled. Error code: " + event.status, [{text: "OK"}]);
                     setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
+                    break;
                 case 7:
-                    Alert.alert("Connection Lost", "A network error occurred. Please try again. Error code: ", event.status);
+                    Alert.alert("Connection Lost", "A network error occurred. Please try again. Error code: " + event.status, [{text: "OK"}]);
                     setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
+                    break;
                 case 15:
-                    Alert.alert("Connection Failed", "Timeout while trying to connect. Error code: ", event.status);
+                    Alert.alert("Connection Failed", "Timeout while trying to connect. Error code: " + event.status, [{text: "OK"}]);
+                    break;
+                case 13: 
+                    Alert.alert("Connection Lost", "Disconnected. Error code: " + event.status, [{text: "OK"}]);
+                    setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
+                    break;
             }           
         })
     }, [])

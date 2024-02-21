@@ -48,7 +48,7 @@ class HelphubNearbyModule : Module() {
     val SERVICE_ID = "helphub"
     val REQUEST_CODE_REQUIRED_PERMISSIONS = 1
 
-    val messages : HashMap<String, String> = hashMapOf<String, String>()
+    val messages : MutableMap<String, String> = mutableMapOf<String, String>()
     val discoveredEndpoints : MutableSet<Bundle> = mutableSetOf<Bundle>();
 
     OnCreate {
