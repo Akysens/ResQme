@@ -154,10 +154,6 @@ class HelphubNearbyModule : Module() {
 
     fun disconnect(endpointId: String) {
       connectionsClient.disconnectFromEndpoint(endpointId)
-      .addOnSuccessListener {
-        Log.d(TAG, "Disconnected from $endpointId.")
-      } .addOnFailureListener {
-        Log.w(TAG, "Disconnection from $endpointId failed with: $it");
     }
 
     fun startAdvertising(name : String) {
