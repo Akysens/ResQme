@@ -83,7 +83,6 @@ class HelphubNearbyModule : Module() {
       override fun onConnectionInitiated(endpointId: String, info: ConnectionInfo) {
         this@HelphubNearbyModule.sendEvent("onNewConnectionInitiated", bundleOf("endpointId" to endpointId, "endpointName" to info.endpointName,
           "authenticationToken" to info.authenticationDigits, "isIncomingConnection" to info.isIncomingConnection))
-        connectionsClient.acceptConnection(endpointId, payloadCallback)
       }
 
       override fun onConnectionResult(endpointId: String, resolution: ConnectionResolution) {
@@ -137,6 +136,14 @@ class HelphubNearbyModule : Module() {
         }
     }
 
+    fun acceptConnection(endpointId: string) {
+      connectionsClient.acceptConnection(endpointId, payloadCallback)
+      .addOnSuccessListener {
+        Log.d(TAG, "Connection accepted from $endpointId.")
+      } .addOnFailureListener {
+        Log.w(TAG, "Connection accept from $endpointId failed with: $it");
+    }
+
     fun startAdvertising(name : String) {
       val advertisingOptions : AdvertisingOptions = AdvertisingOptions.Builder().setStrategy(STRATEGY).build()
       connectionsClient.startAdvertising(name, SERVICE_ID, connectionLifecycleCallback, advertisingOptions)
@@ -178,6 +185,10 @@ class HelphubNearbyModule : Module() {
 
     Function("requestConnection") {
       name : String, endpoint : String -> requestConnection(name, endpoint)
+    }
+
+    Function("acceptConnection") {
+      endpoint : String -> acceptConnection(endpoint)
     }
 
     Function("getMessages") {

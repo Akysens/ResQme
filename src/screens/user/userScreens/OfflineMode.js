@@ -9,6 +9,7 @@ import { SwipeButton } from "react-native-expo-swipe-button";
 import { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 import { SegmentedButtons, Banner, Text, Button } from "react-native-paper";
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from "react-native-popup-menu";
+import Dialog from "react-native-dialog";
 
 // State
 import { useStoreState, useStoreActions } from "easy-peasy";
@@ -55,7 +56,7 @@ function NearbyDevice({endpointName, endpointId, setSelected}) {
             <MenuOptions>
                 {
                     isConnected ? 
-                        (<MenuOption text="Connect" onSelect={() => alert("test") }/>)
+                        (<MenuOption text="Connect"/>) // to-do: onSelect
                             : 
                         (   
                             <>
@@ -64,7 +65,6 @@ function NearbyDevice({endpointName, endpointId, setSelected}) {
                             </>
                         )
                 }
-                
             </MenuOptions>
         </Menu>
     );
@@ -130,6 +130,16 @@ export default function OfflineMode() {
             setDiscoveredDevices(Nearby.getDiscoveredEndpoints());
             console.log(discoveredDevices);
         });
+
+        const onConnectionInitiated = Nearby.addNewConnectionListener((event) => {
+            if (event.isIncomingConnection) {
+                Alert.alert(
+                    "Connection Request",
+                    "A connection from " + event.endpointName + " was requested. Authentication token: " + event.authenticationToken
+                    // to do: add accept and reject buttons
+                )
+            }
+        })
     }, [])
 
     return (
