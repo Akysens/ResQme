@@ -138,18 +138,20 @@ class HelphubNearbyModule : Module() {
 
     fun acceptConnection(endpointId: String) {
       connectionsClient.acceptConnection(endpointId, payloadCallback)
-      .addOnSuccessListener {
-        Log.d(TAG, "Connection accepted from $endpointId.")
-      } .addOnFailureListener {
-        Log.w(TAG, "Connection accept from $endpointId failed with: $it");
+        .addOnSuccessListener {
+          Log.d(TAG, "Connection accepted from $endpointId.")
+        }.addOnFailureListener {
+          Log.w(TAG, "Connection accept from $endpointId failed with: $it");
+        }
     }
 
     fun rejectConnection(endpointId: String) {
       connectionsClient.rejectConnection(endpointId)
-      .addOnSuccessListener {
-        Log.d(TAG, "Connection rejected from $endpointId.")
-      } .addOnFailureListener {
-        Log.w(TAG, "Connection rejection from $endpointId failed with: $it");
+        .addOnSuccessListener {
+          Log.d(TAG, "Connection rejected from $endpointId.")
+        }.addOnFailureListener {
+          Log.w(TAG, "Connection rejection from $endpointId failed with: $it");
+        }
     }
 
     fun disconnect(endpointId: String) {
