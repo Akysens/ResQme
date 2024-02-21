@@ -88,13 +88,7 @@ return (
         autoplayInterval={5000}
       />
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.exitButton} onPress={() => {
-          if (isPlaying) {
-            togglePlay();
-          }
-          navigation.navigate('Slider_Screen');
-        }
-        }>
+        <TouchableOpacity style={styles.exitButton} onPress={() => navigation.navigate(' ')}>
           <Image style={styles.buttonImage} source={require('@assets/Exit.png')}/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.warningButton} onPress={togglePlay}>
@@ -129,7 +123,6 @@ const styles = StyleSheet.create({
     color: 'black', // Adjust the color as needed
   },  
   scrollView: {
-    
     // Adjust this as needed
   },
   extraView: {

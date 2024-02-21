@@ -1,177 +1,64 @@
 import React, { useState } from "react";
-import { useStoreActions } from "easy-peasy";
-import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, Image, TouchableOpacity, SafeAreaView } from "react-native";
 import { Button, TextInput, HelperText, Checkbox } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { auth, db } from "@firebaseConfig";
+import { useNavigation } from "@react-navigation/native";
 
-export default function SignupScreen({ navigation }) {
+function SignInScreen() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [pass, setPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [phoneNum, setPhoneNumber] = useState("");
   const [error, setErrMsg] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isRescuer, setIsRescuer] = useState(false);
-  const setUser = useStoreActions((actions) => actions.setUser);
+  const navigation = useNavigation();
 
   const handleSignUp = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
-      const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
-      const id = userCredential.user.uid;
-      const user = {
-        name,
-        email,
-        id,
-        phoneNum,
-        mode: isRescuer ? "rescuer" : "victim",
-      };
-
-      // Add to users collection
-      await setDoc(doc(collection(db, "users"), id), user);
-      setUser(user);
-
-      navigation.navigate("Login_Screen");
+      const userCreds = await createUserWithEmailAndPassword(auth, email, password);
+      const userProfile = { name, email: userCreds.user.email, phoneNum, mode: isRescuer ? "rescuer" : "victim" };
+      await setDoc(doc(db, "users", userCreds.user.uid), userProfile);
+      navigation.navigate('LoginScreen');
     } catch (error) {
-      if (error.code === "auth/email-already-in-use") {
-        setErrMsg("Email already in use !");
-      } else if (error.code === "auth/invalid-email") {
-        setErrMsg("Invalid Email !");
-      }
+      setErrMsg("Error signing up. Please try again.");
+      console.error(error);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <SafeAreaView style={style.container}>
-      <Image source={require('@assets/logo.png')} style={style.logo} />
-      {/* <Text style={style.title}>HelpHub</Text> */}
-      <View>
-        <HelperText
-          type="error"
-          visible={error !== null}
-          style={{
-            display: error !== null ? "flex" : "none",
-          }}
-        >
-          {error}
-        </HelperText>
+    <SafeAreaView style={styles.container}>
+      <Image source={require('@assets/logo.png')} style={styles.logo} />
+      <TextInput label="Email" value={email} onChangeText={setEmail} style={styles.input} />
+      <TextInput label="Password" value={password} secureTextEntry onChangeText={setPassword} style={styles.input} />
+      <TextInput label="Name" value={name} onChangeText={setName} style={styles.input} />
+      <TextInput label="Phone Number" value={phoneNum} keyboardType="numeric" onChangeText={setPhoneNumber} style={styles.input} />
+      <View style={styles.checkboxContainer}>
+        <Text>Are you a rescuer?</Text>
+        <Checkbox status={isRescuer ? 'checked' : 'unchecked'} onPress={() => setIsRescuer(!isRescuer)} />
       </View>
-      <TextInput
-        mode={"outlined"}
-        label={"Email"}
-        onChangeText={(input) => setEmail(input)}
-        value={email}
-        style={style.input}
-      />
-      <TextInput
-        mode={"outlined"}
-        style={style.input}
-        label={"Password"}
-        secureTextEntry={true}
-        onChangeText={(input) => setPassword(input)}
-        value={pass}
-      />
-      <TextInput
-        mode={"outlined"}
-        label={"Name"}
-        style={style.input}
-        onChangeText={(input) => setName(input)}
-        value={name}
-      />
-      <TextInput
-        label={"Phone Number"}
-        mode={"outlined"}
-        style={style.input}
-        keyboardType="numeric"
-        onChangeText={(number) => setPhoneNumber(number)}
-        value={phoneNum}
-        maxLength={15}
-      />
-
-      <View style={{ flexDirection: 'row', 
-      alignItems: 'center',
-      marginVertical: 10}}>
-        <Text style={style.TextInput}>Please check this if you are a rescuer</Text>
-        <Checkbox
-          status={isRescuer ? 'checked' : 'unchecked'}
-          onPress={() => {
-            setIsRescuer(!isRescuer);
-          }}
-        />
-      </View>
-
-      <Button
-        style={style.signInButton}
-        onPress={handleSignUp}
-        mode="contained"
-        loading={loading}
-      >
+      <Button mode="contained" onPress={handleSignUp} loading={loading} style={styles.button}>
         Sign Up
       </Button>
-
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Login_Screen')}
-        style={style.signupButton}
-      >
-        <Text style={style.signupButtonText}>Already have an account?</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')} style={styles.signInButton}>
+        <Text>Already have an account? Sign In</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
 }
 
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-    backgroundColor: '#fff'
-  },
-  // title: {
-  //   fontSize: 24,
-  //   fontWeight: 'bold',
-  //   color: '#000',
-  //   marginBottom: 40,
-  // },
-  input: {
-    width: '100%',
-    marginBottom: 10,
-  },
-  button: {
-    width: '100%',
-    height: 50,
-    backgroundColor: '#6200ee',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 5,
-    marginTop: 20,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: '500',
-  },
-  loginText: {
-    marginTop: 20,
-    color: '#000',
-  },
-  loginClickableText: {
-    color: '#6200ee',
-    fontWeight: 'bold',
-  },
-  logo: {
-    width: 250,
-    height: 250,
-  },
-  signupButton: {
-    marginTop: 20,
-  },
-  signupButtonText: {
-    color: '#0066cc',
-  },
+const styles = StyleSheet.create({
+  container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  logo: { width: 200, height: 200 },
+  input: { width: '80%', margin: 10 },
+  button: { marginTop: 10 },
+  signInButton: { marginTop: 20 },
+  checkboxContainer: { flexDirection: 'row', alignItems: 'center' },
 });
+
+export default SignInScreen;
