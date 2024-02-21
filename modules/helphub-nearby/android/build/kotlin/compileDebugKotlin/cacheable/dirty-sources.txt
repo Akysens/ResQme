@@ -1,2 +1,0 @@
-C:\Users\enesy\Documents\webprojects\helphub\modules\helphub-nearby\android\src\main\java\expo\modules\helphubnearby\HelphubNearbyModule.kt
-C:\Users\enesy\Documents\webprojects\helphub\modules\helphub-nearby\android\src\main\java\expo\modules\helphubnearby\HelphubNearbyView.kt

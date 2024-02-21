@@ -1,5 +1,5 @@
 // React
-import { useEffect, useRef, useState, useCallback, useMemo } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo, forwardRef, useImperativeHandle } from "react";
 
 // UI
 import { SafeAreaView, View, StyleSheet, Alert, FlatList, Pressable, TextInput } from "react-native";
@@ -41,31 +41,34 @@ function NewButton({primary = true, children = null, onPress = null}) {
 
 }
 
-function NearbyDevice({endpointName, endpointId, userName}) {
+const NearbyDevice = ({endpointName, endpointId, userName, connectedDevices, setConnectedDevices}) => {
     
-    [isConnected, setIsConnected] = useState(false);
-
+    const isConnected = () => {
+        return connectedDevices.includes(endpointId);
+    }
+    
     const requestConnection = () => {
         Nearby.requestConnection(userName, endpointId);
-        Alert.alert("Connection Request", "Connection request was sent.");
+        Alert.alert("Connection Request", "Connection request was sent to " + endpointId);
     };
 
     const disconnectFromEndpoint = () => {
         Nearby.disconnect(endpointId);
+        setConnectedDevices(connectedDevices.filter(function(e) {return e !== endpointId}));
     }
 
     return (
         <Menu>
             <MenuTrigger>
-                <View style={{...styles.deviceListItem, backgroundColor: isConnected ? "#A1EEBD" : "#46424f"}}>
+                <View style={{...styles.deviceListItem, backgroundColor: isConnected() ? "#A1EEBD" : "#46424f"}}>
                     <Text style={styles.deviceListItemText}>{endpointName}</Text>
                     <Text style={styles.deviceListItemText}>{endpointId}</Text>
                 </View>
             </MenuTrigger>
             <MenuOptions>
                 {
-                    isConnected ? 
-                        (<MenuOption text="Connect" onSelect={requestConnection()}/>)
+                    !isConnected() ? 
+                        (<MenuOption text="Connect" onSelect={requestConnection}/>)
                             : 
                         (   
                             <>
@@ -86,6 +89,8 @@ export default function OfflineMode() {
     [advertising, setAdvertising] = useState(false);
     [discovering, setDiscovering] = useState(false);
     [selected, setSelected] = useState(null);
+    [connectedDevices, setConnectedDevices] = useState([null]);
+
     if (!warned) {
         Alert.alert(
             "No internet connection!",
@@ -147,7 +152,7 @@ export default function OfflineMode() {
                     [
                         {
                             text: "Accept",
-                            onPress: () => {Nearby.acceptConnection(event.endpointId)},
+                            onPress: () => {Nearby.acceptConnection(event.endpointId); setConnectedDevices([... event.endpointId]);},
                         },
                         {
                             text: "Reject",
@@ -162,12 +167,16 @@ export default function OfflineMode() {
             switch (event.status) {
                 case 0:
                     Alert.alert("Connection Successful", "You successfully connected to endpoint " + event.endpointId);
+                    setConnectedDevices([... event.endpointId]);
                 case 15:
                     Alert.alert("Connection Failed", "Timeout while trying to connect. Error code: ", event.status);
+                    setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
                 case 16:
                     Alert.alert("Connection Lost", "Connection was cancelled. Error code: ", event.status);
+                    setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
                 case 7:
                     Alert.alert("Connection Lost", "A network error occurred. Please try again. Error code: ", event.status);
+                    setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
                 case 15:
                     Alert.alert("Connection Failed", "Timeout while trying to connect. Error code: ", event.status);
             }           
@@ -181,7 +190,7 @@ export default function OfflineMode() {
                 <View style={styles.deviceList}>
                     <FlatList 
                         renderItem={({item}) => {
-                            return <NearbyDevice endpointId={item.id} endpointName={item.name} userName={userName}/>;
+                            return <NearbyDevice endpointId={item.id} endpointName={item.name} userName={userName} connectedDevices={connectedDevices} setConnectedDevices={setConnectedDevices}/>;
                         }}
                         data={discoveredDevices}
                     >
