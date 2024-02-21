@@ -25,3 +25,7 @@ export type DiscoveredEndpointType = {
   serviceId: string,
   endpointName: string
 }
+
+export type DisconnectionType = {
+  endpointId: string
+}

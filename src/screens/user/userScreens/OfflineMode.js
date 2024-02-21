@@ -91,6 +91,12 @@ export default function OfflineMode() {
     [selected, setSelected] = useState(null);
     [connectedDevices, setConnectedDevices] = useState([null]);
 
+    function setConnectedDevicesUnique(endpoint) {
+        if(!connectedDevices.includes(endpoint)) {
+            setConnectedDevices([...connectedDevices, endpoint]);
+        }
+    };
+
     if (!warned) {
         Alert.alert(
             "No internet connection!",
@@ -152,7 +158,23 @@ export default function OfflineMode() {
                     [
                         {
                             text: "Accept",
-                            onPress: () => {Nearby.acceptConnection(event.endpointId); setConnectedDevices([...connectedDevices, event.endpointId]);},
+                            onPress: () => {Nearby.acceptConnection(event.endpointId); setConnectedDevicesUnique([...connectedDevices, event.endpointId]);},
+                        },
+                        {
+                            text: "Reject",
+                            onPress: () => {Nearby.rejectConnection(event.endpointId)},
+                        }
+                    ]
+                )
+            }
+            else {
+                Alert.alert(
+                    "Connection Request",
+                    "Authentication token for your request" + event.authenticationToken,
+                    [
+                        {
+                            text: "Accept",
+                            onPress: () => {Nearby.acceptConnection(event.endpointId); setConnectedDevicesUnique([...connectedDevices, event.endpointId]);},
                         },
                         {
                             text: "Reject",
@@ -168,7 +190,7 @@ export default function OfflineMode() {
             switch (event.status) {
                 case 0:
                     Alert.alert("Connection Successful", "You successfully connected to endpoint " + event.endpointId, [{text: "OK"}]);
-                    setConnectedDevices([... event.endpointId]);
+                    setConnectedDevices([...connectedDevices, event.endpointId]);
                     break;
                 case 15:
                     Alert.alert("Connection Failed", "Timeout while trying to connect. Error code: " + event.status, [{text: "OK"}]);
@@ -189,7 +211,12 @@ export default function OfflineMode() {
                     Alert.alert("Connection Lost", "Disconnected. Error code: " + event.status, [{text: "OK"}]);
                     setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
                     break;
-            }           
+            };
+            
+            const onDisconnected = Nearby.addDisconnectionListener((event) => {
+                Alert.alert("Connection Lost", "Disconnected.", [{text: "OK"}]);
+                setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
+            })
         })
     }, [])
 

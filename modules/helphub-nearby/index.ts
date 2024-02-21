@@ -3,7 +3,7 @@ import { NativeModulesProxy, EventEmitter, Subscription } from 'expo-modules-cor
 // Import the native module. On web, it will be resolved to HelphubNearby.web.ts
 // and on native platforms to HelphubNearby.ts
 import HelphubNearbyModule from './src/HelphubNearbyModule';
-import { ConnectionInfoType, ConnectionResolutionType, DiscoveredEndpointType, InfoPayload, PayloadUpdateType } from './src/HelphubNearby.types';
+import { ConnectionInfoType, ConnectionResolutionType, DisconnectionType, DiscoveredEndpointType, InfoPayload, PayloadUpdateType } from './src/HelphubNearby.types';
 
 
 export function sendPayload(endpoint: string, payload: string) {
@@ -70,4 +70,8 @@ export function addPayloadUpdateListener(listener: (event: PayloadUpdateType) =>
 
 export function addNewConnectionListener(listener: (event: ConnectionInfoType) => void) : Subscription {
   return emitter.addListener("onNewConnectionInitiated", listener);
+}
+
+export function addDisconnectionListener(listener: (event: DisconnectionType) => void) : Subscription {
+  return emitter.addListener("onDisconnection", listener);
 }
