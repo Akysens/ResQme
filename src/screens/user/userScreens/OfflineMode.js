@@ -4,9 +4,6 @@ import { useEffect, useRef, useState, useCallback, useMemo, forwardRef, useImper
 // UI
 import { SafeAreaView, View, StyleSheet, Alert, FlatList, Pressable, TextInput } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { MaterialIcons } from "@expo/vector-icons";
-import { SwipeButton } from "react-native-expo-swipe-button";
-import { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 import { SegmentedButtons, Banner, Text, Button } from "react-native-paper";
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from "react-native-popup-menu";
 import Dialog from "react-native-dialog";

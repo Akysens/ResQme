@@ -66,11 +66,7 @@ class HelphubNearbyModule : Module() {
     val payloadCallback : PayloadCallback = object : PayloadCallback() {
       override fun onPayloadReceived(endpointId: String, payload: Payload) {
         payload.asBytes()?.let {
-          if (messages.containsKey(endpointId)) {
             messages[endpointId] = String(it, UTF_8)
-          } else {
-            messages.put(endpointId, String(it, UTF_8))
-          }
         }
       }
 
@@ -85,14 +81,13 @@ class HelphubNearbyModule : Module() {
           "authenticationToken" to info.authenticationDigits, "isIncomingConnection" to info.isIncomingConnection))
       }
 
+      @RequiresApi(Build.VERSION_CODES.N)
       override fun onConnectionResult(endpointId: String, resolution: ConnectionResolution) {
         this@HelphubNearbyModule.sendEvent("onConnectionUpdate", bundleOf("endpointId" to endpointId, "status" to resolution.status.statusCode))
         when (resolution.status.statusCode) {
           ConnectionsStatusCodes.STATUS_OK -> {
             Log.d(TAG, "Succesfully connected to endpoint $endpointId")
-            messages[endpointId] = ""
-            connectionsClient.stopAdvertising()
-            connectionsClient.stopDiscovery()
+            messages.putIfAbsent(endpointId, "");
           }
 
           ConnectionsStatusCodes.STATUS_CONNECTION_REJECTED -> {
