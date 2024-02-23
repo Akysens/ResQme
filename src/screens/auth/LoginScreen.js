@@ -5,13 +5,14 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '@firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
-import AccModeContext from '../../Contexts';
+import { AccModeContext, AccIdContext } from '../../Contexts';
 
 function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setErrorMsg] = useState(null);
   const { setAccMode } = useContext(AccModeContext);
+  const { setAccId } = useContext(AccIdContext);
   const navigation = useNavigation();
 
   const handleLogin = async () => {
@@ -22,8 +23,11 @@ function LoginScreen() {
 
       if (userProfile.exists()) {
         const userData = userProfile.data();
-        setAccMode(userData.mode); // Set the accMode here
-        // console.log(userData.mode);
+        setAccMode(userData.mode); // Acc Mode is set here to be used in contexts
+        setAccId(userCreds.user.uid); // Same deal for user id
+
+        console.log("LOGIN ID: " + String(userCreds.user.uid));
+
         if (userData.mode === "victim") {
           navigation.navigate('MainApp', { screen: 'Slider_Screen' });
         } else {
