@@ -3,16 +3,28 @@ import { View, Text, StyleSheet, TouchableOpacity, Dimensions} from 'react-nativ
 import MapView, { Marker } from 'react-native-maps';
 import { Image } from 'react-native';
 import * as Location from 'expo-location'
+import { collection, doc, onSnapshot } from 'firebase/firestore';
+import { db } from '@firebaseConfig';
 
 const { width, height } = Dimensions.get('window');
 
 // Clicking on one of these on the map will bring up 2 options kinda obstructed by the bottom bar (Android)
 const SAR_Screen = ({ navigation }) => {
-  const dummyData = [
-    { id: 1, latitude: 37.78825, longitude: -122.4324, title: 'Need Food' },
-    // ... other pins
-  ];
-  
+  const [userData, setUserData] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, "usersLocations"), (querySnapshot) => {
+      const users = [];
+      querySnapshot.forEach((doc) => {
+        const { latitude, longitude, timestamp } = doc.data();
+        users.push({ id: doc.id, latitude, longitude, timestamp });
+      });
+      setUserData(users);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const [location, setLocation] = useState({});
 
   useEffect(() => {
@@ -45,11 +57,12 @@ const SAR_Screen = ({ navigation }) => {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       }}>
-        {dummyData.map((victim) => (
+        {userData.map((user) => (
           <Marker
-            key={victim.id}
-            coordinate={{ latitude: victim.latitude, longitude: victim.longitude }}
-            title={victim.title}
+            key={user.id}
+            coordinate={{ latitude: user.latitude, longitude: user.longitude }}
+            title={`User ${user.id}`}
+            description={`Timestamp: ${user.timestamp}`}
           />
         ))}
       </MapView>
