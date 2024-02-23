@@ -1,13 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { AccIdContext } from '../../../../Contexts';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@firebaseConfig';
 import UploadImage from './UploadImage';
+
+
+
 const Profile = () => {
   const { AccId } = useContext(AccIdContext);
   const [userData, setUserData] = useState(null);
   const [userMedData, setUserMedData] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     GetUserData();
@@ -31,12 +35,16 @@ const Profile = () => {
     return <Text>Loading...</Text>; // or any loading indicator
   }
 
+  const handleEdit = () => {
+
+  }
   return (
     <ScrollView style={styles.container}>
       {/* <View style={styles.section}>
         <TouchableOpacity style={styles.profilePicContainer}>
           <Text style={styles.profilePicText}>PFP / TAP TO CHANGE</Text>
         </TouchableOpacity> */}
+
 
       <View style={styles.header}>
         <View style={styles.profilePicContainer}>
@@ -46,7 +54,17 @@ const Profile = () => {
       {/* </View> */}
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>PERSONAL INFORMATION</Text>
+        <Text style={styles.sectionTitle}>PERSONAL INFORMATION                  </Text>
+        <View style={styles.container}>
+          {/* Edit/Save Button */}
+          <TouchableOpacity style={styles.button} onPress={handleEdit}>
+            {isEditing ? (
+              <Text style={styles.buttonText}>Save</Text>
+            ) : (
+              <Image source={require('@assets/pencil.png')} style={{width: 20, height: 20}} />
+            )}
+          </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.infoContainer}>
         <Text style={styles.infoText}>Name: {userData.name}</Text>
@@ -55,7 +73,17 @@ const Profile = () => {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>MEDICAL INFORMATION</Text>
+        <Text style={styles.sectionTitle}>MEDICAL INFORMATION                     </Text>
+        <View style={styles.container}>
+          {/* Edit/Save Button */}
+          <TouchableOpacity style={styles.button} onPress={handleEdit}>
+            {isEditing ? (
+              <Text style={styles.buttonText}>Save</Text>
+            ) : (
+              <Image source={require('@assets/pencil.png')} style={{width: 20, height: 20}} />
+            )}
+          </TouchableOpacity>
+        </View>
       </View>
 
       <View style={styles.infoContainer}>
