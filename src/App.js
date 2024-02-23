@@ -35,7 +35,7 @@ function MainTabScreen() {
       <MainTab.Screen name="Requests" component={Requests} options={{
         tabBarIcon: () => (
           <Image
-            source={require('./assets/Image8.png')}
+            source={require('./assets/RequestSymbol.png')}
             style={{ width: 24, height: 24 }}
           />
         ),
@@ -43,7 +43,7 @@ function MainTabScreen() {
       <MainTab.Screen name="Notifications" component={Notifications} options={{
         tabBarIcon: () => (
           <Image
-            source={require('./assets/Image5.png')}
+            source={require('./assets/NotifSymbol.png')}
             style={{ width: 24, height: 24 }}
           />
         ),
@@ -51,7 +51,7 @@ function MainTabScreen() {
       {accMode === "rescuer" && <MainTab.Screen name=" " component={SAR_Team_Screen} options={{
         tabBarIcon: () => (
           <Image
-            source={require('./assets/Image4.png')}
+            source={require('./assets/MainPlus.png')}
             style={{ width: 50, height: 50 }}
           />
         ),
@@ -59,7 +59,7 @@ function MainTabScreen() {
       {accMode === "victim" && <MainTab.Screen name=" " component={Slider_Screen} options={{
         tabBarIcon: () => (
           <Image
-            source={require('./assets/Image4.png')}
+            source={require('./assets/MainPlus.png')}
             style={{ width: 50, height: 50 }}
           />
         ),
@@ -67,7 +67,7 @@ function MainTabScreen() {
       <MainTab.Screen name="Profile" component={Profile} options={{
         tabBarIcon: () => (
           <Image
-            source={require('./assets/Image6.png')}
+            source={require('./assets/Profile.png')}
             style={{ width: 24, height: 24 }}
           />
         ),
@@ -75,7 +75,7 @@ function MainTabScreen() {
       <MainTab.Screen name="Settings" component={Settings} options={{
         tabBarIcon: () => (
           <Image
-            source={require('./assets/Image7.png')}
+            source={require('./assets/Settings.png')}
             style={{ width: 24, height: 24 }}
           />
         ),

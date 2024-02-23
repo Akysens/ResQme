@@ -8,7 +8,7 @@ module.exports = {
     icon: "./src/assets/ResQme_Icon.png",
     userInterfaceStyle: "light",
     splash: {
-      image: "./src/assets/ResQme_splash.png",
+      image: "./src/assets/splash.png",
       resizeMode: "contain",
       backgroundColor: "#D9D9D9",
     },
@@ -31,7 +31,7 @@ module.exports = {
       },
     },
     web: {
-      favicon: "./src/assets/ResQme_favicon.png",
+      favicon: "./src/assets/favicon.png",
     },
     plugins: [
       [
@@ -46,6 +46,6 @@ module.exports = {
         projectId: "7439e976-f17d-4b78-a74e-6cc292acc4f9",
       },
     },
-    owner: "haberra",
+    owner: "Bmanzur\nEaksay\nSdusnoki\nSnjora",
   },
 };
