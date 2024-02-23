@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-nati
 import { AccIdContext } from '../../../../Contexts';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@firebaseConfig';
+import UploadImage from './UploadImage';
 
 const Profile = () => {
   const { AccId } = useContext(AccIdContext);
@@ -34,9 +35,15 @@ const Profile = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.section}>
-        <TouchableOpacity style={styles.profilePicContainer}>
+        {/* <TouchableOpacity style={styles.profilePicContainer}>
           <Text style={styles.profilePicText}>PFP / TAP TO CHANGE</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+
+      {/* <View style={styles.header}> */}
+        {/* <View style={styles.profilePicContainer}> */}
+          <UploadImage/>
+        {/* </View> */}
+    {/* </View> */}
       </View>
 
       <View style={styles.section}>
@@ -95,7 +102,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     borderWidth: 1,
     borderColor: 'black',
-    height: 150, // Set a fixed height for the profile picture container
+    height: 150,
   },
   profilePicText: {
     textAlign: 'center',
@@ -123,10 +130,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   infoContainer: {
-    padding: 20,
+    padding: 10,
   },
   infoText: {
-    fontSize: 16,
+    fontSize: 15,
     paddingBottom: 5, // Add some space between info texts
   },
   logoutButton: {
