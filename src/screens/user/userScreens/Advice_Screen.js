@@ -92,9 +92,8 @@ return (
           if (isPlaying) {
             togglePlay();
           }
-          navigation.navigate('Slider_Screen');
-        }
-        }>
+          navigation.navigate(' ')
+          }}>
           <Image style={styles.buttonImage} source={require('@assets/Exit.png')}/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.warningButton} onPress={togglePlay}>
@@ -129,7 +128,6 @@ const styles = StyleSheet.create({
     color: 'black', // Adjust the color as needed
   },  
   scrollView: {
-    
     // Adjust this as needed
   },
   extraView: {

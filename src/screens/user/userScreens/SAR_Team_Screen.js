@@ -1,18 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Image } from 'react-native';
 import * as Location from 'expo-location'
+import { collection, doc, onSnapshot } from 'firebase/firestore';
+import { db } from '@firebaseConfig';
 
 const { width, height } = Dimensions.get('window');
 
 // Clicking on one of these on the map will bring up 2 options kinda obstructed by the bottom bar (Android)
 const SAR_Screen = ({ navigation }) => {
-  const dummyData = [
-    { id: 1, latitude: 37.78825, longitude: -122.4324, title: 'Need Food' },
-    // ... other pins
-  ];
-  
+  const [userData, setUserData] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, "usersLocations"), (querySnapshot) => {
+      const users = [];
+      querySnapshot.forEach((doc) => {
+        const { latitude, longitude, timestamp } = doc.data();
+        users.push({ id: doc.id, latitude, longitude, timestamp });
+      });
+      setUserData(users);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const [location, setLocation] = useState({});
 
   useEffect(() => {
@@ -44,15 +56,17 @@ const SAR_Screen = ({ navigation }) => {
         longitude: -122.4324,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
-      }}>
-        {dummyData.map((victim) => (
-          <Marker
-            key={victim.id}
-            coordinate={{ latitude: victim.latitude, longitude: victim.longitude }}
-            title={victim.title}
-          />
-        ))}
-      </MapView>
+      }}/>
+        {/* {userData.map((user) => ( */}
+          {/* <Marker */}
+            {/* key={user.id} */}
+            {/* coordinate={{ latitude: user.latitude, longitude: user.longitude }} */}
+            {/* title={`User ${user.id}`} */}
+            {/* description={`Timestamp: ${user.timestamp}`} */}
+          {/* /> */}
+        {/* ))} */}
+        {/* <Text>Hi</Text> */}
+      {/* </MapView> */}
       <TouchableOpacity style={styles.fab} onPress={goToMyLocation}>
         <Image source={require('../../../assets/center.png')}
         style={styles.fabIcon}/>
@@ -63,8 +77,8 @@ const SAR_Screen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height,
-    width,
+    height: "100%",
+    width: "100%",
     backgroundColor: '#fff',
   },
   header: {
@@ -82,8 +96,8 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   map: {
-    width,
-    height: height - 60, // minus header height
+    width: "100%",
+    height: "100%", // minus header height
   },
   fab: {
     position: 'absolute',
@@ -112,7 +126,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
   },
-  // Add other styles for navBar items and bottom sheet details as required
 });
 
 export default SAR_Screen;
