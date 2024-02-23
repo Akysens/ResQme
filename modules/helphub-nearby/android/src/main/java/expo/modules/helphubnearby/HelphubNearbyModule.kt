@@ -55,7 +55,7 @@ class HelphubNearbyModule : Module() {
       connectionsClient = Nearby.getConnectionsClient(context);
     }
 
-    Events("onNewDeviceDiscovered", "onConnectionUpdate", "onPayloadTransferUpdate", "onNewConnectionInitiated", "onDisconnection")
+    Events("onNewDeviceDiscovered", "onConnectionUpdate", "onPayloadTransferUpdate", "onNewConnectionInitiated", "onDisconnection, onPayloadReceived")
 
     fun sendPayload(endpointId : String, message : String) {
       Payload.fromBytes(message.toByteArray(UTF_8)).let {
@@ -66,6 +66,7 @@ class HelphubNearbyModule : Module() {
     val payloadCallback : PayloadCallback = object : PayloadCallback() {
       override fun onPayloadReceived(endpointId: String, payload: Payload) {
         payload.asBytes()?.let {
+            this@HelphubNearbyModule.sendEvent("onPayloadReceived", bundleOf("endpointId" to endpointId, "message" to String(it, UTF_8)))
             messages[endpointId] = String(it, UTF_8)
         }
       }

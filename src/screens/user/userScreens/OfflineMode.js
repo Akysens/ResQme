@@ -251,8 +251,8 @@ export default function OfflineMode() {
                 setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
             })
 
-            const onPayloadUpdate = Nearby.addPayloadUpdateListener((event) => {
-                console.log("payload",event.status)
+            const onPayloadReceived = Nearby.addPayloadReceivedListener((event) => {
+                Alert.alert("Received Message", "From: " + event.endpointId + "\n" + event.message);
             })
         })
     }, [])

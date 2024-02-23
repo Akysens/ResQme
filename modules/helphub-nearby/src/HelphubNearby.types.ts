@@ -15,6 +15,11 @@ export type PayloadUpdateType = {
   status: number
 }
 
+export type PayloadType = {
+  endpointId: string,
+  message: string
+}
+
 export type ConnectionResolutionType = {
   endpointId: string,
   status: number
