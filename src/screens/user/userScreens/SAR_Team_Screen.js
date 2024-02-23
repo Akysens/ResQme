@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Image } from 'react-native';
 import * as Location from 'expo-location'
 import { collection, doc, onSnapshot } from 'firebase/firestore';
@@ -56,16 +56,17 @@ const SAR_Screen = ({ navigation }) => {
         longitude: -122.4324,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
-      }}>
-        {userData.map((user) => (
-          <Marker
-            key={user.id}
-            coordinate={{ latitude: user.latitude, longitude: user.longitude }}
-            title={`User ${user.id}`}
-            description={`Timestamp: ${user.timestamp}`}
-          />
-        ))}
-      </MapView>
+      }}/>
+        {/* {userData.map((user) => ( */}
+          {/* <Marker */}
+            {/* key={user.id} */}
+            {/* coordinate={{ latitude: user.latitude, longitude: user.longitude }} */}
+            {/* title={`User ${user.id}`} */}
+            {/* description={`Timestamp: ${user.timestamp}`} */}
+          {/* /> */}
+        {/* ))} */}
+        {/* <Text>Hi</Text> */}
+      {/* </MapView> */}
       <TouchableOpacity style={styles.fab} onPress={goToMyLocation}>
         <Image source={require('../../../assets/center.png')}
         style={styles.fabIcon}/>
@@ -76,8 +77,8 @@ const SAR_Screen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height,
-    width,
+    height: "100%",
+    width: "100%",
     backgroundColor: '#fff',
   },
   header: {
@@ -95,8 +96,8 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   map: {
-    width,
-    height: height - 60, // minus header height
+    width: "100%",
+    height: "100%", // minus header height
   },
   fab: {
     position: 'absolute',
@@ -125,7 +126,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
   },
-  // Add other styles for navBar items and bottom sheet details as required
 });
 
 export default SAR_Screen;
