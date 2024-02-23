@@ -69,8 +69,6 @@ const MessageDialog = ({endpointName, endpointId}) => {
 
 
 const NearbyDevice = ({endpointName, endpointId, userName, connectedDevices, setConnectedDevices}) => {
-
-
     const isConnected = () => {
         return connectedDevices.includes(endpointId);
     }
@@ -91,7 +89,7 @@ const NearbyDevice = ({endpointName, endpointId, userName, connectedDevices, set
 
     return (
         <>
-            <MessageDialog />
+            <MessageDialog endpointId={endpointId} endpointName={endpointName}/>
             <Menu>
                 <MenuTrigger>
                     <View style={{...styles.deviceListItem, backgroundColor: isConnected() ? "#A1EEBD" : "#46424f"}}>
