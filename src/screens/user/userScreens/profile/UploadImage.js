@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Image, View, Platform, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function UploadImage() {
   const [image, setImage] = useState(null);
 
   useEffect(() => {
     checkForPermissions();
+    retrieveStoredImage(); // Retrieve stored image when component mounts
   }, []);
 
   const checkForPermissions = async () => {
@@ -28,7 +30,7 @@ export default function UploadImage() {
   
     if (!result.canceled) {
       setImage(result.assets[0].uri);
-      console.log(result.assets[0].uri); // Log the URI directly from the result
+      storeImage(result.assets[0].uri); // Store the URI of the selected image
     }
   };
   
@@ -41,10 +43,28 @@ export default function UploadImage() {
   
     if (!result.canceled) {
       setImage(result.assets[0].uri);
-      console.log(result.assets[0].uri); // Log the URI directly from the result
+      storeImage(result.assets[0].uri); // Store the URI of the selected image
     }
   };
   
+  const storeImage = async (uri) => {
+    try {
+      await AsyncStorage.setItem('profileImage', uri); // Store the URI with a key 'profileImage'
+    } catch (error) {
+      console.error('Error storing image:', error);
+    }
+  };
+
+  const retrieveStoredImage = async () => {
+    try {
+      const storedImage = await AsyncStorage.getItem('profileImage'); // Retrieve the stored URI
+      if (storedImage !== null) {
+        setImage(storedImage); // Set the image URI if it exists
+      }
+    } catch (error) {
+      console.error('Error retrieving image:', error);
+    }
+  };
 
   const showImagePicker = () => {
     Alert.alert("Upload Image", "Choose an option", [
@@ -56,7 +76,7 @@ export default function UploadImage() {
 
   return (
     <View style={imageUploaderStyles.container}>
-      {image && <Image source={{ uri: image }} style={ imageUploaderStyles.image } />}
+      {image && <Image source={{ uri: image }} style={imageUploaderStyles.image} />}
       <View style={imageUploaderStyles.uploadBtnContainer}>
         <TouchableOpacity onPress={showImagePicker} style={imageUploaderStyles.uploadBtn}>
           <Text>{image ? 'Edit' : 'Upload'} Image</Text>
@@ -93,7 +113,7 @@ const imageUploaderStyles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    width: '100%', // Make the image fill the entire width of the circular container
-    height: '100%', // Make the image fill the entire height of the circular container
-  },
+    width: "100%",
+    height: "100%",
+  }
 });

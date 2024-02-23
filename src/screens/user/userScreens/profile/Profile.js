@@ -4,7 +4,6 @@ import { AccIdContext } from '../../../../Contexts';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@firebaseConfig';
 import UploadImage from './UploadImage';
-
 const Profile = () => {
   const { AccId } = useContext(AccIdContext);
   const [userData, setUserData] = useState(null);
@@ -34,17 +33,17 @@ const Profile = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.section}>
-        {/* <TouchableOpacity style={styles.profilePicContainer}>
+      {/* <View style={styles.section}>
+        <TouchableOpacity style={styles.profilePicContainer}>
           <Text style={styles.profilePicText}>PFP / TAP TO CHANGE</Text>
         </TouchableOpacity> */}
 
-      {/* <View style={styles.header}> */}
-        {/* <View style={styles.profilePicContainer}> */}
+      <View style={styles.header}>
+        <View style={styles.profilePicContainer}>
           <UploadImage/>
-        {/* </View> */}
-    {/* </View> */}
-      </View>
+        </View>
+    </View>
+      {/* </View> */}
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>PERSONAL INFORMATION</Text>
@@ -87,6 +86,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     padding: 20,
   },
   backButton: {
@@ -94,15 +94,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   profilePicContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-    margin: 10,
-    borderRadius: 100,
-    borderWidth: 1,
-    borderColor: 'black',
-    height: 150,
+    width: 200, 
+    height: 200, 
+    borderRadius: 100, 
+    backgroundColor: '#efefef',
+    alignItems: 'center', // Center horizontally
+    justifyContent: 'center', // Center vertically
   },
   profilePicText: {
     textAlign: 'center',
@@ -130,10 +127,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   infoContainer: {
-    padding: 10,
+    padding: 20,
   },
   infoText: {
-    fontSize: 15,
+    fontSize: 16,
     paddingBottom: 5, // Add some space between info texts
   },
   logoutButton: {
