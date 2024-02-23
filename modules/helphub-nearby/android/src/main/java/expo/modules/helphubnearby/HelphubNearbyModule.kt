@@ -108,11 +108,16 @@ class HelphubNearbyModule : Module() {
 
     val endpointDiscoveryCallback = object : EndpointDiscoveryCallback() {
       override fun onEndpointFound(endpointId: String, info: DiscoveredEndpointInfo) {
+        val bundle = bundleOf("id" to endpointId, "name" to info.endpointName)
+        if (!discoveredEndpoints.contains(bundle)) {
           discoveredEndpoints.add(bundleOf("id" to endpointId, "name" to info.endpointName))
           this@HelphubNearbyModule.sendEvent(
             "onNewDeviceDiscovered", bundleOf(
               "endpointId" to endpointId,
-              "serviceId" to info.serviceId, "endpointName" to info.endpointName))
+              "serviceId" to info.serviceId, "endpointName" to info.endpointName
+            )
+          )
+        }
       }
 
       @RequiresApi(Build.VERSION_CODES.N)

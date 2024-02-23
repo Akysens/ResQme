@@ -39,9 +39,37 @@ function NewButton({primary = true, children = null, onPress = null}) {
 
 }
 
-const NearbyDevice = ({endpointName, endpointId, userName, connectedDevices, setConnectedDevices}) => {
+
+const MessageDialog = ({endpointName, endpointId}) => {
     [messaging, setMessaging] = useState(false);
     [message, setMessage] = useState("");
+
+    const sendMessage = (payload) => {
+        Nearby.sendPayload(endpointId, payload);
+        console.log("Message sent to: " + endpointId);
+        setMessaging(false);
+    }
+
+    const handleCancel = () => {
+        setMessaging(false);
+    }
+
+    return (            
+        <Dialog.Container visible={messaging}>
+            <Dialog.Title>Messaging</Dialog.Title>
+            <Dialog.Description>
+                Last Message from {endpointName}: {Nearby.getEndpointMessage(endpointId)};
+            </Dialog.Description>
+            <Dialog.Input label="Message to be sent" onChangeText={(text) => setMessage(text)}/>
+            <Dialog.Button label="Cancel" onPress={handleCancel}/>
+            <Dialog.Button label="Send" onPress={() => sendMessage(message)}/>
+        </Dialog.Container>
+    )
+}
+
+
+const NearbyDevice = ({endpointName, endpointId, userName, connectedDevices, setConnectedDevices}) => {
+
 
     const isConnected = () => {
         return connectedDevices.includes(endpointId);
@@ -57,30 +85,13 @@ const NearbyDevice = ({endpointName, endpointId, userName, connectedDevices, set
         setConnectedDevices(connectedDevices.filter(function(e) {return e !== endpointId}));
     }
 
-    const sendMessage = (payload) => {
-        Nearby.sendPayload(endpointId, payload);
-        setMessaging(false);
-    }
-
     const openMessagingPanel = () => {
         setMessaging(true);
     }
 
-    const handleCancel = () => {
-        setMessaging(false);
-    }
-
     return (
         <>
-            <Dialog.Container visible={messaging}>
-                <Dialog.Title>Messaging</Dialog.Title>
-                <Dialog.Description>
-                    Last Message from {endpointName}: {Nearby.getEndpointMessage(endpointId)};
-                </Dialog.Description>
-                <Dialog.Input label="Message to be sent" onChangeText={(text) => setMessage(text)}/>
-                <Dialog.Button label="Cancel" onPress={handleCancel}/>
-                <Dialog.Button label="Send" onPress={() => sendMessage(message)}/>
-            </Dialog.Container>
+            <MessageDialog />
             <Menu>
                 <MenuTrigger>
                     <View style={{...styles.deviceListItem, backgroundColor: isConnected() ? "#A1EEBD" : "#46424f"}}>
