@@ -1,6 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import LoginScreen from './screens/auth/LoginScreen'; 
+import SignupScreen from './screens/auth/SignInScreen';
+import SAR_Screen from './screens/user/userScreens/SAR_Team_Screen';
+import { LogBox, Alert } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import LoginScreen from './screens/auth/LoginScreen';
@@ -87,6 +92,7 @@ function MainTabScreen() {
 
 const RootStack = createStackNavigator();
 
+LogBox.ignoreAllLogs();
 function App() {
   const [accMode, setAccMode] = useState(null);
   const [AccId, setAccId] = useState(null);
