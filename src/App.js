@@ -30,8 +30,9 @@ const MainTab = createBottomTabNavigator();
 function MainTabScreen() {
   const { accMode } = useContext(AccModeContext);
 
-  return (
-    <MainTab.Navigator screenOptions={{ headerShown: true, headerTitleAlign: 'center', headerTitleStyle: { fontWeight: 'bold' } }}>
+  return ( 
+    <MainTab.Navigator
+    screenOptions={{ headerShown: true, headerTitleAlign: 'center', headerTitleStyle: { fontWeight: 'bold' } }}>
       <MainTab.Screen name="Requests" component={Requests} options={{
         tabBarIcon: () => (
           <Image

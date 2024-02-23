@@ -1,11 +1,35 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { AccIdContext } from '../../../../Contexts';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@firebaseConfig';
 
 const Profile = () => {
   const { AccId } = useContext(AccIdContext);
+  const [userData, setUserData] = useState(null);
+  const [userMedData, setUserMedData] = useState(null);
 
-  console.log("PROFILE UID: " + String(AccId));
+  useEffect(() => {
+    GetUserData();
+  }, []);
+
+  // async function to get the user's data and med data from db to display
+  // in profile
+  const GetUserData = async () => {
+    const userMedDoc = doc(db, "usersMedicalInfo", AccId);
+    const userMedProfile = await getDoc(userMedDoc);
+    const userMedData = userMedProfile.data();
+    setUserMedData(userMedData); // Use setUserMedData to update userMedData
+  
+    const userPersDoc = doc(db, "users", AccId);
+    const userProfile = await getDoc(userPersDoc);
+    const userData = userProfile.data();
+    setUserData(userData); // Use setUserData to update userData
+  }
+
+  if (!userData) {
+    return <Text>Loading...</Text>; // or any loading indicator
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -15,11 +39,13 @@ const Profile = () => {
         </TouchableOpacity>
       </View>
 
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>PERSONAL INFORMATION</Text>
+      </View>
       <View style={styles.infoContainer}>
-        <Text style={styles.infoText}>Name</Text>
-        <Text style={styles.infoText}>Email</Text>
-        <Text style={styles.infoText}>Phone Number</Text>
-        <Text style={styles.infoText}>Address (Not Shared to Anyone Except SAR)</Text>
+        <Text style={styles.infoText}>Name: {userData.name}</Text>
+        <Text style={styles.infoText}>Email: {userData.email} </Text>
+        <Text style={styles.infoText}>Phone Number: {userData.phoneNum}</Text>
       </View>
 
       <View style={styles.section}>
@@ -27,17 +53,18 @@ const Profile = () => {
       </View>
 
       <View style={styles.infoContainer}>
-        <Text style={styles.infoText}>Blood Type</Text>
-        <Text style={styles.infoText}>Emergency Contact Name</Text>
-        <Text style={styles.infoText}>Emergency Contact Phone #</Text>
-        <Text style={styles.infoText}>Emergency Contact Email</Text>
-        <Text style={styles.infoText}>Gender</Text>
-        <Text style={styles.infoText}>Weight</Text>
-        <Text style={styles.infoText}>Height</Text>
-        <Text style={styles.infoText}>Organ Donor</Text>
+        <Text style={styles.infoText}>Blood Type: {userMedData.BloodType}</Text>
+        <Text style={styles.infoText}>Emergency Contact Name: {userMedData.EmergencyContactName}</Text>
+        <Text style={styles.infoText}>Emergency Contact Phone #: {userMedData.EmergencyContactNumber}</Text>
+        <Text style={styles.infoText}>Emergency Contact Email: {userMedData.EmergencyContactEmail}</Text>
+        <Text style={styles.infoText}>Gender: {userMedData.Gender}</Text>
+        <Text style={styles.infoText}>Weight: {userMedData.Weight} kg</Text>
+        <Text style={styles.infoText}>Height: {userMedData.Gender} cm</Text>
       </View>
 
-      <TouchableOpacity style={styles.logoutButton}>
+      <TouchableOpacity 
+      style={styles.logoutButton}
+      >
         <Text style={styles.logoutButtonText}>LOGOUT</Text>
       </TouchableOpacity>
 
