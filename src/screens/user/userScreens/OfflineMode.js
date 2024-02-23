@@ -87,9 +87,22 @@ const NearbyDevice = ({key, endpointName, endpointId, userName, connectedDevices
         setMessaging(true);
     }
 
+    [messaging, setMessaging] = useState(false);
+    [message, setMessage] = useState("");
+
+    const sendMessage = (payload) => {
+        Nearby.sendPayload(endpointId, payload);
+        console.log("Message sent to: " + endpointId);
+        setMessaging(false);
+    }
+
+    const handleCancel = () => {
+        setMessaging(false);
+    }
+
     return (
         <>
-            <MessageDialog endpointId={endpointId} endpointName={endpointName} key={key}/>
+            <MessageDialog key={endpointId} endpointId={endpointId} endpointName={endpointName}/>
             <Menu>
                 <MenuTrigger>
                     <View style={{...styles.deviceListItem, backgroundColor: isConnected() ? "#A1EEBD" : "#46424f"}}>
@@ -278,7 +291,8 @@ export default function OfflineMode() {
                 <View style={styles.deviceList}>
                     <FlatList 
                         renderItem={({item}) => {
-                            <NearbyDevice key={item.id}
+                            return <NearbyDevice
+                            key={item.id}
                             endpointId={item.id} 
                             endpointName={item.name} 
                             userName={userName} 
@@ -349,7 +363,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flex: 1,
         flexDirection: "row",
-        justifyContent: "space-between",
+        justifyContent: "center",
     },
     buttonPrimary: {
         width: 140,
