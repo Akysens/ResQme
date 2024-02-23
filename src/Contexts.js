@@ -1,5 +1,4 @@
 import React from 'react';
 
-const AccModeContext = React.createContext(null);
-
-export default AccModeContext;
+export const AccModeContext = React.createContext(null);
+export const AccIdContext = React.createContext(null);

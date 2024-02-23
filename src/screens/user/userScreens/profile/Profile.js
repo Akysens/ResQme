@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { AccIdContext } from '../../../../Contexts';
 
 const Profile = () => {
+  const { AccId } = useContext(AccIdContext);
+
+  console.log("PROFILE UID: " + String(AccId));
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.section}>

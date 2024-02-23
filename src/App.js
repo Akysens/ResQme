@@ -12,7 +12,7 @@ import Requests from './screens/user/userScreens/Requests';
 import Notifications from './screens/user/userScreens/Notifications';
 import Profile from './screens/user/userScreens/profile/Profile';
 import Settings from './screens/user/userScreens/Settings';
-import AccModeContext from './Contexts';
+import { AccModeContext, AccIdContext } from './Contexts';
 
 const AuthStack = createStackNavigator();
 
@@ -88,16 +88,19 @@ const RootStack = createStackNavigator();
 
 function App() {
   const [accMode, setAccMode] = useState(null);
+  const [AccId, setAccId] = useState(null);
 
   return (
     <AccModeContext.Provider value={{ accMode, setAccMode }}>
-      <NavigationContainer>
-        <RootStack.Navigator screenOptions={{ headerShown: false }}>
-          <RootStack.Screen name="Auth" component={AuthStackScreen} />
-          <RootStack.Screen name="MainApp" component={MainTabScreen} />
-          <RootStack.Screen name="Advice_Screen" component={Advice_Screen} />
-        </RootStack.Navigator>
-      </NavigationContainer>
+      <AccIdContext.Provider value={{ AccId, setAccId }}>
+        <NavigationContainer>
+          <RootStack.Navigator screenOptions={{ headerShown: false }}>
+            <RootStack.Screen name="Auth" component={AuthStackScreen} />
+            <RootStack.Screen name="MainApp" component={MainTabScreen} />
+            <RootStack.Screen name="Advice_Screen" component={Advice_Screen} />
+          </RootStack.Navigator>
+        </NavigationContainer>
+      </AccIdContext.Provider>
     </AccModeContext.Provider>
   );
 }
