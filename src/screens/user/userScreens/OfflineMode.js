@@ -120,7 +120,7 @@ const NearbyDevice = ({key, endpointName, endpointId, userName, connectedDevices
 
     return (
         <>
-            <MessageDialog key={endpointId} endpointId={endpointId} endpointName={endpointName}/>
+            <MessageDialog key={key} endpointId={endpointId} endpointName={endpointName}/>
             <Menu>
                 <MenuTrigger>
                     <View style={{...styles.deviceListItem, backgroundColor: isConnected() ? "#A1EEBD" : "#46424f"}}>
