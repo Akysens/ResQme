@@ -1,0 +1,723 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.ResQ.me"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+9        android:targetSdkVersion="34" />
+10
+11    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+11-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:2:3-78
+11-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:2:20-76
+12    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+12-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:3:3-76
+12-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:3:20-74
+13    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+13-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:4:3-74
+13-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:4:20-72
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:5:3-64
+14-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:5:20-62
+15    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+15-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:6:3-77
+15-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:6:20-75
+16    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+16-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:7:3-77
+16-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:7:20-75
+17    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+17-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:8:3-68
+17-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:8:20-66
+18    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+18-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:9:3-75
+18-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:9:20-73
+19    <uses-permission android:name="android.permission.VIBRATE" />
+19-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:10:3-63
+19-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:10:20-61
+20    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+20-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:11:3-78
+20-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:11:20-76
+21
+22    <queries>
+22-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:12:3-18:13
+23        <intent>
+23-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:13:5-17:14
+24            <action android:name="android.intent.action.VIEW" />
+24-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:14:7-58
+24-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:14:15-56
+25
+26            <category android:name="android.intent.category.BROWSABLE" />
+26-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:15:7-67
+26-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:15:17-65
+27
+28            <data android:scheme="https" />
+28-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:16:7-37
+28-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:16:13-35
+29        </intent>
+30        <!-- Query open documents -->
+31        <intent>
+31-->[:expo-file-system] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-file-system\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:15:9-17:18
+32            <action android:name="android.intent.action.OPEN_DOCUMENT_TREE" />
+32-->[:expo-file-system] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-file-system\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:16:13-79
+32-->[:expo-file-system] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-file-system\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:16:21-76
+33        </intent>
+34        <intent>
+34-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:17:9-21:18
+35
+36            <!-- Required for picking images from the camera roll if targeting API 30 -->
+37            <action android:name="android.media.action.IMAGE_CAPTURE" />
+37-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:20:13-73
+37-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:20:21-70
+38        </intent>
+39        <intent>
+39-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:22:9-26:18
+40
+41            <!-- Required for picking images from the camera if targeting API 30 -->
+42            <action android:name="android.media.action.ACTION_VIDEO_CAPTURE" />
+42-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:25:13-80
+42-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:25:21-77
+43        </intent>
+44        <intent>
+44-->[:expo-web-browser] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-web-browser\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:8:9-12:18
+45
+46            <!-- Required for opening tabs if targeting API 30 -->
+47            <action android:name="android.support.customtabs.action.CustomTabsService" />
+47-->[:expo-web-browser] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-web-browser\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:11:13-90
+47-->[:expo-web-browser] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-web-browser\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:11:21-87
+48        </intent>
+49        <intent>
+49-->[com.github.CanHub:Android-Image-Cropper:4.3.1] C:\Users\enesy\.gradle\caches\transforms-3\36b71cb456d6090149680f9c7f89c4f9\transformed\jetified-Android-Image-Cropper-4.3.1\AndroidManifest.xml:10:9-16:18
+50            <action android:name="android.intent.action.GET_CONTENT" />
+50-->[com.github.CanHub:Android-Image-Cropper:4.3.1] C:\Users\enesy\.gradle\caches\transforms-3\36b71cb456d6090149680f9c7f89c4f9\transformed\jetified-Android-Image-Cropper-4.3.1\AndroidManifest.xml:11:13-72
+50-->[com.github.CanHub:Android-Image-Cropper:4.3.1] C:\Users\enesy\.gradle\caches\transforms-3\36b71cb456d6090149680f9c7f89c4f9\transformed\jetified-Android-Image-Cropper-4.3.1\AndroidManifest.xml:11:21-69
+51
+52            <category android:name="android.intent.category.OPENABLE" />
+52-->[com.github.CanHub:Android-Image-Cropper:4.3.1] C:\Users\enesy\.gradle\caches\transforms-3\36b71cb456d6090149680f9c7f89c4f9\transformed\jetified-Android-Image-Cropper-4.3.1\AndroidManifest.xml:13:13-73
+52-->[com.github.CanHub:Android-Image-Cropper:4.3.1] C:\Users\enesy\.gradle\caches\transforms-3\36b71cb456d6090149680f9c7f89c4f9\transformed\jetified-Android-Image-Cropper-4.3.1\AndroidManifest.xml:13:23-70
+53
+54            <data android:mimeType="*/*" />
+54-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:16:7-37
+55        </intent> <!-- Needs to be explicitly declared on Android R+ -->
+56        <package android:name="com.google.android.apps.maps" />
+56-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\enesy\.gradle\caches\transforms-3\a77e0290d419ff602aa9216daeae40eb\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:33:9-64
+56-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\enesy\.gradle\caches\transforms-3\a77e0290d419ff602aa9216daeae40eb\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:33:18-61
+57    </queries>
+58    <!-- Required for picking images from camera directly -->
+59    <uses-permission android:name="android.permission.CAMERA" />
+59-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:8:5-65
+59-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:8:22-62
+60    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+60-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:13:5-76
+60-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:13:22-73
+61    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+61-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:14:5-75
+61-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:14:22-72
+62    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" /> <!-- Include required permissions for Google Maps API to run. -->
+62-->[:expo-location] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-location\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:10:5-86
+62-->[:expo-location] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-location\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:10:22-83
+63    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+63-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\enesy\.gradle\caches\transforms-3\a77e0290d419ff602aa9216daeae40eb\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:23:5-79
+63-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\enesy\.gradle\caches\transforms-3\a77e0290d419ff602aa9216daeae40eb\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:23:22-76
+64
+65    <uses-feature
+65-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\enesy\.gradle\caches\transforms-3\a77e0290d419ff602aa9216daeae40eb\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:26:5-28:35
+66        android:glEsVersion="0x00020000"
+66-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\enesy\.gradle\caches\transforms-3\a77e0290d419ff602aa9216daeae40eb\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:27:9-41
+67        android:required="true" />
+67-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\enesy\.gradle\caches\transforms-3\a77e0290d419ff602aa9216daeae40eb\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:28:9-32
+68
+69    <uses-permission android:name="android.permission.WAKE_LOCK" />
+69-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:25:5-68
+69-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:25:22-65
+70    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+70-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:27:5-81
+70-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:27:22-78
+71
+72    <permission
+72-->[androidx.core:core:1.12.0] C:\Users\enesy\.gradle\caches\transforms-3\70132967dd87178cf9ceb9b114b30d7c\transformed\core-1.12.0\AndroidManifest.xml:22:5-24:47
+73        android:name="com.ResQ.me.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+73-->[androidx.core:core:1.12.0] C:\Users\enesy\.gradle\caches\transforms-3\70132967dd87178cf9ceb9b114b30d7c\transformed\core-1.12.0\AndroidManifest.xml:23:9-81
+74        android:protectionLevel="signature" />
+74-->[androidx.core:core:1.12.0] C:\Users\enesy\.gradle\caches\transforms-3\70132967dd87178cf9ceb9b114b30d7c\transformed\core-1.12.0\AndroidManifest.xml:24:9-44
+75
+76    <uses-permission android:name="com.ResQ.me.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+76-->[androidx.core:core:1.12.0] C:\Users\enesy\.gradle\caches\transforms-3\70132967dd87178cf9ceb9b114b30d7c\transformed\core-1.12.0\AndroidManifest.xml:26:5-97
+76-->[androidx.core:core:1.12.0] C:\Users\enesy\.gradle\caches\transforms-3\70132967dd87178cf9ceb9b114b30d7c\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
+77    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+77-->[com.android.installreferrer:installreferrer:2.2] C:\Users\enesy\.gradle\caches\transforms-3\410ccc09171c29ab3310f7c80dc77d29\transformed\jetified-installreferrer-2.2\AndroidManifest.xml:9:5-110
+77-->[com.android.installreferrer:installreferrer:2.2] C:\Users\enesy\.gradle\caches\transforms-3\410ccc09171c29ab3310f7c80dc77d29\transformed\jetified-installreferrer-2.2\AndroidManifest.xml:9:22-107
+78    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+78-->[io.nlopez.smartlocation:library:3.3.3] C:\Users\enesy\.gradle\caches\transforms-3\26b37ec31d394823985173f19940c032\transformed\jetified-library-3.3.3\AndroidManifest.xml:15:5-98
+78-->[io.nlopez.smartlocation:library:3.3.3] C:\Users\enesy\.gradle\caches\transforms-3\26b37ec31d394823985173f19940c032\transformed\jetified-library-3.3.3\AndroidManifest.xml:15:22-95
+79    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+79-->[io.nlopez.smartlocation:library:3.3.3] C:\Users\enesy\.gradle\caches\transforms-3\26b37ec31d394823985173f19940c032\transformed\jetified-library-3.3.3\AndroidManifest.xml:16:5-94
+79-->[io.nlopez.smartlocation:library:3.3.3] C:\Users\enesy\.gradle\caches\transforms-3\26b37ec31d394823985173f19940c032\transformed\jetified-library-3.3.3\AndroidManifest.xml:16:22-91
+80
+81    <application
+81-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:19:3-41:17
+82        android:name="com.ResQ.me.MainApplication"
+82-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:19:16-47
+83        android:allowBackup="true"
+83-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:19:116-142
+84        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+84-->[androidx.core:core:1.12.0] C:\Users\enesy\.gradle\caches\transforms-3\70132967dd87178cf9ceb9b114b30d7c\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
+85        android:extractNativeLibs="false"
+86        android:icon="@mipmap/ic_launcher"
+86-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:19:81-115
+87        android:label="@string/app_name"
+87-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:19:48-80
+88        android:theme="@style/AppTheme" >
+88-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:19:143-174
+89        <meta-data
+89-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:20:5-119
+90            android:name="com.google.android.geo.API_KEY"
+90-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:20:16-61
+91            android:value="AIzaSyB6VDBuqsMPad0y_IFIhpJreQR-USohpk4" />
+91-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:20:62-117
+92        <meta-data
+92-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:21:5-83
+93            android:name="expo.modules.updates.ENABLED"
+93-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:21:16-59
+94            android:value="false" />
+94-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:21:60-81
+95        <meta-data
+95-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:22:5-93
+96            android:name="expo.modules.updates.EXPO_SDK_VERSION"
+96-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:22:16-68
+97            android:value="50.0.0" />
+97-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:22:69-91
+98        <meta-data
+98-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:23:5-105
+99            android:name="expo.modules.updates.EXPO_UPDATES_CHECK_ON_LAUNCH"
+99-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:23:16-80
+100            android:value="ALWAYS" />
+100-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:23:81-103
+101        <meta-data
+101-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:24:5-99
+102            android:name="expo.modules.updates.EXPO_UPDATES_LAUNCH_WAIT_MS"
+102-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:24:16-79
+103            android:value="0" />
+103-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:24:80-97
+104
+105        <activity
+105-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:25:5-38:16
+106            android:name="com.ResQ.me.MainActivity"
+106-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:25:15-43
+107            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|uiMode"
+107-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:25:44-134
+108            android:exported="true"
+108-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:25:256-279
+109            android:launchMode="singleTask"
+109-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:25:135-166
+110            android:screenOrientation="portrait"
+110-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:25:280-316
+111            android:theme="@style/Theme.App.SplashScreen"
+111-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:25:210-255
+112            android:windowSoftInputMode="adjustResize" >
+112-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:25:167-209
+113            <intent-filter>
+113-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:26:7-29:23
+114                <action android:name="android.intent.action.MAIN" />
+114-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:27:9-60
+114-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:27:17-58
+115
+116                <category android:name="android.intent.category.LAUNCHER" />
+116-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:28:9-68
+116-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:28:19-66
+117            </intent-filter>
+118            <intent-filter>
+118-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:30:7-37:23
+119                <action android:name="android.intent.action.VIEW" />
+119-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:14:7-58
+119-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:14:15-56
+120
+121                <category android:name="android.intent.category.DEFAULT" />
+121-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:32:9-67
+121-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:32:19-65
+122                <category android:name="android.intent.category.BROWSABLE" />
+122-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:15:7-67
+122-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:15:17-65
+123
+124                <data android:scheme="resqme" />
+124-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:16:7-37
+124-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:16:13-35
+125                <data android:scheme="com.ResQ.me" />
+125-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:16:7-37
+125-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:16:13-35
+126                <data android:scheme="exp+resqme" />
+126-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:16:7-37
+126-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:16:13-35
+127            </intent-filter>
+128        </activity>
+129        <activity
+129-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:39:5-106
+130            android:name="com.facebook.react.devsupport.DevSettingsActivity"
+130-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:39:15-79
+131            android:exported="false" />
+131-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:39:80-104
+132
+133        <uses-library
+133-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:40:5-83
+134            android:name="org.apache.http.legacy"
+134-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:40:19-56
+135            android:required="false" />
+135-->C:\Users\enesy\Documents\webprojects\helphub\android\app\src\main\AndroidManifest.xml:40:57-81
+136
+137        <provider
+137-->[:react-native-webview] C:\Users\enesy\Documents\webprojects\helphub\node_modules\react-native-webview\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:8:9-16:20
+138            android:name="com.reactnativecommunity.webview.RNCWebViewFileProvider"
+138-->[:react-native-webview] C:\Users\enesy\Documents\webprojects\helphub\node_modules\react-native-webview\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:9:13-83
+139            android:authorities="com.ResQ.me.fileprovider"
+139-->[:react-native-webview] C:\Users\enesy\Documents\webprojects\helphub\node_modules\react-native-webview\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:10:13-64
+140            android:exported="false"
+140-->[:react-native-webview] C:\Users\enesy\Documents\webprojects\helphub\node_modules\react-native-webview\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:11:13-37
+141            android:grantUriPermissions="true" >
+141-->[:react-native-webview] C:\Users\enesy\Documents\webprojects\helphub\node_modules\react-native-webview\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:12:13-47
+142            <meta-data
+142-->[:react-native-webview] C:\Users\enesy\Documents\webprojects\helphub\node_modules\react-native-webview\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:13:13-15:63
+143                android:name="android.support.FILE_PROVIDER_PATHS"
+143-->[:react-native-webview] C:\Users\enesy\Documents\webprojects\helphub\node_modules\react-native-webview\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:14:17-67
+144                android:resource="@xml/file_provider_paths" />
+144-->[:react-native-webview] C:\Users\enesy\Documents\webprojects\helphub\node_modules\react-native-webview\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:15:17-60
+145        </provider>
+146        <provider
+146-->[:expo-file-system] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-file-system\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:21:9-30:20
+147            android:name="expo.modules.filesystem.FileSystemFileProvider"
+147-->[:expo-file-system] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-file-system\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:22:13-74
+148            android:authorities="com.ResQ.me.FileSystemFileProvider"
+148-->[:expo-file-system] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-file-system\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:23:13-74
+149            android:exported="false"
+149-->[:expo-file-system] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-file-system\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:24:13-37
+150            android:grantUriPermissions="true" >
+150-->[:expo-file-system] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-file-system\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:25:13-47
+151            <meta-data
+151-->[:react-native-webview] C:\Users\enesy\Documents\webprojects\helphub\node_modules\react-native-webview\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:13:13-15:63
+152                android:name="android.support.FILE_PROVIDER_PATHS"
+152-->[:react-native-webview] C:\Users\enesy\Documents\webprojects\helphub\node_modules\react-native-webview\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:14:17-67
+153                android:resource="@xml/file_system_provider_paths" />
+153-->[:react-native-webview] C:\Users\enesy\Documents\webprojects\helphub\node_modules\react-native-webview\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:15:17-60
+154        </provider>
+155
+156        <service
+156-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:30:9-42:19
+157            android:name="com.google.android.gms.metadata.ModuleDependencies"
+157-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:31:13-78
+158            android:enabled="false"
+158-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:32:13-36
+159            android:exported="false" >
+159-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:33:13-37
+160            <intent-filter>
+160-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:35:13-37:29
+161                <action android:name="com.google.android.gms.metadata.MODULE_DEPENDENCIES" />
+161-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:36:17-94
+161-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:36:25-91
+162            </intent-filter>
+163
+164            <meta-data
+164-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:39:13-41:36
+165                android:name="photopicker_activity:0:required"
+165-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:40:17-63
+166                android:value="" />
+166-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:41:17-33
+167        </service>
+168
+169        <activity
+169-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:44:9-46:59
+170            android:name="com.canhub.cropper.CropImageActivity"
+170-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:45:13-64
+171            android:exported="true"
+171-->[com.github.CanHub:Android-Image-Cropper:4.3.1] C:\Users\enesy\.gradle\caches\transforms-3\36b71cb456d6090149680f9c7f89c4f9\transformed\jetified-Android-Image-Cropper-4.3.1\AndroidManifest.xml:35:13-36
+172            android:theme="@style/Base.Theme.AppCompat" /> <!-- https://developer.android.com/guide/topics/manifest/provider-element.html -->
+172-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:46:13-56
+173        <provider
+173-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:48:9-56:20
+174            android:name="expo.modules.imagepicker.fileprovider.ImagePickerFileProvider"
+174-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:49:13-89
+175            android:authorities="com.ResQ.me.ImagePickerFileProvider"
+175-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:50:13-75
+176            android:exported="false"
+176-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:51:13-37
+177            android:grantUriPermissions="true" >
+177-->[:expo-image-picker] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:52:13-47
+178            <meta-data
+178-->[:react-native-webview] C:\Users\enesy\Documents\webprojects\helphub\node_modules\react-native-webview\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:13:13-15:63
+179                android:name="android.support.FILE_PROVIDER_PATHS"
+179-->[:react-native-webview] C:\Users\enesy\Documents\webprojects\helphub\node_modules\react-native-webview\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:14:17-67
+180                android:resource="@xml/image_picker_provider_paths" />
+180-->[:react-native-webview] C:\Users\enesy\Documents\webprojects\helphub\node_modules\react-native-webview\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:15:17-60
+181        </provider>
+182
+183        <service
+183-->[:expo-location] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-location\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:13:9-16:56
+184            android:name="expo.modules.location.services.LocationTaskService"
+184-->[:expo-location] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-location\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:14:13-78
+185            android:exported="false"
+185-->[:expo-location] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-location\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:15:13-37
+186            android:foregroundServiceType="location" />
+186-->[:expo-location] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-location\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:16:13-53
+187
+188        <receiver
+188-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:8:9-16:20
+189            android:name="expo.modules.taskManager.TaskBroadcastReceiver"
+189-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:9:13-74
+190            android:exported="false" >
+190-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:10:13-37
+191            <intent-filter>
+191-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:11:13-15:29
+192                <action android:name="expo.modules.taskManager.TaskBroadcastReceiver.INTENT_ACTION" />
+192-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:12:17-103
+192-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:12:25-100
+193                <action android:name="android.intent.action.BOOT_COMPLETED" />
+193-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:13:17-79
+193-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:13:25-76
+194                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+194-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:14:17-84
+194-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:14:25-81
+195            </intent-filter>
+196        </receiver>
+197
+198        <service
+198-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:18:9-22:72
+199            android:name="expo.modules.taskManager.TaskJobService"
+199-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:19:13-67
+200            android:enabled="true"
+200-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:20:13-35
+201            android:exported="false"
+201-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:21:13-37
+202            android:permission="android.permission.BIND_JOB_SERVICE" />
+202-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:22:13-69
+203
+204        <meta-data
+204-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:24:9-26:36
+205            android:name="expo.modules.taskManager.oneAppId"
+205-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:25:13-61
+206            android:value="true" />
+206-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:26:13-33
+207        <meta-data
+207-->[:expo-modules-core] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:9:9-11:89
+208            android:name="org.unimodules.core.AppLoader#react-native-headless"
+208-->[:expo-modules-core] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:10:13-79
+209            android:value="expo.modules.adapters.react.apploader.RNHeadlessAppLoader" />
+209-->[:expo-modules-core] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:11:13-86
+210        <meta-data
+210-->[:expo-modules-core] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:12:9-15:45
+211            android:name="com.facebook.soloader.enabled"
+211-->[:expo-modules-core] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:13:13-57
+212            android:value="true" />
+212-->[:expo-modules-core] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:14:13-33
+213
+214        <provider
+214-->[com.github.CanHub:Android-Image-Cropper:4.3.1] C:\Users\enesy\.gradle\caches\transforms-3\36b71cb456d6090149680f9c7f89c4f9\transformed\jetified-Android-Image-Cropper-4.3.1\AndroidManifest.xml:23:9-31:20
+215            android:name="com.canhub.cropper.CropFileProvider"
+215-->[com.github.CanHub:Android-Image-Cropper:4.3.1] C:\Users\enesy\.gradle\caches\transforms-3\36b71cb456d6090149680f9c7f89c4f9\transformed\jetified-Android-Image-Cropper-4.3.1\AndroidManifest.xml:24:13-63
+216            android:authorities="com.ResQ.me.cropper.fileprovider"
+216-->[com.github.CanHub:Android-Image-Cropper:4.3.1] C:\Users\enesy\.gradle\caches\transforms-3\36b71cb456d6090149680f9c7f89c4f9\transformed\jetified-Android-Image-Cropper-4.3.1\AndroidManifest.xml:25:13-72
+217            android:exported="false"
+217-->[com.github.CanHub:Android-Image-Cropper:4.3.1] C:\Users\enesy\.gradle\caches\transforms-3\36b71cb456d6090149680f9c7f89c4f9\transformed\jetified-Android-Image-Cropper-4.3.1\AndroidManifest.xml:26:13-37
+218            android:grantUriPermissions="true" >
+218-->[com.github.CanHub:Android-Image-Cropper:4.3.1] C:\Users\enesy\.gradle\caches\transforms-3\36b71cb456d6090149680f9c7f89c4f9\transformed\jetified-Android-Image-Cropper-4.3.1\AndroidManifest.xml:27:13-47
+219            <meta-data
+219-->[:react-native-webview] C:\Users\enesy\Documents\webprojects\helphub\node_modules\react-native-webview\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:13:13-15:63
+220                android:name="android.support.FILE_PROVIDER_PATHS"
+220-->[:react-native-webview] C:\Users\enesy\Documents\webprojects\helphub\node_modules\react-native-webview\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:14:17-67
+221                android:resource="@xml/library_file_paths" />
+221-->[:react-native-webview] C:\Users\enesy\Documents\webprojects\helphub\node_modules\react-native-webview\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:15:17-60
+222        </provider>
+223
+224        <meta-data
+224-->[com.google.maps.android:android-maps-utils:3.8.2] C:\Users\enesy\.gradle\caches\transforms-3\b1679482cad57f917f8dac16117afc03\transformed\jetified-android-maps-utils-3.8.2\AndroidManifest.xml:8:9-10:69
+225            android:name="com.google.android.gms.version"
+225-->[com.google.maps.android:android-maps-utils:3.8.2] C:\Users\enesy\.gradle\caches\transforms-3\b1679482cad57f917f8dac16117afc03\transformed\jetified-android-maps-utils-3.8.2\AndroidManifest.xml:9:13-58
+226            android:value="@integer/google_play_services_version" />
+226-->[com.google.maps.android:android-maps-utils:3.8.2] C:\Users\enesy\.gradle\caches\transforms-3\b1679482cad57f917f8dac16117afc03\transformed\jetified-android-maps-utils-3.8.2\AndroidManifest.xml:10:13-66
+227
+228        <activity
+228-->[com.google.android.gms:play-services-base:18.2.0] C:\Users\enesy\.gradle\caches\transforms-3\1ec357e09cdf8a166485a7c4a9a40b77\transformed\jetified-play-services-base-18.2.0\AndroidManifest.xml:20:9-22:45
+229            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+229-->[com.google.android.gms:play-services-base:18.2.0] C:\Users\enesy\.gradle\caches\transforms-3\1ec357e09cdf8a166485a7c4a9a40b77\transformed\jetified-play-services-base-18.2.0\AndroidManifest.xml:20:19-85
+230            android:exported="false"
+230-->[com.google.android.gms:play-services-base:18.2.0] C:\Users\enesy\.gradle\caches\transforms-3\1ec357e09cdf8a166485a7c4a9a40b77\transformed\jetified-play-services-base-18.2.0\AndroidManifest.xml:22:19-43
+231            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+231-->[com.google.android.gms:play-services-base:18.2.0] C:\Users\enesy\.gradle\caches\transforms-3\1ec357e09cdf8a166485a7c4a9a40b77\transformed\jetified-play-services-base-18.2.0\AndroidManifest.xml:21:19-78
+232
+233        <provider
+233-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:31:9-39:20
+234            android:name="androidx.startup.InitializationProvider"
+234-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:32:13-67
+235            android:authorities="com.ResQ.me.androidx-startup"
+235-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:33:13-68
+236            android:exported="false" >
+236-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:34:13-37
+237            <meta-data
+237-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:36:13-38:52
+238                android:name="androidx.work.WorkManagerInitializer"
+238-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:37:17-68
+239                android:value="androidx.startup" />
+239-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:38:17-49
+240            <meta-data
+240-->[androidx.emoji2:emoji2:1.2.0] C:\Users\enesy\.gradle\caches\transforms-3\3c3ce375ee3f48257998e6e5f2ec4e28\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+241                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+241-->[androidx.emoji2:emoji2:1.2.0] C:\Users\enesy\.gradle\caches\transforms-3\3c3ce375ee3f48257998e6e5f2ec4e28\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
+242                android:value="androidx.startup" />
+242-->[androidx.emoji2:emoji2:1.2.0] C:\Users\enesy\.gradle\caches\transforms-3\3c3ce375ee3f48257998e6e5f2ec4e28\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
+243            <meta-data
+243-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\enesy\.gradle\caches\transforms-3\8082724517149b8a66d9fa67651fa1fb\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:29:13-31:52
+244                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+244-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\enesy\.gradle\caches\transforms-3\8082724517149b8a66d9fa67651fa1fb\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:30:17-78
+245                android:value="androidx.startup" />
+245-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\enesy\.gradle\caches\transforms-3\8082724517149b8a66d9fa67651fa1fb\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:31:17-49
+246            <meta-data
+246-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+247                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+247-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+248                android:value="androidx.startup" />
+248-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+249        </provider>
+250
+251        <service
+251-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:41:9-46:35
+252            android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
+252-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:42:13-88
+253            android:directBootAware="false"
+253-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:43:13-44
+254            android:enabled="@bool/enable_system_alarm_service_default"
+254-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:44:13-72
+255            android:exported="false" />
+255-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:45:13-37
+256        <service
+256-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:47:9-53:35
+257            android:name="androidx.work.impl.background.systemjob.SystemJobService"
+257-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:48:13-84
+258            android:directBootAware="false"
+258-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:49:13-44
+259            android:enabled="@bool/enable_system_job_service_default"
+259-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:50:13-70
+260            android:exported="true"
+260-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:51:13-36
+261            android:permission="android.permission.BIND_JOB_SERVICE" />
+261-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:52:13-69
+262        <service
+262-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:54:9-59:35
+263            android:name="androidx.work.impl.foreground.SystemForegroundService"
+263-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:55:13-81
+264            android:directBootAware="false"
+264-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:56:13-44
+265            android:enabled="@bool/enable_system_foreground_service_default"
+265-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:57:13-77
+266            android:exported="false" />
+266-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:58:13-37
+267
+268        <receiver
+268-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:61:9-66:35
+269            android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"
+269-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:62:13-88
+270            android:directBootAware="false"
+270-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:63:13-44
+271            android:enabled="true"
+271-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:64:13-35
+272            android:exported="false" />
+272-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:65:13-37
+273        <receiver
+273-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:67:9-77:20
+274            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy"
+274-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:68:13-106
+275            android:directBootAware="false"
+275-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:69:13-44
+276            android:enabled="false"
+276-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:70:13-36
+277            android:exported="false" >
+277-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:71:13-37
+278            <intent-filter>
+278-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:73:13-76:29
+279                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+279-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:74:17-87
+279-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:74:25-84
+280                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+280-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:75:17-90
+280-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:75:25-87
+281            </intent-filter>
+282        </receiver>
+283        <receiver
+283-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:78:9-88:20
+284            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy"
+284-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:79:13-104
+285            android:directBootAware="false"
+285-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:80:13-44
+286            android:enabled="false"
+286-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:81:13-36
+287            android:exported="false" >
+287-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:82:13-37
+288            <intent-filter>
+288-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:84:13-87:29
+289                <action android:name="android.intent.action.BATTERY_OKAY" />
+289-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:85:17-77
+289-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:85:25-74
+290                <action android:name="android.intent.action.BATTERY_LOW" />
+290-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:86:17-76
+290-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:86:25-73
+291            </intent-filter>
+292        </receiver>
+293        <receiver
+293-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:89:9-99:20
+294            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy"
+294-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:90:13-104
+295            android:directBootAware="false"
+295-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:91:13-44
+296            android:enabled="false"
+296-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:92:13-36
+297            android:exported="false" >
+297-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:93:13-37
+298            <intent-filter>
+298-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:95:13-98:29
+299                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+299-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:96:17-83
+299-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:96:25-80
+300                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+300-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:97:17-82
+300-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:97:25-79
+301            </intent-filter>
+302        </receiver>
+303        <receiver
+303-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:100:9-109:20
+304            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy"
+304-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:101:13-103
+305            android:directBootAware="false"
+305-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:102:13-44
+306            android:enabled="false"
+306-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:103:13-36
+307            android:exported="false" >
+307-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:104:13-37
+308            <intent-filter>
+308-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:106:13-108:29
+309                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+309-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:107:17-79
+309-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:107:25-76
+310            </intent-filter>
+311        </receiver>
+312        <receiver
+312-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:110:9-121:20
+313            android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
+313-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:111:13-88
+314            android:directBootAware="false"
+314-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:112:13-44
+315            android:enabled="false"
+315-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:113:13-36
+316            android:exported="false" >
+316-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:114:13-37
+317            <intent-filter>
+317-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:116:13-120:29
+318                <action android:name="android.intent.action.BOOT_COMPLETED" />
+318-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:13:17-79
+318-->[:expo-task-manager] C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-task-manager\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:13:25-76
+319                <action android:name="android.intent.action.TIME_SET" />
+319-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:118:17-73
+319-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:118:25-70
+320                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+320-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:119:17-81
+320-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:119:25-78
+321            </intent-filter>
+322        </receiver>
+323        <receiver
+323-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:122:9-131:20
+324            android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver"
+324-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:123:13-99
+325            android:directBootAware="false"
+325-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:124:13-44
+326            android:enabled="@bool/enable_system_alarm_service_default"
+326-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:125:13-72
+327            android:exported="false" >
+327-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:126:13-37
+328            <intent-filter>
+328-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:128:13-130:29
+329                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
+329-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:129:17-98
+329-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:129:25-95
+330            </intent-filter>
+331        </receiver>
+332        <receiver
+332-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:132:9-142:20
+333            android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver"
+333-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:133:13-78
+334            android:directBootAware="false"
+334-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:134:13-44
+335            android:enabled="true"
+335-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:135:13-35
+336            android:exported="true"
+336-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:136:13-36
+337            android:permission="android.permission.DUMP" >
+337-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:137:13-57
+338            <intent-filter>
+338-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:139:13-141:29
+339                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS" />
+339-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:140:17-88
+339-->[androidx.work:work-runtime:2.7.1] C:\Users\enesy\.gradle\caches\transforms-3\7cb310e7d3009dce70364e12b366ba4d\transformed\work-runtime-2.7.1\AndroidManifest.xml:140:25-85
+340            </intent-filter>
+341        </receiver>
+342        <receiver
+342-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+343            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+343-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+344            android:directBootAware="false"
+344-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+345            android:enabled="true"
+345-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+346            android:exported="true"
+346-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+347            android:permission="android.permission.DUMP" >
+347-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+348            <intent-filter>
+348-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+349                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+349-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+349-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+350            </intent-filter>
+351            <intent-filter>
+351-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+352                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+352-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+352-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+353            </intent-filter>
+354            <intent-filter>
+354-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+355                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+355-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+355-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+356            </intent-filter>
+357            <intent-filter>
+357-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+358                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+358-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+358-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\enesy\.gradle\caches\transforms-3\b699b078ace186b12fcb37da8849db23\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+359            </intent-filter>
+360        </receiver>
+361
+362        <service
+362-->[androidx.room:room-runtime:2.2.5] C:\Users\enesy\.gradle\caches\transforms-3\8f0287e8b6abb09139e27873a6686566\transformed\room-runtime-2.2.5\AndroidManifest.xml:25:9-28:40
+363            android:name="androidx.room.MultiInstanceInvalidationService"
+363-->[androidx.room:room-runtime:2.2.5] C:\Users\enesy\.gradle\caches\transforms-3\8f0287e8b6abb09139e27873a6686566\transformed\room-runtime-2.2.5\AndroidManifest.xml:26:13-74
+364            android:directBootAware="true"
+364-->[androidx.room:room-runtime:2.2.5] C:\Users\enesy\.gradle\caches\transforms-3\8f0287e8b6abb09139e27873a6686566\transformed\room-runtime-2.2.5\AndroidManifest.xml:27:13-43
+365            android:exported="false" />
+365-->[androidx.room:room-runtime:2.2.5] C:\Users\enesy\.gradle\caches\transforms-3\8f0287e8b6abb09139e27873a6686566\transformed\room-runtime-2.2.5\AndroidManifest.xml:28:13-37
+366        <service
+366-->[io.nlopez.smartlocation:library:3.3.3] C:\Users\enesy\.gradle\caches\transforms-3\26b37ec31d394823985173f19940c032\transformed\jetified-library-3.3.3\AndroidManifest.xml:19:9-21:40
+367            android:name="io.nlopez.smartlocation.activity.providers.ActivityGooglePlayServicesProvider$ActivityRecognitionService"
+367-->[io.nlopez.smartlocation:library:3.3.3] C:\Users\enesy\.gradle\caches\transforms-3\26b37ec31d394823985173f19940c032\transformed\jetified-library-3.3.3\AndroidManifest.xml:20:13-132
+368            android:exported="false" />
+368-->[io.nlopez.smartlocation:library:3.3.3] C:\Users\enesy\.gradle\caches\transforms-3\26b37ec31d394823985173f19940c032\transformed\jetified-library-3.3.3\AndroidManifest.xml:21:13-37
+369        <service
+369-->[io.nlopez.smartlocation:library:3.3.3] C:\Users\enesy\.gradle\caches\transforms-3\26b37ec31d394823985173f19940c032\transformed\jetified-library-3.3.3\AndroidManifest.xml:22:9-24:40
+370            android:name="io.nlopez.smartlocation.geofencing.providers.GeofencingGooglePlayServicesProvider$GeofencingService"
+370-->[io.nlopez.smartlocation:library:3.3.3] C:\Users\enesy\.gradle\caches\transforms-3\26b37ec31d394823985173f19940c032\transformed\jetified-library-3.3.3\AndroidManifest.xml:23:13-127
+371            android:exported="false" />
+371-->[io.nlopez.smartlocation:library:3.3.3] C:\Users\enesy\.gradle\caches\transforms-3\26b37ec31d394823985173f19940c032\transformed\jetified-library-3.3.3\AndroidManifest.xml:24:13-37
+372        <service
+372-->[io.nlopez.smartlocation:library:3.3.3] C:\Users\enesy\.gradle\caches\transforms-3\26b37ec31d394823985173f19940c032\transformed\jetified-library-3.3.3\AndroidManifest.xml:25:9-27:40
+373            android:name="io.nlopez.smartlocation.geocoding.providers.AndroidGeocodingProvider$AndroidGeocodingService"
+373-->[io.nlopez.smartlocation:library:3.3.3] C:\Users\enesy\.gradle\caches\transforms-3\26b37ec31d394823985173f19940c032\transformed\jetified-library-3.3.3\AndroidManifest.xml:26:13-120
+374            android:exported="false" />
+374-->[io.nlopez.smartlocation:library:3.3.3] C:\Users\enesy\.gradle\caches\transforms-3\26b37ec31d394823985173f19940c032\transformed\jetified-library-3.3.3\AndroidManifest.xml:27:13-37
+375    </application>
+376
+377</manifest>
