@@ -8,13 +8,16 @@ import { SegmentedButtons, Banner, Text, Button } from "react-native-paper";
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from "react-native-popup-menu";
 import Dialog from "react-native-dialog";
 
-// State
-import { useStoreState, useStoreActions } from "easy-peasy";
-import NetInfo from "@react-native-community/netinfo";
-
 import * as Nearby from "../../../../modules/helphub-nearby/index";
-import DialogInput from "react-native-dialog/lib/Input";
 
+/**
+ * Button Component
+ * Can become active (secondary) or inactive (primary).
+ * 
+ * primary: boolean     -> whether the button is a primary or a secondary button
+ * childen: any         -> A react prop for supporting children components, such as text
+ * onPress: function    -> Function to call on pressing the button.
+ *  */
 function NewButton({primary = true, children = null, onPress = null}) {
     return (
       <Pressable
@@ -40,16 +43,29 @@ function NewButton({primary = true, children = null, onPress = null}) {
 }
 
 
+/**
+ * Message Dialog
+ * A dialog that shows the last message from an endpoint
+ * Allows user to send messages.
+ * 
+ * @param key Unique identifier of the component
+ * @param endpointName The name of the endpoint device
+ * @param endpointId ID of the endpoint device
+ */
 const MessageDialog = ({key, endpointName, endpointId}) => {
-    [messaging, setMessaging] = useState(false);
-    [message, setMessage] = useState("");
+    [messaging, setMessaging] = useState(false); // Whether client is currently messaging (true or false)
+    [message, setMessage] = useState(""); // Message to be sent
 
+
+    // Send a message via Google Nearby.
     const sendMessage = (payload) => {
         Nearby.sendPayload(endpointId, payload);
-        console.log("Message sent to: " + endpointId);
+        console.log("Message sent to: " + endpointId); // for debug
         setMessaging(false);
     }
 
+
+    // Cancel message dialog
     const handleCancel = () => {
         setMessaging(false);
     }
@@ -67,37 +83,39 @@ const MessageDialog = ({key, endpointName, endpointId}) => {
     )
 }
 
-
+/**
+ * Nearby Device
+ * A render component that displays the ID and the name of a Nearby device
+ * Has pop-up menus that allow for connection, disconnection, and messaging 
+ * @param key Unique identifier of the component
+ * @param endpointName Name of the endpoint device
+ * @param endpointId ID of the endpoint device
+ * @param userName Name of the user
+ * @param connectedDevices An array that contains the endpointId's of all 
+ * connected devices via Nearby
+ * @param setConneectedDevices React state function to set connectedDevices array
+ */
 const NearbyDevice = ({key, endpointName, endpointId, userName, connectedDevices, setConnectedDevices}) => {
+    // Check if the endpoint is connected
     const isConnected = () => {
         return connectedDevices.includes(endpointId);
     }
     
+    // Request connection to the endpoint
     const requestConnection = () => {
         Nearby.requestConnection(userName, endpointId);
         Alert.alert("Connection Request", "Connection request was sent to " + endpointId);
     };
 
+    // Disconnect from an endpoint
     const disconnectFromEndpoint = () => {
         Nearby.disconnect(endpointId);
         setConnectedDevices(connectedDevices.filter(function(e) {return e !== endpointId}));
     }
 
+    // Open messaging panel
     const openMessagingPanel = () => {
         setMessaging(true);
-    }
-
-    [messaging, setMessaging] = useState(false);
-    [message, setMessage] = useState("");
-
-    const sendMessage = (payload) => {
-        Nearby.sendPayload(endpointId, payload);
-        console.log("Message sent to: " + endpointId);
-        setMessaging(false);
-    }
-
-    const handleCancel = () => {
-        setMessaging(false);
     }
 
     return (
@@ -129,20 +147,35 @@ const NearbyDevice = ({key, endpointName, endpointId, userName, connectedDevices
 }
 
 export default function OfflineMode() {
+    // Discovered devices
     [discoveredDevices, setDiscoveredDevices] = useState(null);
-    [userName, setUserName] = useState("HelphubUser");
-    [warned, setWarned] = useState(false);
-    [advertising, setAdvertising] = useState(false);
-    [discovering, setDiscovering] = useState(false);
-    [selected, setSelected] = useState(null);
+
+    // Connected devices
     [connectedDevices, setConnectedDevices] = useState([null]);
 
+    // Username
+    [userName, setUserName] = useState("HelphubUser");
+
+    // Whether we have showed the warning for the users
+    [warned, setWarned] = useState(false);
+
+    // Whether device is advertising
+    [advertising, setAdvertising] = useState(false);
+
+    // Whether device is discovering
+    [discovering, setDiscovering] = useState(false);
+
+    // Selected device (i.e to connect)
+    [selected, setSelected] = useState(null);
+
+    // Adds a device to connectedDevices ONLY IF it is not there
     function setConnectedDevicesUnique(endpoint) {
         if(!connectedDevices.includes(endpoint)) {
             setConnectedDevices([...connectedDevices, endpoint]);
         }
     };
 
+    // Show a warning about app switching to offline mode
     if (!warned) {
         Alert.alert(
             "No internet connection!",
@@ -151,26 +184,32 @@ export default function OfflineMode() {
         setWarned(true);
     }
 
+
+    // Start advertising.
     const startAdvertising = () => {
         Nearby.startAdvertising(userName);
         setAdvertising(true);
     }
 
+    // Stop advertising
     const stopAdvertising = () => {
         Nearby.stopAdvertising();
         setAdvertising(false);
     }
 
+    // Start discovery
     const startDiscovering = () => {
         Nearby.startDiscovery();
         setDiscovering(true);
     }
 
+    // Stop discovery
     const stopDiscovering = () => {
         Nearby.stopDiscovery();
         setDiscovering(false);
     }
 
+    // Start searching for devices (i.e start advertising and discovering)
     const startSearch = () => {
         Nearby.startAdvertising(userName);
         Nearby.startDiscovery();
@@ -178,6 +217,7 @@ export default function OfflineMode() {
         setAdvertising(true);
     }
 
+    // stop searching for devices (i.e stop advertising and discovering)
     const stopSearch  = () => {
         Nearby.stopAdvertising();
         Nearby.stopDiscovery();
@@ -204,12 +244,17 @@ export default function OfflineMode() {
     }, [])
 
     */
+
+    // Subscriptions for listening various events
     useEffect(() => {
+        // Informs when we discover a new devices
         const onNewDeviceDiscovered = Nearby.addDeviceDiscoveryListener((event) => {
+            // Get currently discovered devices
             setDiscoveredDevices(Nearby.getDiscoveredEndpoints());
             console.log(discoveredDevices);
         });
 
+        // Informs when a new connection is initiated (by user or someone else)
         const onConnectionInitiated = Nearby.addNewConnectionListener((event) => {
             if (event.isIncomingConnection) {
                 Alert.alert(
@@ -245,6 +290,7 @@ export default function OfflineMode() {
             }
         });
 
+        // Informs on connection updates (e.g connection lost, succesful)
         const onConnectionUpdate = Nearby.addConnectionUpdateListener((event) => {
             console.log(event.status);
             switch (event.status) {
@@ -273,16 +319,19 @@ export default function OfflineMode() {
                     break;
             };
             
+            // Informs when a device is disconnected
             const onDisconnected = Nearby.addDisconnectionListener((event) => {
                 Alert.alert("Connection Lost", "Disconnected.", [{text: "OK"}]);
                 setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
             })
 
+            // Informs a payload (message) is received
             const onPayloadReceived = Nearby.addPayloadReceivedListener((event) => {
                 Alert.alert("Received Message", "From: " + event.endpointId + "\n" + event.message);
             })
         })
     }, [])
+
 
     return (
         <View style={styles.container}>
