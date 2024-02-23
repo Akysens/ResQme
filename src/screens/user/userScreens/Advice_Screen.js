@@ -88,7 +88,12 @@ return (
         autoplayInterval={5000}
       />
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.exitButton} onPress={() => navigation.navigate(' ')}>
+        <TouchableOpacity style={styles.exitButton} onPress={() => {
+          if (isPlaying) {
+            togglePlay();
+          }
+          navigation.navigate(' ')
+          }}>
           <Image style={styles.buttonImage} source={require('@assets/Exit.png')}/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.warningButton} onPress={togglePlay}>
