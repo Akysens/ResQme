@@ -1,10 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from './screens/auth/LoginScreen'; 
-import SignupScreen from './screens/auth/SignInScreen';
-import SAR_Screen from './screens/user/userScreens/SAR_Team_Screen';
 import { LogBox, Alert } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -18,6 +14,7 @@ import Notifications from './screens/user/userScreens/Notifications';
 import Profile from './screens/user/userScreens/profile/Profile';
 import Settings from './screens/user/userScreens/Settings';
 import { AccModeContext, AccIdContext } from './Contexts';
+import { OfflineMode } from './screens/user/userScreens';
 
 const AuthStack = createStackNavigator();
 
@@ -97,14 +94,47 @@ function App() {
   const [accMode, setAccMode] = useState(null);
   const [AccId, setAccId] = useState(null);
 
+  const [appIsReady, setAppIsReady] = useState(false); 
+  const [internetReachable, setInternetReachable] = useState(null);
+
+  const getInternetStatus = async () => {
+    try {
+      const netInfo = await NetInfo.fetch();
+      const isInternetReachable = netInfo.isInternetReachable;
+      setInternetReachable(isInternetReachable);
+    }
+    catch (error) {
+      console.warn(error);
+    }
+    finally {
+      if (internetReachable !== null) {
+        setAppIsReady(true);
+      };
+    }
+  }
+
+  useEffect(() => {
+    async function prepare() {
+      await getInternetStatus();
+    }
+
+    prepare();
+  }, [internetReachable]);
+
+  if (!appIsReady) {
+    return null;
+  }
+
   return (
     <AccModeContext.Provider value={{ accMode, setAccMode }}>
       <AccIdContext.Provider value={{ AccId, setAccId }}>
         <NavigationContainer>
           <RootStack.Navigator screenOptions={{ headerShown: false }}>
-            <RootStack.Screen name="Auth" component={AuthStackScreen} />
-            <RootStack.Screen name="MainApp" component={MainTabScreen} />
-            <RootStack.Screen name="Advice_Screen" component={Advice_Screen} />
+            (internetReachable ? 
+              ( <RootStack.Screen name="Auth" component={AuthStackScreen} />
+                <RootStack.Screen name="MainApp" component={MainTabScreen} />
+                <RootStack.Screen name="Advice_Screen" component={Advice_Screen} />) :
+              (<RootStack.Screen name="OfflineMode" component={OfflineMode} />))
           </RootStack.Navigator>
         </NavigationContainer>
       </AccIdContext.Provider>
