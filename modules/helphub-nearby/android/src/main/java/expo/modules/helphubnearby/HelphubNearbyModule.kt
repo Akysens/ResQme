@@ -55,7 +55,7 @@ class HelphubNearbyModule : Module() {
       connectionsClient = Nearby.getConnectionsClient(context);
     }
 
-    Events("onNewDeviceDiscovered", "onConnectionUpdate", "onPayloadTransferUpdate", "onNewConnectionInitiated", "onDisconnection, onPayloadReceived")
+    Events("onNewDeviceDiscovered", "onConnectionUpdate", "onPayloadTransferUpdate", "onNewConnectionInitiated", "onDisconnection", "onPayloadReceived")
 
     fun sendPayload(endpointId : String, message : String) {
       Payload.fromBytes(message.toByteArray(UTF_8)).let {
