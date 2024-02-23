@@ -38,6 +38,7 @@ class HelphubNearbyModule : Module() {
     Name("HelphubNearby")
 
     val STRATEGY = Strategy.P2P_CLUSTER
+    val CONNECTIONTYPE = ConnectionType.DISRUPTIVE
 
     val TAG = "Helphub-Nearby"
 
@@ -161,7 +162,7 @@ class HelphubNearbyModule : Module() {
     }
 
     fun startAdvertising(name : String) {
-      val advertisingOptions : AdvertisingOptions = AdvertisingOptions.Builder().setStrategy(STRATEGY).build()
+      val advertisingOptions : AdvertisingOptions = AdvertisingOptions.Builder().setStrategy(STRATEGY).setConnectionType(CONNECTIONTYPE).build()
       connectionsClient.startAdvertising(name, SERVICE_ID, connectionLifecycleCallback, advertisingOptions)
         .addOnSuccessListener { Log.d(TAG, "Advertisement started successfully.")}
         .addOnFailureListener {

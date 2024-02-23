@@ -40,7 +40,7 @@ function NewButton({primary = true, children = null, onPress = null}) {
 }
 
 
-const MessageDialog = ({endpointName, endpointId}) => {
+const MessageDialog = ({key, endpointName, endpointId}) => {
     [messaging, setMessaging] = useState(false);
     [message, setMessage] = useState("");
 
@@ -54,7 +54,7 @@ const MessageDialog = ({endpointName, endpointId}) => {
         setMessaging(false);
     }
 
-    return (            
+    return (
         <Dialog.Container visible={messaging}>
             <Dialog.Title>Messaging</Dialog.Title>
             <Dialog.Description>
@@ -68,7 +68,7 @@ const MessageDialog = ({endpointName, endpointId}) => {
 }
 
 
-const NearbyDevice = ({endpointName, endpointId, userName, connectedDevices, setConnectedDevices}) => {
+const NearbyDevice = ({key, endpointName, endpointId, userName, connectedDevices, setConnectedDevices}) => {
     const isConnected = () => {
         return connectedDevices.includes(endpointId);
     }
@@ -89,7 +89,7 @@ const NearbyDevice = ({endpointName, endpointId, userName, connectedDevices, set
 
     return (
         <>
-            <MessageDialog endpointId={endpointId} endpointName={endpointName}/>
+            <MessageDialog endpointId={endpointId} endpointName={endpointName} key={key}/>
             <Menu>
                 <MenuTrigger>
                     <View style={{...styles.deviceListItem, backgroundColor: isConnected() ? "#A1EEBD" : "#46424f"}}>
@@ -155,6 +155,20 @@ export default function OfflineMode() {
 
     const stopDiscovering = () => {
         Nearby.stopDiscovery();
+        setDiscovering(false);
+    }
+
+    const startSearch = () => {
+        Nearby.startAdvertising(userName);
+        Nearby.startDiscovery();
+        setDiscovering(true);
+        setAdvertising(true);
+    }
+
+    const stopSearch  = () => {
+        Nearby.stopAdvertising();
+        Nearby.stopDiscovery();
+        setAdvertising(false);
         setDiscovering(false);
     }
 
@@ -264,7 +278,12 @@ export default function OfflineMode() {
                 <View style={styles.deviceList}>
                     <FlatList 
                         renderItem={({item}) => {
-                            return <NearbyDevice endpointId={item.id} endpointName={item.name} userName={userName} connectedDevices={connectedDevices} setConnectedDevices={setConnectedDevices}/>;
+                            <NearbyDevice key={item.id}
+                            endpointId={item.id} 
+                            endpointName={item.name} 
+                            userName={userName} 
+                            connectedDevices={connectedDevices} 
+                            setConnectedDevices={setConnectedDevices}/>;
                         }}
                         data={discoveredDevices}
                     >
@@ -272,12 +291,8 @@ export default function OfflineMode() {
                 </View>
                 <View style={styles.buttonContainer}>
                     <NewButton primary={!discovering}
-                        onPress={(discovering ? stopDiscovering : startDiscovering)}>
-                        <Text>Discover</Text>
-                    </NewButton>
-                    <NewButton primary={!advertising}
-                        onPress={advertising ? stopAdvertising : startAdvertising}>
-                        <Text>Advertise</Text>
+                        onPress={(discovering ? stopSearch : startSearch)}>
+                        <Text>Search</Text>
                     </NewButton>
                 </View>
                 <Text style={{color: "white"}}>Selected: {selected}</Text>
