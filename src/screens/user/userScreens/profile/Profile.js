@@ -37,7 +37,7 @@ const Profile = () => {
 
   const handleEditPersonal = () => {
     setIsEditingPersonal(!isEditingPersonal);
-    if (isEditing) {
+    if (isEditingPersonal) {
       console.log("HI");
     }
   }
@@ -64,7 +64,7 @@ const Profile = () => {
       {/* </View> */}
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>PERSONAL INFORMATION                  </Text>
+        <Text style={styles.sectionTitle}>PERSONAL INFORMATION                </Text>
         <View style={styles.container}>
           {/* Edit/Save Button */}
           <TouchableOpacity style={styles.button} onPress={handleEditPersonal}>
@@ -83,7 +83,7 @@ const Profile = () => {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>MEDICAL INFORMATION                     </Text>
+        <Text style={styles.sectionTitle}>MEDICAL INFORMATION                   </Text>
         <View style={styles.container}>
           {/* Edit/Save Button */}
           <TouchableOpacity style={styles.button} onPress={handleEditMedical}>
@@ -97,13 +97,13 @@ const Profile = () => {
       </View>
 
       <View style={styles.infoContainer}>
-        <Text style={styles.infoText} disabled={isEditingMedical}>Blood Type: {userMedData.BloodType}</Text>
-        <Text style={styles.infoText} disabled={isEditingMedical}>Emergency Contact Name: {userMedData.EmergencyContactName}</Text>
-        <Text style={styles.infoText} disabled={isEditingMedical}>Emergency Contact Phone #: {userMedData.EmergencyContactNumber}</Text>
-        <Text style={styles.infoText} disabled={isEditingMedical}>Emergency Contact Email: {userMedData.EmergencyContactEmail}</Text>
-        <Text style={styles.infoText} disabled={isEditingMedical}>Gender: {userMedData.Gender}</Text>
-        <Text style={styles.infoText} disabled={isEditingMedical}>Weight: {userMedData.Weight} kg</Text>
-        <Text style={styles.infoText} disabled={isEditingMedical}>Height: {userMedData.Gender} cm</Text>
+        <Text style={styles.infoText}>Blood Type: {userMedData.BloodType}</Text>
+        <Text style={styles.infoText}>Emergency Contact Name: {userMedData.EmergencyContactName}</Text>
+        <Text style={styles.infoText}>Emergency Contact Phone #: {userMedData.EmergencyContactNumber}</Text>
+        <Text style={styles.infoText}>Emergency Contact Email: {userMedData.EmergencyContactEmail}</Text>
+        <Text style={styles.infoText}>Gender: {userMedData.Gender}</Text>
+        <Text style={styles.infoText}>Weight: {userMedData.Weight} kg</Text>
+        <Text style={styles.infoText}>Height: {userMedData.Gender} cm</Text>
       </View>
 
       <TouchableOpacity 
