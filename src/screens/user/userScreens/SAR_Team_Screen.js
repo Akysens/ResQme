@@ -10,52 +10,55 @@ const { width, height } = Dimensions.get('window');
 const SAR_Screen = ({ navigation }) => {
   const [userData, setUserData] = useState([]);
   const [location, setLocation] = useState(null);
-  const [selectedUserBloodType, setSelectedUserBloodType] = useState(null); // Added state to store selected user's blood type
-  const [isMarkerSelected, setIsMarkerSelected] = useState(false); // Added state to track if a marker is selected
+  const [selectedUserBloodType, setSelectedUserBloodType] = useState(null);
+  const [isMarkerSelected, setIsMarkerSelected] = useState(false);
   const mapRef = useRef(null);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "usersLocations"), async (querySnapshot) => {
-      const users = [];
-      for (const doc of querySnapshot.docs) {
-        const { latitude, longitude, timestamp } = doc.data();
-        const userTimestamp = getTimeDifference(timestamp);
-        const id = doc.id;
-        const name = await getNameFromOtherDatabase(id); // Fetch name from another database
-        users.push({ id, name, latitude, longitude, userTimestamp });
-      }
-      setUserData(users);
-    });
-
-    return unsubscribe;
-  }, []);
-
-  useEffect(() => {
-    (async () => {
+    const fetchData = async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         Alert.alert('Permission Denied', 'Please enable location services to use this feature.');
         return;
       }
-
+  
       try {
         const location = await Location.getCurrentPositionAsync({
-          accuracy: Location.Accuracy.Balanced,
+          accuracy: Location.Accuracy.BestForNavigation, // Use the highest accuracy for navigation
           enableHighAccuracy: true,
           timeInterval: 5000
         });
         setLocation(location);
       } catch (error) {
         console.error('Error getting current location:', error);
-      }
-    })();
+      }      
+  
+      const unsubscribe = onSnapshot(collection(db, "usersLocations"), async (querySnapshot) => {
+        const users = [];
+        for (const doc of querySnapshot.docs) {
+          const { latitude, longitude, timestamp } = doc.data();
+          const userTimestamp = getTimeDifference(timestamp);
+          const id = doc.id;
+          const name = await getNameFromOtherDatabase(id);
+          users.push({ id, name, latitude, longitude, userTimestamp });
+        }
+        setUserData(users);
+      });
+  
+      return unsubscribe;
+    };
+  
+    fetchData();
   }, []);
-
+  
   const goToMyLocation = () => {
     if (location && location.coords && mapRef.current) {
       const { latitude, longitude } = location.coords;
       mapRef.current.animateCamera({
         center: { latitude, longitude },
+        latitudeDelta: 0.02,
+        longitudeDelta: 0.02,
+        zoom: 20,
       });
     } else {
       Alert.alert('Location Not Available', 'Unable to get current location.');
@@ -67,12 +70,12 @@ const SAR_Screen = ({ navigation }) => {
       const medicalSnap = await getDoc(doc(db, "usersMedicalInfo", id));
 
       if (medicalSnap.exists()) {
-        setSelectedUserBloodType(medicalSnap.data().BloodType); // Set selected user's blood type
+        setSelectedUserBloodType(medicalSnap.data().BloodType);
       } else {
         setSelectedUserBloodType("Unknown");
       }
 
-      setIsMarkerSelected(true); // Set marker selection state to true
+      setIsMarkerSelected(true);
     } catch (error) {
       console.error("Error getting document: ", error);
       setSelectedUserBloodType("Unknown");
@@ -80,13 +83,13 @@ const SAR_Screen = ({ navigation }) => {
   }
 
   const handleMapPress = () => {
-    setSelectedUserBloodType(null); // Clear selected user's blood type
-    setIsMarkerSelected(false); // Set marker selection state to false
+    setSelectedUserBloodType(null);
+    setIsMarkerSelected(false);
   }
 
   const getTimeDifference = (timestamp) => {
     const currentTime = new Date().getTime();
-    const timestampTime = timestamp.toMillis(); // Assuming timestamp is a Firestore Timestamp object
+    const timestampTime = timestamp.toMillis();
   
     const difference = currentTime - timestampTime;
     const daysDifference = Math.floor(difference / (1000 * 60 * 60 * 24));
@@ -106,7 +109,7 @@ const SAR_Screen = ({ navigation }) => {
       }
     } catch (error) {
       console.error("Error getting document: ", error);
-      return "Unkown";
+      return "Unknown";
     }
   };
 
@@ -115,21 +118,24 @@ const SAR_Screen = ({ navigation }) => {
       <MapView
         ref={mapRef}
         style={styles.map}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-        onPress={handleMapPress} // Handle tap on map to clear selected user's information
+        initialRegion={location ? {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          latitudeDelta: 0.02,
+          longitudeDelta: 0.02,
+          zoom: 20,
+        } : null}
+        onPress={handleMapPress}
+        showsUserLocation={true} // Display blue dot for user's current location
+        userLocationAnnotationTitle="My Location" // Title for the blue dot
       >
         {userData.map((user) => (
           <Marker
             key={user.id}
             coordinate={{ latitude: user.latitude, longitude: user.longitude }}
-            title={user.name} // Change title to user's name
+            title={user.name}
             description={`Help requested: ${user.userTimestamp.days} days ${user.userTimestamp.hours} hrs ${user.userTimestamp.minutes} mins ago`}
-            onPress={() => handleMarkerPress(user.id)} // Call handleMarkerPress when marker is pressed
+            onPress={() => handleMarkerPress(user.id)}
           />
         ))}
       </MapView>
@@ -138,7 +144,7 @@ const SAR_Screen = ({ navigation }) => {
         <Image source={require('../../../assets/center.png')} style={styles.fabIcon}/>
       </TouchableOpacity>
       
-      {isMarkerSelected && selectedUserBloodType && ( // Conditionally render blood type container only when a marker is selected
+      {isMarkerSelected && selectedUserBloodType && (
         <View style={styles.bloodTypeContainer}>
           <Text style={styles.bloodTypeText}>Blood Type: {selectedUserBloodType}</Text>
         </View>

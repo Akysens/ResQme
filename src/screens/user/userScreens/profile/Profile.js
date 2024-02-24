@@ -12,7 +12,7 @@ const Profile = () => {
   const [userMedData, setUserMedData] = useState(null);
   const [isEditingPersonal, setIsEditingPersonal] = useState(false);
   const [isEditingMedical, setIsEditingMedical] = useState(true);
-
+  
   useEffect(() => {
     GetUserData();
   }, []);
@@ -103,7 +103,7 @@ const Profile = () => {
         <Text style={styles.infoText}>Emergency Contact Email: {userMedData.EmergencyContactEmail}</Text>
         <Text style={styles.infoText}>Gender: {userMedData.Gender}</Text>
         <Text style={styles.infoText}>Weight: {userMedData.Weight} kg</Text>
-        <Text style={styles.infoText}>Height: {userMedData.Gender} cm</Text>
+        <Text style={styles.infoText}>Height: {userMedData.Height} cm</Text>
       </View>
 
       <TouchableOpacity 

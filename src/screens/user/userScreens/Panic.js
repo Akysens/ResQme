@@ -6,7 +6,7 @@ import { Audio } from "expo-av";
 
 // UI
 import { FAB, Text, Banner, IconButton } from "react-native-paper";
-import { Animated, Image, PanResponder, StyleSheet, Text, View } from "react-native";
+import { Animated, Image, PanResponder, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Carousel from "react-native-snap-carousel";
 

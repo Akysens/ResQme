@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Image, View, Platform, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AccIdContext } from '../../../../Contexts';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { db } from '@firebaseConfig';
 
 export default function UploadImage() {
   const [image, setImage] = useState(null);
+  const { AccId } = useContext(AccIdContext);
 
   useEffect(() => {
     checkForPermissions();
@@ -49,7 +53,7 @@ export default function UploadImage() {
   
   const storeImage = async (uri) => {
     try {
-      await AsyncStorage.setItem('profileImage', uri); // Store the URI with a key 'profileImage'
+      await setDoc(doc(db, "usersProfilePics", AccId), { uri }); // Store the URI with a key 'profileImage'
     } catch (error) {
       console.error('Error storing image:', error);
     }
@@ -57,9 +61,11 @@ export default function UploadImage() {
 
   const retrieveStoredImage = async () => {
     try {
-      const storedImage = await AsyncStorage.getItem('profileImage'); // Retrieve the stored URI
-      if (storedImage !== null) {
-        setImage(storedImage); // Set the image URI if it exists
+      const userPicDoc = doc(db, "usersProfilePics", AccId);
+      const userPic = await getDoc(userPicDoc);
+      if (userPic.exists()) {
+        const { uri } = userPic.data();
+        setImage(uri); // Set the image URI if it exists
       }
     } catch (error) {
       console.error('Error retrieving image:', error);

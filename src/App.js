@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { LogBox, Alert } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import LoginScreen from './screens/auth/LoginScreen';
@@ -12,7 +13,10 @@ import Requests from './screens/user/userScreens/Requests';
 import Notifications from './screens/user/userScreens/Notifications';
 import Profile from './screens/user/userScreens/profile/Profile';
 import Settings from './screens/user/userScreens/Settings';
+import NetInfo from "@react-native-community/netinfo";
+import { MenuProvider } from "react-native-popup-menu";
 import { AccModeContext, AccIdContext } from './Contexts';
+import { OfflineMode } from './screens/user/userScreens';
 
 const AuthStack = createStackNavigator();
 
@@ -87,22 +91,60 @@ function MainTabScreen() {
 
 const RootStack = createStackNavigator();
 
+LogBox.ignoreAllLogs();
 function App() {
   const [accMode, setAccMode] = useState(null);
   const [AccId, setAccId] = useState(null);
 
+  const [appIsReady, setAppIsReady] = useState(false); 
+  const [internetReachable, setInternetReachable] = useState(null);
+
+  const getInternetStatus = async () => {
+    try {
+      const netInfo = await NetInfo.fetch();
+      const isInternetReachable = netInfo.isInternetReachable;
+      setInternetReachable(isInternetReachable);
+    }
+    catch (error) {
+      console.warn(error);
+    }
+    finally {
+      if (internetReachable !== null) {
+        setAppIsReady(true);
+      };
+    }
+  }
+
+  useEffect(() => {
+    async function prepare() {
+      await getInternetStatus();
+    }
+
+    prepare();
+  }, [internetReachable]);
+
+  if (!appIsReady) {
+    return null;
+  }
+
   return (
-    <AccModeContext.Provider value={{ accMode, setAccMode }}>
-      <AccIdContext.Provider value={{ AccId, setAccId }}>
-        <NavigationContainer>
-          <RootStack.Navigator screenOptions={{ headerShown: false }}>
-            <RootStack.Screen name="Auth" component={AuthStackScreen} />
-            <RootStack.Screen name="MainApp" component={MainTabScreen} />
-            <RootStack.Screen name="Advice_Screen" component={Advice_Screen} />
-          </RootStack.Navigator>
-        </NavigationContainer>
-      </AccIdContext.Provider>
-    </AccModeContext.Provider>
+    <MenuProvider>
+      <AccModeContext.Provider value={{ accMode, setAccMode }}>
+        <AccIdContext.Provider value={{ AccId, setAccId }}>
+          <NavigationContainer>
+            <RootStack.Navigator screenOptions={{ headerShown: false }}>
+              {internetReachable ? 
+                ( <>
+                    <RootStack.Screen name="Auth" component={AuthStackScreen} />
+                    <RootStack.Screen name="MainApp" component={MainTabScreen} />
+                    <RootStack.Screen name="Advice_Screen" component={Advice_Screen} />
+                  </>) :
+                (<RootStack.Screen name="OfflineMode" component={OfflineMode} />)}
+            </RootStack.Navigator>
+          </NavigationContainer>
+        </AccIdContext.Provider>
+      </AccModeContext.Provider>
+    </MenuProvider>
   );
 }
 
