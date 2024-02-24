@@ -194,6 +194,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Tap to switch to selecting a year</string>
     <string name="mtrl_timepicker_cancel">Cancel</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="nearby_device_type_tablet">tablet</string>
     <string name="password_toggle_content_description">Show password</string>
     <string gender="unknown" name="progressbar_description">Progress bar</string>
     <string gender="unknown" name="radiogroup_description">Radio group</string>

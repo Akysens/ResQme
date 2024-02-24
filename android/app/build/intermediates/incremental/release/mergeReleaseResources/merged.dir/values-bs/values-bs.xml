@@ -202,6 +202,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Dodirnite da prebacite na odabir godine</string>
     <string name="mtrl_timepicker_cancel">Otkaži</string>
     <string name="mtrl_timepicker_confirm">Uredu</string>
+    <string name="nearby_device_type_tablet">tablet</string>
     <string name="password_toggle_content_description">Prikaži lozinku</string>
     <string gender="unknown" name="progressbar_description">Traka napretka</string>
     <string gender="unknown" name="radiogroup_description">Grupa za radio</string>

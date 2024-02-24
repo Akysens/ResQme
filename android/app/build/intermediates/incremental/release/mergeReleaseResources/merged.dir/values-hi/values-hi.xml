@@ -208,6 +208,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">\'साल चुनना\' पर स्विच करने के लिए टैप करें</string>
     <string name="mtrl_timepicker_cancel">रद्द करें</string>
     <string name="mtrl_timepicker_confirm">ठीक है</string>
+    <string name="nearby_device_type_tablet">टैबलेट</string>
     <string name="password_toggle_content_description">पासवर्ड दिखाएं</string>
     <string name="pick_image_chooser_title">सोर्स चुनें</string>
     <string gender="unknown" name="progressbar_description">प्रोग्रेस बार</string>

@@ -200,6 +200,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">แตะเพื่อสลับไปใช้การเลือกปี</string>
     <string name="mtrl_timepicker_cancel">ยกเลิก</string>
     <string name="mtrl_timepicker_confirm">ตกลง</string>
+    <string name="nearby_device_type_tablet">แท็บเล็ต</string>
     <string name="password_toggle_content_description">แสดงรหัสผ่าน</string>
     <string gender="unknown" name="progressbar_description">แถบความคืบหน้า</string>
     <string gender="unknown" name="radiogroup_description">กลุ่มปุ่มตัวเลือก</string>

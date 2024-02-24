@@ -207,6 +207,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Puudutage, et lülituda aasta valimisele</string>
     <string name="mtrl_timepicker_cancel">Tühista</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="nearby_device_type_tablet">tahvelarvuti</string>
     <string name="password_toggle_content_description">Parooli kuvamine</string>
     <string name="pick_image_chooser_title">Valige allikas</string>
     <string gender="unknown" name="progressbar_description">Edenemisriba</string>

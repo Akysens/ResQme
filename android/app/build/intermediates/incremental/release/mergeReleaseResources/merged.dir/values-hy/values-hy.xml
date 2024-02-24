@@ -194,6 +194,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Հպեք՝ տարեթվի ընտությանն անցնելու համար</string>
     <string name="mtrl_timepicker_cancel">Չեղարկել</string>
     <string name="mtrl_timepicker_confirm">Եղավ</string>
+    <string name="nearby_device_type_tablet">պլանշետ</string>
     <string name="password_toggle_content_description">Ցուցադրել գաղտնաբառը</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Որոնել"</string>
     <string gender="unknown" name="state_off_description">անջատած</string>

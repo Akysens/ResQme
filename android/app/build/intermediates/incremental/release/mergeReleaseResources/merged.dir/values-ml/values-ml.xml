@@ -200,6 +200,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">വർഷം തിരഞ്ഞെടുക്കുന്നതിലേക്ക് മാറാൻ ടാപ്പ് ചെയ്യുക</string>
     <string name="mtrl_timepicker_cancel">റദ്ദാക്കുക</string>
     <string name="mtrl_timepicker_confirm">ശരി</string>
+    <string name="nearby_device_type_tablet">ടാബ്‌ലെറ്റ്</string>
     <string name="password_toggle_content_description">പാസ്‌വേഡ് കാണിക്കുക</string>
     <string gender="unknown" name="progressbar_description">പുരോഗതി ബാർ</string>
     <string gender="unknown" name="radiogroup_description">റേഡിയോ ഗ്രൂപ്പ്</string>

@@ -207,6 +207,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Byt till att välja ett år genom att trycka</string>
     <string name="mtrl_timepicker_cancel">Avbryt</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="nearby_device_type_tablet">surfplatta</string>
     <string name="password_toggle_content_description">Visa lösenord</string>
     <string name="pick_image_chooser_title">Välj bild</string>
     <string gender="unknown" name="progressbar_description">Förloppsfält</string>

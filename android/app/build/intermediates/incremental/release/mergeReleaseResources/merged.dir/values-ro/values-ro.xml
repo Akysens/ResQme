@@ -202,6 +202,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Atingeți pentru a comuta la selectarea unui an</string>
     <string name="mtrl_timepicker_cancel">Anulați</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="nearby_device_type_tablet">tabletă</string>
     <string name="password_toggle_content_description">Afișați parola</string>
     <string gender="unknown" name="progressbar_description">Bară de progres</string>
     <string gender="unknown" name="radiogroup_description">Grup de butoane radio</string>

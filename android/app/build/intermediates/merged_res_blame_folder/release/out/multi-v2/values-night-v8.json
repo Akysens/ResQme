@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.ResQ.me.app-mergeReleaseResources-53:/values-night-v8/values-night-v8.xml",
+            "outputFile": "com.ResQ.me.app-mergeReleaseResources-54:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
                     "source": "C:\\Users\\enesy\\Documents\\webprojects\\helphub\\node_modules\\@react-native-community\\datetimepicker\\android\\build\\intermediates\\packaged_res\\release\\values-night-v8\\values-night-v8.xml",

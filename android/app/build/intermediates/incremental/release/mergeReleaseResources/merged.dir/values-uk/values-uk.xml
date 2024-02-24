@@ -206,6 +206,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Натисніть, щоб вибрати рік</string>
     <string name="mtrl_timepicker_cancel">Скасувати</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="nearby_device_type_tablet">планшет</string>
     <string name="password_toggle_content_description">Показувати пароль</string>
     <string gender="unknown" name="progressbar_description">Індикатор прогресу</string>
     <string gender="unknown" name="radiogroup_description">Група перемикачів</string>

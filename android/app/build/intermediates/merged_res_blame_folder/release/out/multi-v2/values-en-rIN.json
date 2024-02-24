@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.ResQ.me.app-mergeReleaseResources-53:/values-en-rIN/values-en-rIN.xml",
+            "outputFile": "com.ResQ.me.app-mergeReleaseResources-54:/values-en-rIN/values-en-rIN.xml",
             "map": [
                 {
                     "source": "C:\\Users\\enesy\\.gradle\\caches\\transforms-3\\74b1aa12cd0fccf5775204fe649dbf5c\\transformed\\jetified-exoplayer-core-2.18.1\\res\\values-en-rIN\\values-en-rIN.xml",

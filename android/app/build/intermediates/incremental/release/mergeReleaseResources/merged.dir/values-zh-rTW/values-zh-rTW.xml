@@ -208,6 +208,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">輕觸即可切換為選取年份</string>
     <string name="mtrl_timepicker_cancel">取消</string>
     <string name="mtrl_timepicker_confirm">確定</string>
+    <string name="nearby_device_type_tablet">平板電腦</string>
     <string name="password_toggle_content_description">顯示密碼</string>
     <string name="pick_image_chooser_title">選擇來源</string>
     <string gender="unknown" name="progressbar_description">進度列</string>

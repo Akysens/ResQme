@@ -199,6 +199,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Gusa ili uende kwenye sehemu ya kuchagua mwaka</string>
     <string name="mtrl_timepicker_cancel">Ghairi</string>
     <string name="mtrl_timepicker_confirm">Sawa</string>
+    <string name="nearby_device_type_tablet">kompyuta kibao</string>
     <string name="password_toggle_content_description">Onyesha nenosiri</string>
     <string gender="unknown" name="progressbar_description">Upau wa Hatua</string>
     <string gender="unknown" name="radiogroup_description">Kundi la Redio</string>

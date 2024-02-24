@@ -1954,6 +1954,19 @@ library {
 }
 library {
   maven_library {
+    groupId: "com.google.android.gms"
+    artifactId: "play-services-nearby"
+    version: "19.1.0"
+  }
+  digests {
+    sha256: "\301Pp\023 K5\352\326\311X\361\033P\374\333\255\373\2214\211\252\272i.\255\\\246\227\027!/"
+  }
+  repo_index {
+    value: 2
+  }
+}
+library {
+  maven_library {
     groupId: "com.airbnb.android"
     artifactId: "lottie"
     version: "6.2.0"
@@ -3059,55 +3072,63 @@ library_dependencies {
 }
 library_dependencies {
   library_index: 151
+  library_dep_index: 10
+  library_dep_index: 11
+  library_dep_index: 144
+  library_dep_index: 145
+  library_dep_index: 146
+}
+library_dependencies {
+  library_index: 152
   library_dep_index: 6
   library_dep_index: 79
 }
 library_dependencies {
-  library_index: 152
+  library_index: 153
   library_dep_index: 49
   library_dep_index: 144
   library_dep_index: 145
   library_dep_index: 146
 }
 library_dependencies {
-  library_index: 153
-  library_dep_index: 152
+  library_index: 154
+  library_dep_index: 153
 }
 library_dependencies {
-  library_index: 154
+  library_index: 155
   library_dep_index: 12
   library_dep_index: 14
   library_dep_index: 24
   library_dep_index: 27
   library_dep_index: 11
-  library_dep_index: 155
+  library_dep_index: 156
+  library_dep_index: 159
   library_dep_index: 158
-  library_dep_index: 157
   library_dep_index: 11
   library_dep_index: 31
 }
 library_dependencies {
-  library_index: 155
-  library_dep_index: 156
+  library_index: 156
   library_dep_index: 157
   library_dep_index: 158
+  library_dep_index: 159
   library_dep_index: 18
-}
-library_dependencies {
-  library_index: 156
-  library_dep_index: 8
 }
 library_dependencies {
   library_index: 157
   library_dep_index: 8
-  library_dep_index: 158
 }
 library_dependencies {
   library_index: 158
   library_dep_index: 8
+  library_dep_index: 159
 }
 library_dependencies {
   library_index: 159
+  library_dep_index: 8
+}
+library_dependencies {
+  library_index: 160
   library_dep_index: 8
   library_dep_index: 11
 }
@@ -3154,17 +3175,18 @@ module_dependencies {
   dependency_index: 149
   dependency_index: 150
   dependency_index: 11
-  dependency_index: 1
   dependency_index: 151
+  dependency_index: 1
+  dependency_index: 152
   dependency_index: 80
   dependency_index: 144
-  dependency_index: 152
   dependency_index: 153
   dependency_index: 154
+  dependency_index: 155
   dependency_index: 49
   dependency_index: 54
   dependency_index: 33
-  dependency_index: 159
+  dependency_index: 160
 }
 repositories {
   maven_repo {

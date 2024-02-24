@@ -214,6 +214,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Klepnutím přepnete na výběr roku</string>
     <string name="mtrl_timepicker_cancel">Zrušit</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="nearby_device_type_tablet">tablet</string>
     <string name="password_toggle_content_description">Zobrazit heslo</string>
     <string name="pick_image_chooser_title">Vybrat zdroj</string>
     <string gender="unknown" name="progressbar_description">Ukazatel postupu</string>

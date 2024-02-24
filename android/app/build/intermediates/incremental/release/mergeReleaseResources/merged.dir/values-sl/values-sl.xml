@@ -205,6 +205,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Dotik za preklop na izbiro leta</string>
     <string name="mtrl_timepicker_cancel">Prekliči</string>
     <string name="mtrl_timepicker_confirm">V redu</string>
+    <string name="nearby_device_type_tablet">tablični rač.</string>
     <string name="password_toggle_content_description">Prikaz gesla</string>
     <string gender="unknown" name="progressbar_description">Črta napredka</string>
     <string gender="unknown" name="radiogroup_description">Radio skupina</string>

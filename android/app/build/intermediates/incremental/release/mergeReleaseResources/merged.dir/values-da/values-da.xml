@@ -197,6 +197,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Tryk for at gå til valg af år</string>
     <string name="mtrl_timepicker_cancel">Annuller</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="nearby_device_type_tablet">tablet</string>
     <string name="password_toggle_content_description">Vis adgangskode</string>
     <string gender="unknown" name="progressbar_description">Statuslinje</string>
     <string gender="unknown" name="radiogroup_description">Radiogruppe</string>

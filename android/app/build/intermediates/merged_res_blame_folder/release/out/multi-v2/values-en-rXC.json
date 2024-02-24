@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.ResQ.me.app-mergeReleaseResources-53:/values-en-rXC/values-en-rXC.xml",
+            "outputFile": "com.ResQ.me.app-mergeReleaseResources-54:/values-en-rXC/values-en-rXC.xml",
             "map": [
                 {
                     "source": "C:\\Users\\enesy\\.gradle\\caches\\transforms-3\\bb37d0b34432556e80ac63318ff0ceec\\transformed\\browser-1.6.0\\res\\values-en-rXC\\values-en-rXC.xml",

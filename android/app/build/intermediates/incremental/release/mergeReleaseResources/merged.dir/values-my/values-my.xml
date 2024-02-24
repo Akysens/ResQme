@@ -200,6 +200,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">နှစ်ရွေးချယ်ခြင်းသို့ ပြောင်းရန် တို့ပါ</string>
     <string name="mtrl_timepicker_cancel">မလုပ်တော့</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="nearby_device_type_tablet">တက်ဘလက်</string>
     <string name="password_toggle_content_description">စကားဝှက်ကို ပြရန်</string>
     <string gender="unknown" name="progressbar_description">ပြီးစီးမှုပြ ဘားတန်း</string>
     <string gender="unknown" name="radiogroup_description">ရေဒီယိုအုပ်စု</string>

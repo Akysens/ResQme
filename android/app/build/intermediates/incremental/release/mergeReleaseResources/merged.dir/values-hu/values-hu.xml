@@ -200,6 +200,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Koppintson az év kiválasztásához</string>
     <string name="mtrl_timepicker_cancel">Mégse</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="nearby_device_type_tablet">táblagép</string>
     <string name="password_toggle_content_description">Jelszó megjelenítése</string>
     <string gender="unknown" name="progressbar_description">Folyamatjelző</string>
     <string gender="unknown" name="radiogroup_description">Választógomb-csoport</string>

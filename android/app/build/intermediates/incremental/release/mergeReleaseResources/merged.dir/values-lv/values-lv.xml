@@ -203,6 +203,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Pieskarties, lai pārslēgtos uz gada atlasīšanu</string>
     <string name="mtrl_timepicker_cancel">Atcelt</string>
     <string name="mtrl_timepicker_confirm">Labi</string>
+    <string name="nearby_device_type_tablet">planšetdators</string>
     <string name="password_toggle_content_description">Rādīt paroli</string>
     <string gender="unknown" name="progressbar_description">Progresa josla</string>
     <string gender="unknown" name="radiogroup_description">Radiopogu kopa</string>

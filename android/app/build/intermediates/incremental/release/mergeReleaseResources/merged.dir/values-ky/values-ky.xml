@@ -193,6 +193,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Жыл тандоо үчүн таптап коюңуз</string>
     <string name="mtrl_timepicker_cancel">Жокко чыгаруу</string>
     <string name="mtrl_timepicker_confirm">Жарайт</string>
+    <string name="nearby_device_type_tablet">планшет</string>
     <string name="password_toggle_content_description">Сырсөздү көрсөтүү</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Издөө"</string>
     <string gender="unknown" name="state_off_description">өчүк</string>

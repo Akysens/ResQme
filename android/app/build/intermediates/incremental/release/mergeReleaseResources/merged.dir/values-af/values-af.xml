@@ -200,6 +200,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Tik om oor te skakel na die kies van \'n jaar</string>
     <string name="mtrl_timepicker_cancel">Kanselleer</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="nearby_device_type_tablet">tablet</string>
     <string name="password_toggle_content_description">Wys wagwoord</string>
     <string gender="unknown" name="progressbar_description">Vorderingbalk</string>
     <string gender="unknown" name="radiogroup_description">Radiogroep</string>

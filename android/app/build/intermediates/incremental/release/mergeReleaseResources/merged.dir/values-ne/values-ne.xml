@@ -194,6 +194,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">कुनै वर्ष चयन गर्ने विकल्प प्रयोग गर्न ट्याप गर्नुहोस्</string>
     <string name="mtrl_timepicker_cancel">रद्द गर्नुहोस्</string>
     <string name="mtrl_timepicker_confirm">ठिक छ</string>
+    <string name="nearby_device_type_tablet">ट्याब्लेट</string>
     <string name="password_toggle_content_description">पासवर्ड देखाउनुहोस्</string>
     <string msgid="6264217191555673260" name="search_menu_title">"खोज"</string>
     <string gender="unknown" name="state_off_description">अफ</string>

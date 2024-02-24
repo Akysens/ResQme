@@ -207,6 +207,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Nhấn để chuyển sang chế độ chọn một năm</string>
     <string name="mtrl_timepicker_cancel">Huỷ</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="nearby_device_type_tablet">máy tính bảng</string>
     <string name="password_toggle_content_description">Hiện mật khẩu</string>
     <string name="pick_image_chooser_title">Chọn nguồn</string>
     <string gender="unknown" name="progressbar_description">Thanh tiến độ</string>

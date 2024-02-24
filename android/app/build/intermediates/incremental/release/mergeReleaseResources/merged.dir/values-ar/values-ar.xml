@@ -220,6 +220,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">انقر للتبديل إلى اختيار عام</string>
     <string name="mtrl_timepicker_cancel">إلغاء</string>
     <string name="mtrl_timepicker_confirm">حسنًا</string>
+    <string name="nearby_device_type_tablet">جهاز لوحي</string>
     <string name="password_toggle_content_description">عرض كلمة المرور</string>
     <string name="pick_image_camera">الة تصوير</string>
     <string name="pick_image_chooser_title">اختر مصدرًا</string>

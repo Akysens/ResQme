@@ -207,6 +207,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Ketuk untuk beralih ke memilih tahun</string>
     <string name="mtrl_timepicker_cancel">Batal</string>
     <string name="mtrl_timepicker_confirm">Oke</string>
+    <string name="nearby_device_type_tablet">tablet</string>
     <string name="password_toggle_content_description">Tampilkan sandi</string>
     <string name="pick_image_chooser_title">Pilih sumber</string>
     <string gender="unknown" name="progressbar_description">Bilah Progres</string>

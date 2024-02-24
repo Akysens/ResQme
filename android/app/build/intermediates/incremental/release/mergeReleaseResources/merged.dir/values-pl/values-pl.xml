@@ -211,6 +211,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Kliknij, by wybrać rok</string>
     <string name="mtrl_timepicker_cancel">Anuluj</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="nearby_device_type_tablet">tablet</string>
     <string name="password_toggle_content_description">Pokaż hasło</string>
     <string name="pick_image_chooser_title">Wybierz źródło</string>
     <string gender="unknown" name="progressbar_description">Pasek postępu</string>

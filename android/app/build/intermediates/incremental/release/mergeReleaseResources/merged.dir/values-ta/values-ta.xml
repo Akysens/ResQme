@@ -200,6 +200,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">ஆண்டைத் தேர்வுசெய்வதற்கு மாற்ற தட்டவும்</string>
     <string name="mtrl_timepicker_cancel">ரத்துசெய்</string>
     <string name="mtrl_timepicker_confirm">சரி</string>
+    <string name="nearby_device_type_tablet">டேப்லெட்</string>
     <string name="password_toggle_content_description">கடவுச்சொல்லைக் காட்டு</string>
     <string gender="unknown" name="progressbar_description">போக்கு பட்டி</string>
     <string gender="unknown" name="radiogroup_description">ரேடியோ குழு</string>

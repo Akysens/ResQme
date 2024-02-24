@@ -208,6 +208,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">سال کو منتخب کرنے کے ليے سوئچ پر تھپتھپائیں</string>
     <string name="mtrl_timepicker_cancel">منسوخ کریں</string>
     <string name="mtrl_timepicker_confirm">ٹھیک ہے</string>
+    <string name="nearby_device_type_tablet">ٹیبلیٹ</string>
     <string name="password_toggle_content_description">پاس ورڈ دکھائیں</string>
     <string name="pick_image_chooser_title">ذریعہ منتخب کریں</string>
     <string gender="unknown" name="progressbar_description">پیشرفت کی بار</string>

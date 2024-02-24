@@ -207,6 +207,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Yıl seçmeye geçmek için dokunun</string>
     <string name="mtrl_timepicker_cancel">İptal</string>
     <string name="mtrl_timepicker_confirm">Tamam</string>
+    <string name="nearby_device_type_tablet">tablet</string>
     <string name="password_toggle_content_description">Şifreyi göster</string>
     <string name="pick_image_chooser_title">Kaynağı seçin</string>
     <string gender="unknown" name="progressbar_description">İlerleme Çubuğu</string>

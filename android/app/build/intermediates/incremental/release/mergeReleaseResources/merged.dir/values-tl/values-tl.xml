@@ -192,6 +192,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">I-tap para lumipat sa pagpili ng taon</string>
     <string name="mtrl_timepicker_cancel">Kanselahin</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="nearby_device_type_tablet">tablet</string>
     <string name="password_toggle_content_description">Ipakita ang password</string>
     <string gender="unknown" name="radiogroup_description">Grupo ng Radio</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Maghanap"</string>

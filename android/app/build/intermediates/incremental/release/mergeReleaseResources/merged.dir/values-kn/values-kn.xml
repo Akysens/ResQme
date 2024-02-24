@@ -200,6 +200,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">ವರ್ಷವನ್ನು ಆಯ್ಕೆಗಾಗಿ ಬದಲಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ</string>
     <string name="mtrl_timepicker_cancel">ರದ್ದುಮಾಡಿ</string>
     <string name="mtrl_timepicker_confirm">ಸರಿ</string>
+    <string name="nearby_device_type_tablet">ಟ್ಯಾಬ್ಲೆಟ್</string>
     <string name="password_toggle_content_description">ಪಾಸ್‌ವರ್ಡ್ ತೋರಿಸಿ</string>
     <string gender="unknown" name="progressbar_description">ಪ್ರೋಗ್ರೆಸ್ ಬಾರ್</string>
     <string gender="unknown" name="radiogroup_description">ರೇಡಿಯೋ ಗುಂಪು</string>

@@ -189,6 +189,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Tocar para cambiar a selección de ano</string>
     <string name="mtrl_timepicker_cancel">Cancelar</string>
     <string name="mtrl_timepicker_confirm">Aceptar</string>
+    <string name="nearby_device_type_tablet">tableta</string>
     <string name="password_toggle_content_description">Mostra o contrasinal</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Buscar"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">">999"</string>

@@ -843,6 +843,19 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
+      name="C:\Users\enesy\Documents\webprojects\helphub\android@@:react-native-community_netinfo::release"
+      jars="C:\Users\enesy\Documents\webprojects\helphub\node_modules\@react-native-community\netinfo\android\build\.transforms\d423f40325fe866e9d18185e8b920e25\transformed\out\jars\classes.jar;C:\Users\enesy\Documents\webprojects\helphub\node_modules\@react-native-community\netinfo\android\build\.transforms\d423f40325fe866e9d18185e8b920e25\transformed\out\jars\libs\R.jar"
+      resolved="ResQme:react-native-community_netinfo:unspecified"
+      folder="C:\Users\enesy\Documents\webprojects\helphub\node_modules\@react-native-community\netinfo\android\build\.transforms\d423f40325fe866e9d18185e8b920e25\transformed\out"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
       name="C:\Users\enesy\Documents\webprojects\helphub\android@@:lottie-react-native::release"
       jars="C:\Users\enesy\Documents\webprojects\helphub\node_modules\lottie-react-native\android\build\.transforms\16d701ae349910717ce088c9372b43c8\transformed\out\jars\classes.jar;C:\Users\enesy\Documents\webprojects\helphub\node_modules\lottie-react-native\android\build\.transforms\16d701ae349910717ce088c9372b43c8\transformed\out\jars\libs\R.jar"
       resolved="ResQme:lottie-react-native:unspecified"
@@ -1611,12 +1624,12 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="C:\Users\enesy\Documents\webprojects\helphub\android@@:expo-modules-core$android-annotation"
-      jars="C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-modules-core\android-annotation\build\libs\expo-modules-core$android-annotation-1.1.1.jar"
-      resolved="::"/>
-  <library
       name="C:\Users\enesy\Documents\webprojects\helphub\android@@:expo-modules-core$android-annotation-processor"
       jars="C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-modules-core\android-annotation-processor\build\libs\expo-modules-core$android-annotation-processor-1.1.1.jar"
+      resolved="::"/>
+  <library
+      name="C:\Users\enesy\Documents\webprojects\helphub\android@@:expo-modules-core$android-annotation"
+      jars="C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-modules-core\android-annotation\build\libs\expo-modules-core$android-annotation-1.1.1.jar"
       resolved="::"/>
   <library
       name="C:\Users\enesy\Documents\webprojects\helphub\android@@:expo-random::release"
@@ -1649,6 +1662,32 @@
       jars="C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-system-ui\android\build\.transforms\af50ab5bb2d2a2749439c5c2efa76d81\transformed\out\jars\classes.jar;C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-system-ui\android\build\.transforms\af50ab5bb2d2a2749439c5c2efa76d81\transformed\out\jars\libs\R.jar"
       resolved="host.exp.exponent:expo-system-ui:unspecified"
       folder="C:\Users\enesy\Documents\webprojects\helphub\node_modules\expo-system-ui\android\build\.transforms\af50ab5bb2d2a2749439c5c2efa76d81\transformed\out"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="C:\Users\enesy\Documents\webprojects\helphub\android@@:helphub-nearby::release"
+      jars="C:\Users\enesy\Documents\webprojects\helphub\modules\helphub-nearby\android\build\.transforms\5ebec108ef1b56065865f2203184f6ea\transformed\out\jars\classes.jar;C:\Users\enesy\Documents\webprojects\helphub\modules\helphub-nearby\android\build\.transforms\5ebec108ef1b56065865f2203184f6ea\transformed\out\jars\libs\R.jar"
+      resolved="expo.modules.helphubnearby:helphub-nearby:unspecified"
+      folder="C:\Users\enesy\Documents\webprojects\helphub\modules\helphub-nearby\android\build\.transforms\5ebec108ef1b56065865f2203184f6ea\transformed\out"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="C:\Users\enesy\Documents\webprojects\helphub\android@@:helphub-nearby-connections::release"
+      jars="C:\Users\enesy\Documents\webprojects\helphub\modules\helphub-nearby-connections\android\build\.transforms\5c446e9943321a3aff3e8149dd5df019\transformed\out\jars\classes.jar;C:\Users\enesy\Documents\webprojects\helphub\modules\helphub-nearby-connections\android\build\.transforms\5c446e9943321a3aff3e8149dd5df019\transformed\out\jars\libs\R.jar"
+      resolved="expo.modules.helphubnearbyconnections:helphub-nearby-connections:unspecified"
+      folder="C:\Users\enesy\Documents\webprojects\helphub\modules\helphub-nearby-connections\android\build\.transforms\5c446e9943321a3aff3e8149dd5df019\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -1792,6 +1831,19 @@
       jars="C:\Users\enesy\.gradle\caches\transforms-3\a77e0290d419ff602aa9216daeae40eb\transformed\jetified-play-services-maps-18.2.0\jars\classes.jar"
       resolved="com.google.android.gms:play-services-maps:18.2.0"
       folder="C:\Users\enesy\.gradle\caches\transforms-3\a77e0290d419ff602aa9216daeae40eb\transformed\jetified-play-services-maps-18.2.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="com.google.android.gms:play-services-nearby:19.1.0@aar"
+      jars="C:\Users\enesy\.gradle\caches\transforms-3\00b3980868304598afc762f635a1fc53\transformed\jetified-play-services-nearby-19.1.0\jars\classes.jar"
+      resolved="com.google.android.gms:play-services-nearby:19.1.0"
+      folder="C:\Users\enesy\.gradle\caches\transforms-3\00b3980868304598afc762f635a1fc53\transformed\jetified-play-services-nearby-19.1.0"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"

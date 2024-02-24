@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.ResQ.me.app-mergeReleaseResources-53:/values-v21/values-v21.xml",
+            "outputFile": "com.ResQ.me.app-mergeReleaseResources-54:/values-v21/values-v21.xml",
             "map": [
                 {
                     "source": "C:\\Users\\enesy\\.gradle\\caches\\transforms-3\\70132967dd87178cf9ceb9b114b30d7c\\transformed\\core-1.12.0\\res\\values-v21\\values-v21.xml",

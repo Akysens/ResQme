@@ -197,6 +197,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Touchez pour passer à la sélection d\'année</string>
     <string name="mtrl_timepicker_cancel">Annuler</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="nearby_device_type_tablet">tablette</string>
     <string name="password_toggle_content_description">Afficher le mot de passe</string>
     <string gender="unknown" name="progressbar_description">Barre de progression</string>
     <string gender="unknown" name="radiogroup_description">Groupe de boutons radio</string>

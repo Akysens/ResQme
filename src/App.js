@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { LogBox, Alert } from 'react-native';
@@ -13,6 +13,8 @@ import Requests from './screens/user/userScreens/Requests';
 import Notifications from './screens/user/userScreens/Notifications';
 import Profile from './screens/user/userScreens/profile/Profile';
 import Settings from './screens/user/userScreens/Settings';
+import NetInfo from "@react-native-community/netinfo";
+import { MenuProvider } from "react-native-popup-menu";
 import { AccModeContext, AccIdContext } from './Contexts';
 import { OfflineMode } from './screens/user/userScreens';
 
@@ -126,19 +128,23 @@ function App() {
   }
 
   return (
-    <AccModeContext.Provider value={{ accMode, setAccMode }}>
-      <AccIdContext.Provider value={{ AccId, setAccId }}>
-        <NavigationContainer>
-          <RootStack.Navigator screenOptions={{ headerShown: false }}>
-            (internetReachable ? 
-              ( <RootStack.Screen name="Auth" component={AuthStackScreen} />
-                <RootStack.Screen name="MainApp" component={MainTabScreen} />
-                <RootStack.Screen name="Advice_Screen" component={Advice_Screen} />) :
-              (<RootStack.Screen name="OfflineMode" component={OfflineMode} />))
-          </RootStack.Navigator>
-        </NavigationContainer>
-      </AccIdContext.Provider>
-    </AccModeContext.Provider>
+    <MenuProvider>
+      <AccModeContext.Provider value={{ accMode, setAccMode }}>
+        <AccIdContext.Provider value={{ AccId, setAccId }}>
+          <NavigationContainer>
+            <RootStack.Navigator screenOptions={{ headerShown: false }}>
+              {internetReachable ? 
+                ( <>
+                    <RootStack.Screen name="Auth" component={AuthStackScreen} />
+                    <RootStack.Screen name="MainApp" component={MainTabScreen} />
+                    <RootStack.Screen name="Advice_Screen" component={Advice_Screen} />
+                  </>) :
+                (<RootStack.Screen name="OfflineMode" component={OfflineMode} />)}
+            </RootStack.Navigator>
+          </NavigationContainer>
+        </AccIdContext.Provider>
+      </AccModeContext.Provider>
+    </MenuProvider>
   );
 }
 

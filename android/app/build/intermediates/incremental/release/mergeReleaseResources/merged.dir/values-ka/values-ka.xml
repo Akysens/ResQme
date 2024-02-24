@@ -199,6 +199,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">შეეხეთ წლის არჩევაზე გადასართავად</string>
     <string name="mtrl_timepicker_cancel">გაუქმება</string>
     <string name="mtrl_timepicker_confirm">კარგი</string>
+    <string name="nearby_device_type_tablet">ტაბლეტი</string>
     <string name="password_toggle_content_description">პაროლის ჩვენება</string>
     <string gender="unknown" name="progressbar_description">პროგრესის ზოლი</string>
     <string gender="unknown" name="radiogroup_description">რადიო ჯგუფი</string>

@@ -200,6 +200,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">वर्ष निवडण्यासाठी स्विच करा वर टॅप करा</string>
     <string name="mtrl_timepicker_cancel">रद्द करा</string>
     <string name="mtrl_timepicker_confirm">ओके</string>
+    <string name="nearby_device_type_tablet">टॅबलेट</string>
     <string name="password_toggle_content_description">पासवर्ड दाखवा</string>
     <string gender="unknown" name="progressbar_description">प्रगती बार</string>
     <string gender="unknown" name="radiogroup_description">रेडिओ ग्रुप</string>

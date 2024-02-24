@@ -205,6 +205,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Tippen, um zur Jahresauswahl zu wechseln</string>
     <string name="mtrl_timepicker_cancel">Abbrechen</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="nearby_device_type_tablet">Tablet</string>
     <string name="password_toggle_content_description">Passwort anzeigen</string>
     <string name="pick_image_camera">Kamera</string>
     <string name="pick_image_chooser_title">Quelle wählen</string>

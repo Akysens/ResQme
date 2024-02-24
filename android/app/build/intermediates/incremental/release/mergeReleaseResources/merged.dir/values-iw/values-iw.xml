@@ -206,6 +206,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">יש להקיש כדי להחליף לבחירת שנה</string>
     <string name="mtrl_timepicker_cancel">ביטול</string>
     <string name="mtrl_timepicker_confirm">אישור</string>
+    <string name="nearby_device_type_tablet">טאבלט</string>
     <string name="password_toggle_content_description">הצגת סיסמה</string>
     <string gender="unknown" name="progressbar_description">סרגל התקדמות</string>
     <string gender="unknown" name="radiogroup_description">קבוצת רדיו</string>

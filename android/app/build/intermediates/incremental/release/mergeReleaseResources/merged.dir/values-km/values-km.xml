@@ -200,6 +200,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">ចុច​ដើម្បីប្ដូរទៅ​ការជ្រើសរើសឆ្នាំ</string>
     <string name="mtrl_timepicker_cancel">បោះបង់</string>
     <string name="mtrl_timepicker_confirm">យល់ព្រម</string>
+    <string name="nearby_device_type_tablet">ថេប្លេត</string>
     <string name="password_toggle_content_description">បង្ហាញពាក្យសម្ងាត់</string>
     <string gender="unknown" name="progressbar_description">របារ​ដំណើរការ</string>
     <string gender="unknown" name="radiogroup_description">ក្រុមវិទ្យុ</string>

@@ -203,6 +203,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Додирните да бисте прешли на избор године</string>
     <string name="mtrl_timepicker_cancel">Откажи</string>
     <string name="mtrl_timepicker_confirm">Потврди</string>
+    <string name="nearby_device_type_tablet">таблет</string>
     <string name="password_toggle_content_description">Прикажи лозинку</string>
     <string gender="unknown" name="progressbar_description">Трака са напретком</string>
     <string gender="unknown" name="radiogroup_description">Група за радио</string>

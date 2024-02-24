@@ -206,6 +206,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Нажмите, чтобы перейти к выбору года</string>
     <string name="mtrl_timepicker_cancel">Отмена</string>
     <string name="mtrl_timepicker_confirm">ОК</string>
+    <string name="nearby_device_type_tablet">планшет</string>
     <string name="password_toggle_content_description">Показать пароль</string>
     <string gender="unknown" name="progressbar_description">Индикатор прогресса</string>
     <string gender="unknown" name="radiogroup_description">Группа кнопок-переключателей</string>

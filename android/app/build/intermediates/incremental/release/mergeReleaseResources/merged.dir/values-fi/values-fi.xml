@@ -200,6 +200,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Siirry vuoden valintaan napauttamalla</string>
     <string name="mtrl_timepicker_cancel">Peru</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="nearby_device_type_tablet">tabletti</string>
     <string name="password_toggle_content_description">Näytä salasana</string>
     <string gender="unknown" name="progressbar_description">Edistymispalkki</string>
     <string gender="unknown" name="radiogroup_description">Valintanappiryhmä</string>

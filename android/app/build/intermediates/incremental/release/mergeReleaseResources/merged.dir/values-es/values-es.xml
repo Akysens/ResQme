@@ -208,6 +208,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Toca para seleccionar un año</string>
     <string name="mtrl_timepicker_cancel">Cancelar</string>
     <string name="mtrl_timepicker_confirm">Aceptar</string>
+    <string name="nearby_device_type_tablet">tablet</string>
     <string name="password_toggle_content_description">Mostrar contraseña</string>
     <string name="pick_image_camera">Cámara</string>
     <string name="pick_image_chooser_title">Seleccionar fuente</string>

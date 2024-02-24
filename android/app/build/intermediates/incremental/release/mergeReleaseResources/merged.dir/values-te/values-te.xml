@@ -200,6 +200,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">\'సంవత్సరాన్ని ఎంపిక చేసుకోవడం\'కు మారడానికి నొక్కండి</string>
     <string name="mtrl_timepicker_cancel">రద్దు చేయండి</string>
     <string name="mtrl_timepicker_confirm">సరే</string>
+    <string name="nearby_device_type_tablet">టాబ్లెట్</string>
     <string name="password_toggle_content_description">పాస్‌వర్డ్‌ను చూపు</string>
     <string gender="unknown" name="progressbar_description">ప్రోగ్రెస్ బార్</string>
     <string gender="unknown" name="radiogroup_description">రేడియో గ్రూప్</string>

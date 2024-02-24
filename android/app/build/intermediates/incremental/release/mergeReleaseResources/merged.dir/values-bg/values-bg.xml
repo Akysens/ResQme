@@ -199,6 +199,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Докоснете, за да превключите към избиране на година</string>
     <string name="mtrl_timepicker_cancel">Отказ</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="nearby_device_type_tablet">таблет</string>
     <string name="password_toggle_content_description">Показване на паролата</string>
     <string gender="unknown" name="progressbar_description">Лента за напредък</string>
     <string gender="unknown" name="radiogroup_description">Радио група</string>

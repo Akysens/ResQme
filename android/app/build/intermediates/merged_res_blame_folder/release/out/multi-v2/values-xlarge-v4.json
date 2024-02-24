@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.ResQ.me.app-mergeReleaseResources-53:/values-xlarge-v4/values-xlarge-v4.xml",
+            "outputFile": "com.ResQ.me.app-mergeReleaseResources-54:/values-xlarge-v4/values-xlarge-v4.xml",
             "map": [
                 {
                     "source": "C:\\Users\\enesy\\.gradle\\caches\\transforms-3\\56963efc71fe8ddc1fb98be9100b17ed\\transformed\\appcompat-1.6.1\\res\\values-xlarge-v4\\values-xlarge-v4.xml",

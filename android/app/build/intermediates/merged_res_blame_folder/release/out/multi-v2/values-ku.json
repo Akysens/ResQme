@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.ResQ.me.app-mergeReleaseResources-53:/values-ku/values-ku.xml",
+            "outputFile": "com.ResQ.me.app-mergeReleaseResources-54:/values-ku/values-ku.xml",
             "map": [
                 {
                     "source": "C:\\Users\\enesy\\.gradle\\caches\\transforms-3\\85e91599e4e0ce5a577583f2baf52780\\transformed\\jetified-react-android-0.73.4-release\\res\\values-ku\\values-ku.xml",

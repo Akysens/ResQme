@@ -208,6 +208,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">탭하여 연도 선택으로 전환</string>
     <string name="mtrl_timepicker_cancel">취소</string>
     <string name="mtrl_timepicker_confirm">확인</string>
+    <string name="nearby_device_type_tablet">태블릿</string>
     <string name="password_toggle_content_description">비밀번호 표시</string>
     <string name="pick_image_chooser_title">이미지 선택</string>
     <string gender="unknown" name="progressbar_description">진행률 표시줄</string>

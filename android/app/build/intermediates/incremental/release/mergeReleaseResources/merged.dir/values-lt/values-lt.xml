@@ -206,6 +206,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Palieskite, kad perjungtumėte į metų pasirinkimą</string>
     <string name="mtrl_timepicker_cancel">Atšaukti</string>
     <string name="mtrl_timepicker_confirm">Gerai</string>
+    <string name="nearby_device_type_tablet">planšet. komp.</string>
     <string name="password_toggle_content_description">Rodyti slaptažodį</string>
     <string gender="unknown" name="progressbar_description">Eigos juosta</string>
     <string gender="unknown" name="radiogroup_description">Akučių grupė</string>

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.ResQ.me.app-mergeReleaseResources-53:/values-en-rAU/values-en-rAU.xml",
+            "outputFile": "com.ResQ.me.app-mergeReleaseResources-54:/values-en-rAU/values-en-rAU.xml",
             "map": [
                 {
                     "source": "C:\\Users\\enesy\\.gradle\\caches\\transforms-3\\74b1aa12cd0fccf5775204fe649dbf5c\\transformed\\jetified-exoplayer-core-2.18.1\\res\\values-en-rAU\\values-en-rAU.xml",

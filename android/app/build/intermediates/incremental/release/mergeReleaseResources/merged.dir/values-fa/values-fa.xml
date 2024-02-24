@@ -208,6 +208,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">برای رفتن به حالت انتخاب سال ضربه بزنید</string>
     <string name="mtrl_timepicker_cancel">لغو</string>
     <string name="mtrl_timepicker_confirm">تأیید</string>
+    <string name="nearby_device_type_tablet">رایانه لوحی</string>
     <string name="password_toggle_content_description">نمایش گذرواژه</string>
     <string name="pick_image_chooser_title">منبع را انتخاب کنید</string>
     <string gender="unknown" name="progressbar_description">نوار پیشرفت</string>

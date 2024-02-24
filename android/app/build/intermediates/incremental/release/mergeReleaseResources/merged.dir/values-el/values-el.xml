@@ -199,6 +199,7 @@
     <string name="mtrl_picker_toggle_to_year_selection">Πατήστε για εναλλαγή για την επιλογή έτους</string>
     <string name="mtrl_timepicker_cancel">Ακύρωση</string>
     <string name="mtrl_timepicker_confirm">ΟΚ</string>
+    <string name="nearby_device_type_tablet">tablet</string>
     <string name="password_toggle_content_description">Εμφάνιση κωδικού πρόσβασης</string>
     <string gender="unknown" name="progressbar_description">Γραμμή προόδου</string>
     <string gender="unknown" name="radiogroup_description">Ομάδα κουμπιών επιλογής</string>
