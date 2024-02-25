@@ -8,7 +8,7 @@ admin.initializeApp({
     clientEmail: functions.config().client.email,
   }),
   databaseURL:
-    "https://resqme-4365d-default-rtdb.europe-west1.firebasedatabase.app",
+    "https://helphub-85664-default-rtdb.europe-west1.firebasedatabase.app",
 });
 
 const db = admin.firestore();

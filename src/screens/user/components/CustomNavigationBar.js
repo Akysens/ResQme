@@ -62,7 +62,7 @@ export default function CustomNavigationBar({ navigation }) {
   return (
     <Header elevated>
       <Content
-        title="⛑️ ResQme"
+        title="⛑️ HelpHub"
         onPress={() => {
           navigation.navigate("Calm");
         }}

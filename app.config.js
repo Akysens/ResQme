@@ -1,11 +1,11 @@
 module.exports = {
   expo: {
-    scheme: "resqme",
-    name: "ResQme",
-    slug: "ResQme",
+    scheme: "helphub",
+    name: "HelpHub",
+    slug: "HelpHub",
     version: "1.0.0",
     orientation: "portrait",
-    icon: "./src/assets/ResQme_Icon.png",
+    icon: "./src/assets/logo.png",
     userInterfaceStyle: "light",
     splash: {
       image: "./src/assets/splash.png",
