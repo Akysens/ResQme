@@ -1,4 +1,4 @@
-package com.ResQ.me
+package com.Help.Hub
 
 import android.app.Application
 import android.content.res.Configuration

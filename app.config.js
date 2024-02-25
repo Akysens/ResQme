@@ -17,7 +17,7 @@ module.exports = {
       supportsTablet: true,
     },
     android: {
-      package: "com.ResQ.me",
+      package: "com.Help.Hub",
       permissions: [
         "android.permission.ACCESS_COARSE_LOCATION",
         "android.permission.ACCESS_FINE_LOCATION",
