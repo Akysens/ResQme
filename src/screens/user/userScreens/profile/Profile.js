@@ -122,8 +122,10 @@ const Profile = () => {
             style={styles.input}
             editable={isEditingPersonal}
             onChangeText={value => handleChangePersonalData('phoneNum', value)}
-          value={editedPersonalData.phoneNum}
-          placeholder="Phone Number"
+            value={editedPersonalData.phoneNum}
+            placeholder="Phone Number"
+            keyboardType="numeric"
+            maxLength={15}
           />
         </View>
       </View>
@@ -141,17 +143,33 @@ const Profile = () => {
       </View>
 
       <View style={styles.infoContainer}>
-
-        <View style={styles.infoRow}>
-          <Text style={styles.label}>Blood Type:</Text>
-          <TextInput
-            style={styles.input}
-            editable={isEditingMedical}
-            onChangeText={value => handleChangeMedicalData('BloodType', value)}
-            value={editedMedicalData.BloodType}
-            placeholder="Blood Type"
-          />
+        
+      <View style={styles.infoRow}>
+        <Text style={styles.label}>Blood Type:</Text>
+        <View style={[styles.input, styles.pickerContainer]}>
+          {isEditingMedical ? (
+            <Picker
+              selectedValue={editedMedicalData.BloodType}
+              style={[styles.picker, { height: 50, width: '100%' }]} // Apply picker style
+              onValueChange={(itemValue, itemIndex) =>
+                handleChangeMedicalData('BloodType', itemValue)
+              }>
+              <Picker.Item label="A+" value="A+" />
+              <Picker.Item label="A-" value="A-" />
+              <Picker.Item label="B+" value="B+" />
+              <Picker.Item label="B-" value="B-" />
+              <Picker.Item label="AB+" value="AB+" />
+              <Picker.Item label="AB-" value="AB-" />
+              <Picker.Item label="O+" value="O+" />
+              <Picker.Item label="O-" value="O-" />
+            </Picker>
+          ) : (
+            <Text style={{ color: 'gray', opacity: 0.7 }}>{editedMedicalData.BloodType}</Text>
+          )}
         </View>
+      </View>
+
+
 
         <View style={styles.infoRow}>
           <Text style={styles.label}>Emergency Contact Name:</Text>
@@ -172,6 +190,8 @@ const Profile = () => {
             onChangeText={value => handleChangeMedicalData('EmergencyContactNumber', value)}
             value={editedMedicalData.EmergencyContactNumber}
             placeholder="Emergency Contact Number"
+            keyboardType="numeric"
+            maxLength={15}
           />
         </View>
 
@@ -193,6 +213,7 @@ const Profile = () => {
             editable={isEditingMedical}
             onChangeText={value => handleChangeMedicalData('Height', value)}
             value={editedMedicalData.Height}
+            keyboardType="numeric"
             placeholder="Height"
           />
         </View>
@@ -204,6 +225,7 @@ const Profile = () => {
             editable={isEditingMedical}
             onChangeText={value => handleChangeMedicalData('Weight', value)}
             value={editedMedicalData.Weight}
+            keyboardType="numeric"
             placeholder="Weight"
           />
         </View>
@@ -303,6 +325,19 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
   },
+  pickerContainer: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#e0e0e0', // Lighter border color
+    borderRadius: 5,
+    marginBottom: 10,
+    paddingVertical: 5, // Adjusted padding
+    paddingHorizontal: 8, // Adjusted padding
+  },    
+  picker: {
+    height: 50,
+    width: '100%',
+  },  
   editIcon: {
     width: 20,
     height: 20,

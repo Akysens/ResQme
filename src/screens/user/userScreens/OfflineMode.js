@@ -358,7 +358,7 @@ export default function OfflineMode() {
                         <Text>Search</Text>
                     </NewButton>
                 </View>
-                <Text style={{color: "white"}}>Selected: {selected}</Text>
+                <Text style={{color: "white"}}>Username: {selected}</Text>
                 <TextInput
                     style={styles.nameInput}
                     placeholder="Type your name here."
