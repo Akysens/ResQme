@@ -1,114 +1,217 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity, Image, TextInput } from 'react-native';
 import { AccIdContext } from '../../../../Contexts';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '@firebaseConfig';
+import { doc, getDoc, updateDoc } from 'firebase/firestore'; // import updateDoc
+import { db, auth } from '@firebaseConfig';
+import { signOut } from 'firebase/auth';
 import UploadImage from './UploadImage';
-
+import { useNavigation } from '@react-navigation/native';
+import { Picker } from '@react-native-picker/picker';
 
 const Profile = () => {
   const { AccId } = useContext(AccIdContext);
   const [userData, setUserData] = useState(null);
   const [userMedData, setUserMedData] = useState(null);
   const [isEditingPersonal, setIsEditingPersonal] = useState(false);
-  const [isEditingMedical, setIsEditingMedical] = useState(true);
-  
+  const [isEditingMedical, setIsEditingMedical] = useState(false);
+  const [editedPersonalData, setEditedPersonalData] = useState({});
+  const [editedMedicalData, setEditedMedicalData] = useState({});
+  const navigation = useNavigation();
+
   useEffect(() => {
     GetUserData();
   }, []);
 
-  // async function to get the user's data and med data from db to display
-  // in profile
   const GetUserData = async () => {
     const userMedDoc = doc(db, "usersMedicalInfo", AccId);
     const userMedProfile = await getDoc(userMedDoc);
     const userMedData = userMedProfile.data();
-    setUserMedData(userMedData); // Use setUserMedData to update userMedData
-  
+    setUserMedData(userMedData);
+
     const userPersDoc = doc(db, "users", AccId);
     const userProfile = await getDoc(userPersDoc);
     const userData = userProfile.data();
-    setUserData(userData); // Use setUserData to update userData
+    setUserData(userData);
+    setEditedPersonalData(userData);
+    setEditedMedicalData(userMedData);
   }
+
+  const handleEditPersonal = async () => {
+    if (isEditingPersonal) {
+      // Save edited personal data
+      await updateDoc(doc(db, "users", AccId), editedPersonalData);
+    }
+    setIsEditingPersonal(!isEditingPersonal);
+  }
+
+  const handleEditMedical = async () => {
+    if (isEditingMedical) {
+      // Save edited medical data
+      await updateDoc(doc(db, "usersMedicalInfo", AccId), editedMedicalData);
+    }
+    setIsEditingMedical(!isEditingMedical);
+  }
+
+  const handleChangePersonalData = (key, value) => {
+    setEditedPersonalData(prevState => ({ ...prevState, [key]: value }));
+  }
+
+  const handleChangeMedicalData = (key, value) => {
+    setEditedMedicalData(prevState => ({ ...prevState, [key]: value }));
+  }
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      // Navigate to LoginScreen after successful signout
+      navigation.navigate('LoginScreen');
+    } catch (error) {
+      console.error("Logout Error: ", error);
+    }
+  };
 
   if (!userData) {
-    return <Text>Loading...</Text>; // or any loading indicator
+    return <Text>Loading...</Text>;
   }
 
-  const handleEditPersonal = () => {
-    setIsEditingPersonal(!isEditingPersonal);
-    if (isEditingPersonal) {
-      console.log("HI");
-    }
-  }
-
-  const handleEditMedical = () => {
-    setIsEditingMedical(!isEditingMedical);
-    if (isEditingMedical) {
-      console.log("HI");
-    }
-  }
   return (
     <ScrollView style={styles.container}>
-      {/* <View style={styles.section}>
-        <TouchableOpacity style={styles.profilePicContainer}>
-          <Text style={styles.profilePicText}>PFP / TAP TO CHANGE</Text>
-        </TouchableOpacity> */}
-
-
       <View style={styles.header}>
         <View style={styles.profilePicContainer}>
           <UploadImage/>
         </View>
-    </View>
-      {/* </View> */}
+      </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>PERSONAL INFORMATION                </Text>
-        <View style={styles.container}>
-          {/* Edit/Save Button */}
-          <TouchableOpacity style={styles.button} onPress={handleEditPersonal}>
-            {isEditingPersonal ? (
+        <Text style={styles.sectionTitle}>PERSONAL INFORMATION</Text>
+        <TouchableOpacity style={styles.button} onPress={handleEditPersonal}>
+          {isEditingPersonal ? (
+              <Text style={styles.buttonText}>Save</Text>
+            ) : (
+              <Image source={require('@assets/pencil.png')} style={styles.editIcon} />
+            )}
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.infoContainer}>
+        <View style={styles.infoRow}>
+          <Text style={styles.label}>Name:</Text>
+          <TextInput
+            style={styles.input}
+            editable={isEditingPersonal}
+            onChangeText={value => handleChangePersonalData('name', value)}
+            value={editedPersonalData.name}
+            placeholder="Name"
+          />
+        </View>
+
+        <View style={styles.infoRow}>
+          <Text style={styles.label}>Email:</Text>
+          <TextInput
+            style={styles.input}
+            editable={isEditingPersonal}
+            onChangeText={value => handleChangePersonalData('email', value)}
+            value={editedPersonalData.email}
+            placeholder="Email"
+          />
+        </View>
+
+        <View style={styles.infoRow}>
+          <Text style={styles.label}>Phone Number:</Text>
+          <TextInput
+            style={styles.input}
+            editable={isEditingPersonal}
+            onChangeText={value => handleChangePersonalData('phoneNum', value)}
+          value={editedPersonalData.phoneNum}
+          placeholder="Phone Number"
+          />
+        </View>
+      </View>
+
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>MEDICAL INFORMATION</Text>
+        <TouchableOpacity style={styles.button} onPress={handleEditMedical}>
+          {/* <Text style={styles.buttonText}>{isEditingMedical ? "Save" : "Edit"}</Text> */}
+          {isEditingMedical ? (
               <Text style={styles.buttonText}>Save</Text>
             ) : (
               <Image source={require('@assets/pencil.png')} style={{width: 20, height: 20}} />
             )}
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={styles.infoContainer}>
-        <Text style={styles.infoText}>Name: {userData.name}</Text>
-        <Text style={styles.infoText}>Email: {userData.email} </Text>
-        <Text style={styles.infoText}>Phone Number: {userData.phoneNum}</Text>
-      </View>
-
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>MEDICAL INFORMATION                   </Text>
-        <View style={styles.container}>
-          {/* Edit/Save Button */}
-          <TouchableOpacity style={styles.button} onPress={handleEditMedical}>
-            {isEditingMedical ? (
-              <Text style={styles.buttonText}>Save</Text>
-            ) : (
-              <Image source={require('@assets/pencil.png')} style={{width: 20, height: 20}} />
-            )}
-          </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.infoContainer}>
-        <Text style={styles.infoText}>Blood Type: {userMedData.BloodType}</Text>
-        <Text style={styles.infoText}>Emergency Contact Name: {userMedData.EmergencyContactName}</Text>
-        <Text style={styles.infoText}>Emergency Contact Phone #: {userMedData.EmergencyContactNumber}</Text>
-        <Text style={styles.infoText}>Emergency Contact Email: {userMedData.EmergencyContactEmail}</Text>
-        <Text style={styles.infoText}>Gender: {userMedData.Gender}</Text>
-        <Text style={styles.infoText}>Weight: {userMedData.Weight} kg</Text>
-        <Text style={styles.infoText}>Height: {userMedData.Height} cm</Text>
+
+        <View style={styles.infoRow}>
+          <Text style={styles.label}>Blood Type:</Text>
+          <TextInput
+            style={styles.input}
+            editable={isEditingMedical}
+            onChangeText={value => handleChangeMedicalData('BloodType', value)}
+            value={editedMedicalData.BloodType}
+            placeholder="Blood Type"
+          />
+        </View>
+
+        <View style={styles.infoRow}>
+          <Text style={styles.label}>Emergency Contact Name:</Text>
+          <TextInput
+            style={styles.input}
+            editable={isEditingMedical}
+            onChangeText={value => handleChangeMedicalData('EmergencyContactName', value)}
+            value={editedMedicalData.EmergencyContactName}
+            placeholder="Emergency Contact Name"
+          />
+        </View>
+
+        <View style={styles.infoRow}>
+          <Text style={styles.label}>Emergency Contact Number:</Text>
+          <TextInput
+            style={styles.input}
+            editable={isEditingMedical}
+            onChangeText={value => handleChangeMedicalData('EmergencyContactNumber', value)}
+            value={editedMedicalData.EmergencyContactNumber}
+            placeholder="Emergency Contact Number"
+          />
+        </View>
+
+        <View style={styles.infoRow}>
+          <Text style={styles.label}>Gender:</Text>
+          <TextInput
+            style={styles.input}
+            editable={isEditingMedical}
+            onChangeText={value => handleChangeMedicalData('Gender', value)}
+            value={editedMedicalData.Gender}
+            placeholder="Gender"
+          />
+        </View>
+
+        <View style={styles.infoRow}>
+          <Text style={styles.label}>Height (in cm):</Text>
+          <TextInput
+            style={styles.input}
+            editable={isEditingMedical}
+            onChangeText={value => handleChangeMedicalData('Height', value)}
+            value={editedMedicalData.Height}
+            placeholder="Height"
+          />
+        </View>
+
+        <View style={styles.infoRow}>
+          <Text style={styles.label}>Weight (in lbs):</Text>
+          <TextInput
+            style={styles.input}
+            editable={isEditingMedical}
+            onChangeText={value => handleChangeMedicalData('Weight', value)}
+            value={editedMedicalData.Weight}
+            placeholder="Weight"
+          />
+        </View>
       </View>
 
       <TouchableOpacity 
       style={styles.logoutButton}
-      >
+      onPress={handleLogout}>
         <Text style={styles.logoutButtonText}>LOGOUT</Text>
       </TouchableOpacity>
 
@@ -121,6 +224,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  label: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: 'bold',
+    justifyContent: 'center',
+  },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -132,15 +241,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   profilePicContainer: {
-    width: 200, 
-    height: 200, 
-    borderRadius: 100, 
+    width: 200,
+    height: 200,
+    borderRadius: 100,
     backgroundColor: '#efefef',
-    alignItems: 'center', // Center horizontally
-    justifyContent: 'center', // Center vertically
-  },
-  profilePicText: {
-    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   section: {
     flexDirection: 'row',
@@ -155,21 +261,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  editButton: {
+  button: {
     backgroundColor: 'lightgrey',
     padding: 5,
     borderRadius: 5,
   },
-  editButtonText: {
+  buttonText: {
     fontSize: 12,
     fontWeight: 'bold',
   },
   infoContainer: {
     padding: 20,
+    width: "100%",
   },
   infoText: {
     fontSize: 16,
-    paddingBottom: 5, // Add some space between info texts
+    paddingBottom: 5,
   },
   logoutButton: {
     alignItems: 'center',
@@ -178,10 +285,27 @@ const styles = StyleSheet.create({
     margin: 20,
     borderRadius: 5,
   },
+  infoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: "100%",
+  },
   logoutButtonText: {
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  input: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: 'lightgrey',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  },
+  editIcon: {
+    width: 20,
+    height: 20,
   },
 });
 
