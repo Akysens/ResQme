@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
+
+import themeContext from '../../../theme/themeContext';
 
 // Mock data for notifications with date and time
 const initialNotifications = [
@@ -21,6 +23,8 @@ const NotificationItem = ({ text, dateTime, onDismiss }) => (
 );
 
 const NotificationsScreen = () => {
+  const theme = useContext(themeContext);
+
   const [notifications, setNotifications] = useState(initialNotifications);
 
   const dismissNotification = (id) => {
@@ -32,11 +36,11 @@ const NotificationsScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor}]}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Notifications</Text>
+        <Text style={[styles.headerText, {color: theme.color}]}>Notifications</Text>
         <TouchableOpacity onPress={dismissAllNotifications} style={styles.dismissAllButton}>
-          <Text>Dismiss All</Text>
+          <Text style={{color: theme.color}}>Dismiss All</Text>
         </TouchableOpacity>
       </View>
       <FlatList

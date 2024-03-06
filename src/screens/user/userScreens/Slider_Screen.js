@@ -1,8 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import { View, StyleSheet, Text, Animated, PanResponder } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+import themeContext from '../../../theme/themeContext';
+
 function Slider_Screen() {
+  const theme = useContext(themeContext);
+
   const navigation = useNavigation();
   const translateX = useRef(new Animated.Value(0)).current;
 
@@ -32,7 +36,7 @@ function Slider_Screen() {
   ).current;  
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {color: theme.backgroundColor}]}>
       <View style={styles.sliderBar}>
         <Animated.View
           style={[
@@ -64,7 +68,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
   },
   sliderBar: {
     width: 300,

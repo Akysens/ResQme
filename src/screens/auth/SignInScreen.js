@@ -39,14 +39,14 @@ function SignInScreen() {
       <TextInput label="Name" value={name} onChangeText={setName} style={styles.input} />
       <TextInput label="Phone Number" value={phoneNum} keyboardType="numeric" onChangeText={setPhoneNumber} style={styles.input} />
       <View style={styles.checkboxContainer}>
-        <Text>Are you a rescuer?</Text>
+        <Text style={styles.extraButtonText}>Are you a rescuer?</Text>
         <Checkbox status={isRescuer ? 'checked' : 'unchecked'} onPress={() => setIsRescuer(!isRescuer)} />
       </View>
       <Button mode="contained" onPress={handleSignUp} loading={loading} style={styles.button}>
         Sign Up
       </Button>
       <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')} style={styles.signInButton}>
-        <Text>Already have an account? Sign In</Text>
+        <Text style={styles.extraButtonText}>Already have an account? Sign In</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
   input: { width: '80%', margin: 10 },
   button: { marginTop: 10 },
   signInButton: { marginTop: 20 },
+  extraButtonText: { color: '#0066cc' },
   checkboxContainer: { flexDirection: 'row', alignItems: 'center' },
 });
 

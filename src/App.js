@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import LoginScreen from './screens/auth/LoginScreen';
@@ -13,6 +13,11 @@ import Notifications from './screens/user/userScreens/Notifications';
 import Profile from './screens/user/userScreens/profile/Profile';
 import Settings from './screens/user/userScreens/Settings';
 import { AccModeContext, AccIdContext } from './Contexts';
+
+import { EventRegister } from 'react-native-event-listeners';
+import { dataDetectorType } from 'deprecated-react-native-prop-types/DeprecatedTextPropTypes';
+import theme from './theme/theme';
+import themeContext from './theme/themeContext';
 
 const AuthStack = createStackNavigator();
 
@@ -29,13 +34,14 @@ const MainTab = createBottomTabNavigator();
 
 function MainTabScreen() {
   const { accMode } = useContext(AccModeContext);
-
+  const theme = useContext(themeContext);
+  
   return (
     <MainTab.Navigator screenOptions={{ headerShown: true, headerTitleAlign: 'center', headerTitleStyle: { fontWeight: 'bold' } }}>
       <MainTab.Screen name="Requests" component={Requests} options={{
         tabBarIcon: () => (
           <Image
-            source={require('./assets/Image8.png')}
+            source={theme.theme === 'dark' ? require('./assets/Image8White.png') : require('./assets/Image8.png')}
             style={{ width: 24, height: 24 }}
           />
         ),
@@ -43,7 +49,7 @@ function MainTabScreen() {
       <MainTab.Screen name="Notifications" component={Notifications} options={{
         tabBarIcon: () => (
           <Image
-            source={require('./assets/Image5.png')}
+            source={theme.theme === 'dark' ? require('./assets/Image5White.png') : require('./assets/Image5.png')}
             style={{ width: 24, height: 24 }}
           />
         ),
@@ -67,7 +73,7 @@ function MainTabScreen() {
       <MainTab.Screen name="Profile" component={Profile} options={{
         tabBarIcon: () => (
           <Image
-            source={require('./assets/Image6.png')}
+            source={theme.theme === 'dark' ? require('./assets/Image6White.png') : require('./assets/Image6.png')}
             style={{ width: 24, height: 24 }}
           />
         ),
@@ -75,8 +81,8 @@ function MainTabScreen() {
       <MainTab.Screen name="Settings" component={Settings} options={{
         tabBarIcon: () => (
           <Image
-            source={require('./assets/Image7.png')}
-            style={{ width: 24, height: 24 }}
+          source={theme.theme === 'dark' ? require('./assets/Image7White.png') : require('./assets/Image7.png')}
+          style={{ width: 24, height: 24 }}
           />
         ),
       }} />
@@ -90,18 +96,31 @@ function App() {
   const [accMode, setAccMode] = useState(null);
   const [AccId, setAccId] = useState(null);
 
+  const [darkMode, setDarkMode] = useState(false);
+  useEffect(() => {
+    const listener = EventRegister.addEventListener('ChangeTheme', (data) => {
+      setDarkMode(data);
+    })
+    return () => {
+      EventRegister.removeAllListeners(listener);
+    }
+  }, [darkMode])
+
   return (
-    <AccModeContext.Provider value={{ accMode, setAccMode }}>
-      <AccIdContext.Provider value={{ AccId, setAccId }}>
-        <NavigationContainer>
-          <RootStack.Navigator screenOptions={{ headerShown: false }}>
-            <RootStack.Screen name="Auth" component={AuthStackScreen} />
-            <RootStack.Screen name="MainApp" component={MainTabScreen} />
-            <RootStack.Screen name="Advice_Screen" component={Advice_Screen} />
-          </RootStack.Navigator>
-        </NavigationContainer>
-      </AccIdContext.Provider>
-    </AccModeContext.Provider>
+    <themeContext.Provider value={darkMode === true ? theme.dark : theme.light}>
+      <AccModeContext.Provider value={{ accMode, setAccMode }}>
+        <AccIdContext.Provider value={{ AccId, setAccId }}>
+          <NavigationContainer theme={darkMode === true ? DarkTheme : DefaultTheme}>
+            <RootStack.Navigator screenOptions={{ headerShown: false }}>
+              <RootStack.Screen name="Auth" component={AuthStackScreen} />
+              <RootStack.Screen name="MainApp" component={MainTabScreen} />
+              <RootStack.Screen name="Advice_Screen" component={Advice_Screen} />
+            </RootStack.Navigator>
+          </NavigationContainer>
+        </AccIdContext.Provider>
+      </AccModeContext.Provider>
+    </themeContext.Provider>
+    
   );
 }
 

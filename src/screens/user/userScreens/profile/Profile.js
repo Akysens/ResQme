@@ -2,39 +2,43 @@ import React, { useState, useContext } from 'react';
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { AccIdContext } from '../../../../Contexts';
 
+import themeContext from '../../../../theme/themeContext';
+
+
 const Profile = () => {
   const { AccId } = useContext(AccIdContext);
+  const theme = useContext(themeContext);
 
   console.log("PROFILE UID: " + String(AccId));
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.section}>
-        <TouchableOpacity style={styles.profilePicContainer}>
-          <Text style={styles.profilePicText}>PFP / TAP TO CHANGE</Text>
+    <ScrollView style={[styles.container, {color: theme.backgroundColor}]}>
+      <View style={[styles.section, {color: theme.backgroundColor}]}>
+        <TouchableOpacity style={[styles.profilePicContainer, {borderColor: theme.color}]}>
+          <Text style={[styles.profilePicText, {color: theme.color}]}>PFP / TAP TO CHANGE</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.infoContainer}>
-        <Text style={styles.infoText}>Name</Text>
-        <Text style={styles.infoText}>Email</Text>
-        <Text style={styles.infoText}>Phone Number</Text>
-        <Text style={styles.infoText}>Address (Not Shared to Anyone Except SAR)</Text>
+        <Text style={[styles.infoText, {color: theme.color}]}>Name</Text>
+        <Text style={[styles.infoText, {color: theme.color}]}>Email</Text>
+        <Text style={[styles.infoText, {color: theme.color}]}>Phone Number</Text>
+        <Text style={[styles.infoText, {color: theme.color}]}>Address (Not Shared to Anyone Except SAR)</Text>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>MEDICAL INFORMATION</Text>
+        <Text style={[styles.sectionTitle, {color: theme.color}]}>MEDICAL INFORMATION</Text>
       </View>
 
       <View style={styles.infoContainer}>
-        <Text style={styles.infoText}>Blood Type</Text>
-        <Text style={styles.infoText}>Emergency Contact Name</Text>
-        <Text style={styles.infoText}>Emergency Contact Phone #</Text>
-        <Text style={styles.infoText}>Emergency Contact Email</Text>
-        <Text style={styles.infoText}>Gender</Text>
-        <Text style={styles.infoText}>Weight</Text>
-        <Text style={styles.infoText}>Height</Text>
-        <Text style={styles.infoText}>Organ Donor</Text>
+        <Text style={[styles.infoText, {color: theme.color}]}>Blood Type</Text>
+        <Text style={[styles.infoText, {color: theme.color}]}>Emergency Contact Name</Text>
+        <Text style={[styles.infoText, {color: theme.color}]}>Emergency Contact Phone #</Text>
+        <Text style={[styles.infoText, {color: theme.color}]}>Emergency Contact Email</Text>
+        <Text style={[styles.infoText, {color: theme.color}]}>Gender</Text>
+        <Text style={[styles.infoText, {color: theme.color}]}>Weight</Text>
+        <Text style={[styles.infoText, {color: theme.color}]}>Height</Text>
+        <Text style={[styles.infoText, {color: theme.color}]}>Organ Donor</Text>
       </View>
 
       <TouchableOpacity style={styles.logoutButton}>
@@ -48,7 +52,6 @@ const Profile = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
   header: {
     flexDirection: 'row',
@@ -67,8 +70,7 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 100,
     borderWidth: 1,
-    borderColor: 'black',
-    height: 150, // Set a fixed height for the profile picture container
+    height: 150,
   },
   profilePicText: {
     textAlign: 'center',
@@ -104,7 +106,7 @@ const styles = StyleSheet.create({
   },
   logoutButton: {
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: 'gray',
     padding: 15,
     margin: 20,
     borderRadius: 5,

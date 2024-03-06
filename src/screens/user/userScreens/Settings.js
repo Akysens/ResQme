@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, Switch, StyleSheet, TouchableOpacity, Button, Alert, ScrollView } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import legal from '../../../assets/legal.json';
+import { EventRegister } from 'react-native-event-listeners';
+
+import themeContext from '../../../theme/themeContext';
+import { placeholder } from 'deprecated-react-native-prop-types/DeprecatedTextInputPropTypes';
+import DropDownPicker from 'react-native-dropdown-picker';
+
 
 const Settings = () => {
+  const theme = useContext(themeContext);
   const [darkMode, setDarkMode] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  // More languages to be added into the future
+  const [items, setItems] = useState([
+    {label: 'English', value: 'english'},
+    {label: 'Spanish', value: 'spanish'}
+  ]);
+  
   const [pushNotifications, setPushNotifications] = React.useState(false);
   const [sound, setSound] = React.useState(false);
   const [vibration, setVibration] = React.useState(false);
@@ -18,43 +33,41 @@ const Settings = () => {
       },
     ]);
 
-  const languages = [
-    { label: 'English', value: 'en' },
-    { label: 'Spanish', value: 'es' },
-    // ... add other languages here
-  ];
-
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: theme.backgroundColor}]}>
       <View style={styles.section}>
-        <Text style={styles.label}>Dark Mode</Text>
+        <Text style={[styles.label, {color: theme.color}]}>Dark Mode</Text>
         <View style={styles.subsection}>
-          <Text style={styles.subLabel}>Enable</Text>
+          {/* Dark Mode switch */}
+          <Text style={[styles.subLabel, {color: theme.color}]}>Enable</Text> 
           <Switch
             value={darkMode}
-            onValueChange={(value) => setDarkMode(value)}
+            onValueChange={(value) => {
+              setDarkMode(value);
+              EventRegister.emit('ChangeTheme', value)
+            }}
           />
         </View>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.label}>Notifications</Text>
+        <Text style={[styles.label, {color: theme.color}]}>Notifications</Text>
         <View style={styles.subsection}>
-          <Text style={styles.subLabel}>Push Notifications</Text>
+          <Text style={[styles.subLabel, {color: theme.color}]}>Push Notifications</Text>
           <Switch
             value={pushNotifications}
             onValueChange={(value) => setPushNotifications(value)}
           />
         </View>
         <View style={styles.subsection}>
-          <Text style={styles.subLabel}>Sound</Text>
+          <Text style={[styles.subLabel, {color: theme.color}]}>Sound</Text>
           <Switch
             value={sound}
             onValueChange={(value) => setSound(value)}
           />
         </View>
         <View style={styles.subsection}>
-          <Text style={styles.subLabel}>Vibration</Text>
+          <Text style={[styles.subLabel, {color: theme.color}]}>Vibration</Text>
           <Switch
             value={vibration}
             onValueChange={(value) => setVibration(value)}
@@ -63,22 +76,19 @@ const Settings = () => {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.label}>Language</Text>
-        <Dropdown
-          style={styles.dropdown}
-          data={languages}
-          labelField="label"
-          valueField="value"
-          placeholder="Pick a language..."
-          value={language}
-          onChange={item => {
-            setLanguage(item.value);
-          }}
+        <Text style={[styles.label, {color: theme.color}]}>Language</Text>
+        <DropDownPicker
+          open={open}
+          value={value}
+          items={items}
+          setOpen={setOpen}
+          setValue={setValue}
+          setItems={setItems}
         />
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.label}>About</Text>
+        <Text style={[styles.label, {color: theme.color}]}>About</Text>
         <TouchableOpacity onPress={() => showInfo(legal[1].contents)}>
           <Text style={styles.hyperlink}>Legal</Text>
         </TouchableOpacity>
@@ -95,6 +105,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#fff',
+  },
+  placeholder: {
+    color: 'red'
   },
   title: {
     fontSize: 22,
@@ -128,6 +141,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 4,
     paddingHorizontal: 8,
+    color: '#fff'
   },
   hyperlink: {
     color: 'blue',

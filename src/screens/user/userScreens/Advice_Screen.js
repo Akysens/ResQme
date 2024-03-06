@@ -1,10 +1,11 @@
-import React, { useRef, useState} from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import { View, Button, StyleSheet, Text, Animated, PanResponder, TouchableOpacity, LogBox } from 'react-native';
 import { NavigationRouteContext, useNavigation } from '@react-navigation/native';
 import Carousel from 'react-native-snap-carousel';
 import { Image } from 'react-native';
 import { Audio } from 'expo-av';
 
+import themeContext from '../../../theme/themeContext';
 
 const AdviceBox = ({ item, index }) => {
   LogBox.ignoreAllLogs();
@@ -19,6 +20,8 @@ const AdviceBox = ({ item, index }) => {
 };
 
 const Advice_Screen = () => {
+  const theme = useContext(themeContext);
+
   const navigation = useNavigation();
 
   const [needHelp, setNeedHelp] = useState(false);
@@ -75,7 +78,7 @@ const Advice_Screen = () => {
   const itemWidth = 300; // Adjust the width as needed
 return (
     <View style={styles.container}>
-      <Text style={styles.helpNotif}>Help is on the way!</Text>
+      <Text style={[styles.helpNotif, {color: theme.color}]}>Help is on the way!</Text>
 
       <Carousel
         data={advices}

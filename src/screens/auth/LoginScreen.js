@@ -30,7 +30,7 @@ function LoginScreen() {
 
         if (userData.mode === "victim") {
           navigation.navigate('MainApp', { screen: 'Slider_Screen' });
-        } else {
+        } else if (userData.mode === "rescuer") {
           navigation.navigate('MainApp', { screen: 'SAR_Team_Screen' });
         }
       } else {

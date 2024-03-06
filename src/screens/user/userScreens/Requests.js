@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+
+import themeContext from '../../../theme/themeContext';
 
 const RequestItem = ({ username, distance, requestText, timestamp }) => {
   return (
@@ -25,6 +27,8 @@ const RequestItem = ({ username, distance, requestText, timestamp }) => {
 };
 
 const RequestsPage = () => {
+  const theme = useContext(themeContext);
+
   // This would be your data fetched from your backend or state management
   const requestsData = [
     // Example data structure
@@ -38,7 +42,7 @@ const RequestsPage = () => {
   ];
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {color: theme.backgroundColor}]}>
       <ScrollView>
         {requestsData.map((request, index) => (
           <RequestItem
@@ -57,7 +61,6 @@ const RequestsPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
   pageTitle: {
     fontSize: 24,
@@ -65,7 +68,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   requestItem: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#fff',
     padding: 20,
     marginVertical: 5,
     borderRadius: 10,
