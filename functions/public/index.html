@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ResQme API Documentation</title>
+    <title>HelpHub API Documentation</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css"
       rel="stylesheet"
@@ -62,14 +62,14 @@
 
   <body class="bg-gray-100">
     <div class="container mx-auto px-4 py-8">
-      <h1 class="text-3xl font-bold mb-4">ResQme API Documentation</h1>
+      <h1 class="text-3xl font-bold mb-4">HelpHub API Documentation</h1>
 
       <p class="mb-8">
-        The ResQme API allows organizations to retrieve information about
+        The HelpHub API allows organizations to retrieve information about
         victims, medical information, and volunteers related to emergency
-        situations from the ResQme service. The API provides various endpoints
+        situations from the HelpHub service. The API provides various endpoints
         to access this information based on specific filters. The base URL for
-        the API is <code>https://resqme.me/api</code>. <br /><br />⚠️ The JSON
+        the API is <code>https://helphub.me/api</code>. <br /><br />⚠️ The JSON
         string (filter) has to be URL encoded during request.
       </p>
 
@@ -153,7 +153,7 @@
           class="bg-gray-200 p-4 rounded-lg overflow-auto"
         ><code>filter={"radius":{"latitude": 37.7749, "longitude": -122.4194, "distance": 10, "unit": "MI"}}
 
-GET https://resqme.me/api/getVictims?filter=%7B%22radius%22%3A%7B%22latitude%22%3A%2037.7749,%20%22longitude%22%3A%20-122.4194,%20%22distance%22%3A%2010,%20%22unit%22%3A%20%22MI%22%7D%7D</code></pre>
+GET https://helphub.me/api/getVictims?filter=%7B%22radius%22%3A%7B%22latitude%22%3A%2037.7749,%20%22longitude%22%3A%20-122.4194,%20%22distance%22%3A%2010,%20%22unit%22%3A%20%22MI%22%7D%7D</code></pre>
 
         <h4 class="text-lg font-bold">Response</h4>
         <ul class="list-disc list-inside mb-4">
@@ -215,7 +215,7 @@ GET https://resqme.me/api/getVictims?filter=%7B%22radius%22%3A%7B%22latitude%22%
           class="bg-gray-200 p-4 rounded-lg overflow-auto"
         ><code>filter={"victimIds":["victim1"]}
 
-GET https://resqme.me/api/getMedicalInfo?filter=%7B%22victimIds%22%3A%5B%22victim1%22,%22victim2%22%5D%7D</code></pre>
+GET https://helphub.me/api/getMedicalInfo?filter=%7B%22victimIds%22%3A%5B%22victim1%22,%22victim2%22%5D%7D</code></pre>
 
         <h4 class="text-lg font-bold">Response</h4>
         <ul class="list-disc list-inside mb-4">
@@ -268,7 +268,7 @@ GET https://resqme.me/api/getMedicalInfo?filter=%7B%22victimIds%22%3A%5B%22victi
           class="bg-gray-200 p-4 rounded-lg overflow-auto"
         ><code>filter={"radius":{"latitude": 37.7749, "longitude": -122.4194, "distance": 10, "unit": "MI"}, "type": "ProSAR"}
 
-GET https://resqme.me/api/getVolunteers?filter=%7B%22radius%22%3A%7B%22latitude%22%3A%2037.7749,%20%22longitude%22%3A%20-122.4194,%20%22distance%22%3A%2010,%20%22unit%22%3A%20%22MI%22%7D,%20%22type%22%3A%20%22ProSAR%22%7D</code></pre>
+GET https://helphub.me/api/getVolunteers?filter=%7B%22radius%22%3A%7B%22latitude%22%3A%2037.7749,%20%22longitude%22%3A%20-122.4194,%20%22distance%22%3A%2010,%20%22unit%22%3A%20%22MI%22%7D,%20%22type%22%3A%20%22ProSAR%22%7D</code></pre>
         <h4 class="text-lg font-bold">Response</h4>
         <ul class="list-disc list-inside mb-4">
           <li>Status: 200 OK</li>
@@ -300,8 +300,8 @@ GET https://resqme.me/api/getVolunteers?filter=%7B%22radius%22%3A%7B%22latitude%
       <hr class="mb-8" />
 
       <footer class="text-center">
-        <p class="text-secondary">ResQme API Documentation</p>
-        <p class="text-secondary">© 2023 ResQme. All rights reserved.</p>
+        <p class="text-secondary">HelpHub API Documentation</p>
+        <p class="text-secondary">© 2023 HelpHub. All rights reserved.</p>
       </footer>
     </div>
   </body>

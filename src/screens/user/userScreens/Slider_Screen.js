@@ -1,12 +1,18 @@
-import React, { useRef, useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { View, StyleSheet, Text, Animated, PanResponder } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import themeContext from '../../../theme/themeContext';
+import * as Location from 'expo-location';
+import { db } from '@firebaseConfig';
+import { doc, setDoc } from 'firebase/firestore';
+import { AccIdContext } from '../../../Contexts';
+
 
 function Slider_Screen() {
   const theme = useContext(themeContext);
 
+  const { AccId } = useContext(AccIdContext);
   const navigation = useNavigation();
   const translateX = useRef(new Animated.Value(0)).current;
 
@@ -24,6 +30,7 @@ function Slider_Screen() {
       onPanResponderRelease: (e, { vx, dx }) => {
         translateX.flattenOffset();
         if (dx > 150) { // Threshold to navigate
+          updateLocationInFirestore();
           navigation.navigate('Advice_Screen');
         }
         Animated.spring(translateX, {
@@ -34,6 +41,22 @@ function Slider_Screen() {
       },
     })
   ).current;  
+
+  async function updateLocationInFirestore() {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+
+    if (status != 'granted') {
+      console.error('Permission to access location was denied');
+      return;
+    }
+    
+    const location = await Location.getCurrentPositionAsync({});
+    await setDoc(doc(db, "usersLocations", AccId), {
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
+      timestamp: new Date(),
+    });
+  }
 
   return (
     <View style={[styles.container, {color: theme.backgroundColor}]}>

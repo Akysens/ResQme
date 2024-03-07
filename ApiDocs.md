@@ -1,8 +1,8 @@
-# ResQme API Documentation
+# HelpHub API Documentation
 
-The ResQme API allows organizations to retrieve information about victims, medical information, and volunteers related to emergency situations from the ResQme service. The API provides various endpoints to access this information based on specific filters.
+The HelpHub API allows organizations to retrieve information about victims, medical information, and volunteers related to emergency situations from the HelpHub service. The API provides various endpoints to access this information based on specific filters.
 
-The base URL for the API is `https://resqme.me/api`
+The base URL for the API is `https://helphub.me/api`
 
 ## Table of Contents
 
@@ -61,7 +61,7 @@ The following query parameters can be used to filter the results:
 ```http
 filter={"radius":{"latitude": 37.7749, "longitude": -122.4194, "distance": 10, "unit": "MI"}}
 
-GET https://resqme.me/api/getVictims?filter=%7B%22radius%22%3A%7B%22latitude%22%3A%2037.7749,%20%22longitude%22%3A%20-122.4194,%20%22distance%22%3A%2010,%20%22unit%22%3A%20%22MI%22%7D%7D
+GET https://helphub.me/api/getVictims?filter=%7B%22radius%22%3A%7B%22latitude%22%3A%2037.7749,%20%22longitude%22%3A%20-122.4194,%20%22distance%22%3A%2010,%20%22unit%22%3A%20%22MI%22%7D%7D
 
 ```
 
@@ -122,7 +122,7 @@ The following query parameters can be used to filter the results:
 
 filter={"victimIds":["victim1"]}
 
-GET https://resqme.me/api/getMedicalInfo?filter=%7B%22victimIds%22%3A%5B%22victim1%22,%22victim2%22%5D%7D
+GET https://helphub.me/api/getMedicalInfo?filter=%7B%22victimIds%22%3A%5B%22victim1%22,%22victim2%22%5D%7D
 ```
 
 #### Response
@@ -176,7 +176,7 @@ The following query parameters can be used to filter the results:
 ```http
 filter={"radius":{"latitude": 37.7749, "longitude": -122.4194, "distance": 10, "unit": "MI"}, "type": "ProSAR"}
 
-GET https://resqme.me/api/getVolunteers?filter=%7B%22radius%22%3A%7B%22latitude%22%3A%2037.7749,%20%22longitude%22%3A%20-122.4194,%20%22distance%22%3A%2010,%20%22unit%22%3A%20%22MI%22%7D,%20%22type%22%3A%20%22ProSAR%22%7D
+GET https://helphub.me/api/getVolunteers?filter=%7B%22radius%22%3A%7B%22latitude%22%3A%2037.7749,%20%22longitude%22%3A%20-122.4194,%20%22distance%22%3A%2010,%20%22unit%22%3A%20%22MI%22%7D,%20%22type%22%3A%20%22ProSAR%22%7D
 ```
 
 ####
@@ -215,4 +215,4 @@ The response will be a JSON array containing volunteer information.
 
 ---
 
-This concludes the documentation for the Resqme.me API. Use the provided endpoints to retrieve information about victims, medical information, and volunteers in emergency situations.
+This concludes the documentation for the HelpHub.me API. Use the provided endpoints to retrieve information about victims, medical information, and volunteers in emergency situations.
