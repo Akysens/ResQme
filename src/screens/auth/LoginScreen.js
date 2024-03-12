@@ -7,7 +7,11 @@ import { doc, getDoc } from 'firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
 import { AccModeContext, AccIdContext } from '../../Contexts';
 
+import { useTranslation } from 'react-i18next';
+
 function LoginScreen() {
+  const {t} = useTranslation();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setErrorMsg] = useState(null);
@@ -47,9 +51,9 @@ function LoginScreen() {
       <TextInput label="Email" value={email} onChangeText={setEmail} style={styles.input} />
       <TextInput label="Password" value={password} secureTextEntry onChangeText={setPassword} style={styles.input} />
       {error && <Text style={styles.error}>{error}</Text>}
-      <Button mode="contained" onPress={handleLogin} style={styles.button}>Log in</Button>
+      <Button mode="contained" onPress={handleLogin} style={styles.button}>{t('login_button_login')}</Button>
       <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')} style={styles.signupButton}>
-        <Text style={styles.signupButtonText}>Need an account?</Text>
+        <Text style={styles.signupButtonText}>{t('login_button_needaccount')}</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

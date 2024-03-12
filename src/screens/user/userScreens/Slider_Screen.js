@@ -8,8 +8,12 @@ import { db } from '@firebaseConfig';
 import { doc, setDoc } from 'firebase/firestore';
 import { AccIdContext } from '../../../Contexts';
 
+import i18next from '../../../../services/i18next';
+import { useTranslation } from 'react-i18next';
 
 function Slider_Screen() {
+  const {t} = useTranslation();
+
   const theme = useContext(themeContext);
 
   const { AccId } = useContext(AccIdContext);
@@ -81,7 +85,7 @@ function Slider_Screen() {
           <Text style={styles.arrowText}>→</Text>
         </Animated.View>
       </View>
-      <Text style={styles.sliderText}>SLIDE FOR HELP</Text>
+      <Text style={styles.sliderText}>{t('slider_text_slideforhelp')}</Text>
     </View>
   );
 }

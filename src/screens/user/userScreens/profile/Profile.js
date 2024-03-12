@@ -11,7 +11,12 @@ import UploadImage from './UploadImage';
 import { useNavigation } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 
+import i18next from '../../../../../services/i18next';
+import { useTranslation } from 'react-i18next';
+
 const Profile = () => {
+  const {t} = useTranslation();
+
   const { AccId } = useContext(AccIdContext);
   const theme = useContext(themeContext);
   const [userData, setUserData] = useState(null);
@@ -75,7 +80,7 @@ const Profile = () => {
   };
 
   if (!userData) {
-    return <Text>Loading...</Text>;
+    return <Text>{t('profile_text_loading')}</Text>;
   }
 
   return (
@@ -87,10 +92,10 @@ const Profile = () => {
       </View>
 
       <View style={styles.section}>
-        <Text style={[styles.sectionTitle, {color: theme.color}]}>PERSONAL INFORMATION</Text>
+        <Text style={[styles.sectionTitle, {color: theme.color}]}>{t('profile_header_personalinfo')}</Text>
         <TouchableOpacity style={styles.button} onPress={handleEditPersonal}>
           {isEditingPersonal ? (
-              <Text style={styles.buttonText}>Save</Text>
+              <Text style={styles.buttonText}>{t('profile_button_saveinfo')}</Text>
             ) : (
               <Image source={require('@assets/pencil.png')} style={styles.editIcon} />
             )}
@@ -99,35 +104,35 @@ const Profile = () => {
 
       <View style={styles.infoContainer}>
         <View style={styles.infoRow}>
-          <Text style={[styles.label, {color: theme.color}]}>Name:</Text>
+          <Text style={[styles.label, {color: theme.color}]}>{t('profile_text_name')}</Text>
           <TextInput
             style={styles.input}
             editable={isEditingPersonal}
             onChangeText={value => handleChangePersonalData('name', value)}
             value={editedPersonalData.name}
-            placeholder="Name"
+            placeholder={t('profile_text_name_placeholder')}
           />
         </View>
 
         <View style={styles.infoRow}>
-          <Text style={[styles.label, {color: theme.color}]}>Email:</Text>
+          <Text style={[styles.label, {color: theme.color}]}>{t('profile_text_email')}</Text>
           <TextInput
             style={styles.input}
             editable={isEditingPersonal}
             onChangeText={value => handleChangePersonalData('email', value)}
             value={editedPersonalData.email}
-            placeholder="Email"
+            placeholder={t('profile_text_email_placeholder')}
           />
         </View>
 
         <View style={styles.infoRow}>
-          <Text style={[styles.label, {color: theme.color}]}>Phone Number:</Text>
+          <Text style={[styles.label, {color: theme.color}]}>{t('profile_text_phonenumber')}</Text>
           <TextInput
             style={styles.input}
             editable={isEditingPersonal}
             onChangeText={value => handleChangePersonalData('phoneNum', value)}
             value={editedPersonalData.phoneNum}
-            placeholder="Phone Number"
+            placeholder={t('profile_text_phonenumber_placeholder')}
             keyboardType="numeric"
             maxLength={15}
           />
@@ -135,10 +140,10 @@ const Profile = () => {
       </View>
 
       <View style={styles.section}>
-        <Text style={[styles.sectionTitle, {color: theme.color}]}>MEDICAL INFORMATION</Text>
+        <Text style={[styles.sectionTitle, {color: theme.color}]}>{t('profile_header_medicalinfo')}</Text>
         <TouchableOpacity style={styles.button} onPress={handleEditMedical}>
           {isEditingMedical ? (
-              <Text style={styles.buttonText}>Save</Text>
+              <Text style={styles.buttonText}>{t('profile_button_saveinfo')}</Text>
             ) : (
               <Image source={require('@assets/pencil.png')} style={{width: 20, height: 20}} />
             )}
@@ -148,7 +153,7 @@ const Profile = () => {
       <View style={styles.infoContainer}>
         
       <View style={styles.infoRow}>
-        <Text style={[styles.label, {color: theme.color}]}>Blood Type:</Text>
+        <Text style={[styles.label, {color: theme.color}]}>{t('profile_text_bloodtype')}</Text>
         <View style={[styles.input, styles.pickerContainer]}>
           {isEditingMedical ? (
             <Picker
@@ -172,64 +177,62 @@ const Profile = () => {
         </View>
       </View>
 
-
-
         <View style={styles.infoRow}>
-          <Text style={[styles.label, {color: theme.color}]}>Emergency Contact Name:</Text>
+          <Text style={[styles.label, {color: theme.color}]}>{t('profile_text_emergencycontactname')}</Text>
           <TextInput
             style={styles.input}
             editable={isEditingMedical}
             onChangeText={value => handleChangeMedicalData('EmergencyContactName', value)}
             value={editedMedicalData.EmergencyContactName}
-            placeholder="Emergency Contact Name"
+            placeholder={t('profile_text_emergencycontactname_placeholder')}
           />
         </View>
 
         <View style={styles.infoRow}>
-          <Text style={[styles.label, {color: theme.color}]}>Emergency Contact Number:</Text>
+          <Text style={[styles.label, {color: theme.color}]}>{t('profile_text_emergencycontactnumber')}</Text>
           <TextInput
             style={styles.input}
             editable={isEditingMedical}
             onChangeText={value => handleChangeMedicalData('EmergencyContactNumber', value)}
             value={editedMedicalData.EmergencyContactNumber}
-            placeholder="Emergency Contact Number"
+            placeholder={t('profile_text_emergencycontactnumber_placeholder')}
             keyboardType="numeric"
             maxLength={15}
           />
         </View>
 
         <View style={styles.infoRow}>
-          <Text style={[styles.label, {color: theme.color}]}>Gender:</Text>
+          <Text style={[styles.label, {color: theme.color}]}>{t('profile_text_gender')}</Text>
           <TextInput
             style={styles.input}
             editable={isEditingMedical}
             onChangeText={value => handleChangeMedicalData('Gender', value)}
             value={editedMedicalData.Gender}
-            placeholder="Gender"
+            placeholder={t('profile_text_gender_placeholder')}
           />
         </View>
 
         <View style={styles.infoRow}>
-          <Text style={[styles.label, {color: theme.color}]}>Height (in cm):</Text>
+          <Text style={[styles.label, {color: theme.color}]}>{t('profile_text_height')} (cm):</Text>
           <TextInput
             style={styles.input}
             editable={isEditingMedical}
             onChangeText={value => handleChangeMedicalData('Height', value)}
             value={editedMedicalData.Height}
             keyboardType="numeric"
-            placeholder="Height"
+            placeholder={t('profile_text_height_placeholder')}
           />
         </View>
 
         <View style={styles.infoRow}>
-          <Text style={[styles.label, {color: theme.color}]}>Weight (in lbs):</Text>
+          <Text style={[styles.label, {color: theme.color}]}>{t('profile_text_weight')} (lbs):</Text>
           <TextInput
             style={styles.input}
             editable={isEditingMedical}
             onChangeText={value => handleChangeMedicalData('Weight', value)}
             value={editedMedicalData.Weight}
             keyboardType="numeric"
-            placeholder="Weight"
+            placeholder={t('profile_text_weight_placeholder')}
           />
         </View>
       </View>
@@ -237,7 +240,7 @@ const Profile = () => {
       <TouchableOpacity 
       style={styles.logoutButton}
       onPress={handleLogout}>
-        <Text style={styles.logoutButtonText}>LOGOUT</Text>
+        <Text style={styles.logoutButtonText}>{t('profile_button_logout')}</Text>
       </TouchableOpacity>
 
     </ScrollView>

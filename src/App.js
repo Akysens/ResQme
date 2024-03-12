@@ -23,6 +23,9 @@ import theme from './theme/theme';
 import themeContext from './theme/themeContext';
 // import { OfflineMode } from './screens/user/userScreens';
 
+import i18next from '../services/i18next';
+import { useTranslation } from 'react-i18next';
+
 const AuthStack = createStackNavigator();
 
 function AuthStackScreen() {
@@ -37,12 +40,14 @@ function AuthStackScreen() {
 const MainTab = createBottomTabNavigator();
 
 function MainTabScreen() {
+  const {t} = useTranslation();
+
   const { accMode } = useContext(AccModeContext);
   const theme = useContext(themeContext);
   
   return ( 
     <MainTab.Navigator screenOptions={{ headerShown: true, headerTitleAlign: 'center', headerTitleStyle: { fontWeight: 'bold' } }}>
-      <MainTab.Screen name="Requests" component={Requests} options={{
+      <MainTab.Screen name={t('app_screenname_requests')} component={Requests} options={{
         tabBarIcon: () => (
           <Image
             source={theme.theme === 'dark' ? require('./assets/Image8White.png') : require('./assets/Image8.png')}
@@ -50,7 +55,7 @@ function MainTabScreen() {
           />
         ),
       }} />
-      <MainTab.Screen name="Notifications" component={Notifications} options={{
+      <MainTab.Screen name={t('app_screenname_notifications')} component={Notifications} options={{
         tabBarIcon: () => (
           <Image
             source={theme.theme === 'dark' ? require('./assets/Image5White.png') : require('./assets/Image5.png')}
@@ -74,7 +79,7 @@ function MainTabScreen() {
           />
         ),
       }} />}
-      <MainTab.Screen name="Profile" component={Profile} options={{
+      <MainTab.Screen name={t('app_screenname_profile')} component={Profile} options={{
         tabBarIcon: () => (
           <Image
             source={theme.theme === 'dark' ? require('./assets/Image6White.png') : require('./assets/Image6.png')}
@@ -82,7 +87,7 @@ function MainTabScreen() {
           />
         ),
       }} />
-      <MainTab.Screen name="Settings" component={Settings} options={{
+      <MainTab.Screen name={t('app_screenname_settings')} component={Settings} options={{
         tabBarIcon: () => (
           <Image
           source={theme.theme === 'dark' ? require('./assets/Image7White.png') : require('./assets/Image7.png')}

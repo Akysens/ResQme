@@ -3,23 +3,28 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-nati
 
 import themeContext from '../../../theme/themeContext';
 
+import i18next from '../../../../services/i18next';
+import { useTranslation } from 'react-i18next';
+
 const RequestItem = ({ username, distance, requestText, timestamp }) => {
+  const {t} = useTranslation();
+
   return (
     <View style={styles.requestItem}>
       <View style={styles.headerContainer}>
-        <Text style={styles.usernameText}>[USER] requests [ITEM]</Text>
+        <Text style={styles.usernameText}>{t('requests_text_userrequestitem')}</Text>
         <Text style={styles.timestampText}>{timestamp}</Text>
       </View>
       <Text style={styles.requestText}>{requestText}</Text>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>SHOW ON MAP</Text>
+          <Text style={styles.buttonText}>{t('requests_button_showonmap')}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>PROVIDE HELP</Text>
+          <Text style={styles.buttonText}>{t('requests_button_providehelp')}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>DISMISS</Text>
+          <Text style={styles.buttonText}>{t('requests_button_dismiss')}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -27,6 +32,7 @@ const RequestItem = ({ username, distance, requestText, timestamp }) => {
 };
 
 const RequestsPage = () => {
+
   const theme = useContext(themeContext);
 
   // This would be your data fetched from your backend or state management

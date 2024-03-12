@@ -6,7 +6,11 @@ import { collection, doc, setDoc } from "firebase/firestore";
 import { auth, db } from "@firebaseConfig";
 import { useNavigation } from "@react-navigation/native";
 
+import { useTranslation } from 'react-i18next';
+
 function SignInScreen() {
+  const {t} = useTranslation();
+
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -39,14 +43,14 @@ function SignInScreen() {
       <TextInput label="Name" value={name} onChangeText={setName} style={styles.input} />
       <TextInput label="Phone Number" value={phoneNum} keyboardType="numeric" onChangeText={setPhoneNumber} style={styles.input} />
       <View style={styles.checkboxContainer}>
-        <Text style={styles.extraButtonText}>Are you a rescuer?</Text>
+        <Text style={styles.extraButtonText}>{t('signup_button_checkrescuer')}</Text>
         <Checkbox status={isRescuer ? 'checked' : 'unchecked'} onPress={() => setIsRescuer(!isRescuer)} />
       </View>
       <Button mode="contained" onPress={handleSignUp} loading={loading} style={styles.button}>
-        Sign Up
+      {t('signup_button_signup')}
       </Button>
       <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')} style={styles.signInButton}>
-        <Text style={styles.extraButtonText}>Already have an account? Sign In</Text>
+        <Text style={styles.extraButtonText}>{t('signup_button_accountexisting')}</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

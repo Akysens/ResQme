@@ -7,6 +7,9 @@ import { Audio } from 'expo-av';
 
 import themeContext from '../../../theme/themeContext';
 
+import i18next from '../../../../services/i18next';
+import { useTranslation } from 'react-i18next';
+
 const AdviceBox = ({ item, index }) => {
   LogBox.ignoreAllLogs();
   return (
@@ -20,6 +23,8 @@ const AdviceBox = ({ item, index }) => {
 };
 
 const Advice_Screen = () => {
+  const {t} = useTranslation();
+
   const theme = useContext(themeContext);
 
   const navigation = useNavigation();
@@ -53,19 +58,19 @@ const Advice_Screen = () => {
 
   const advices = [
     {
-      text: "Try not to shout randomly, shouting randomly can block dust and respiratory tract. Additionally, prolonged shouting causes loss of energy and hoarseness.",
+      text: t('advice_text_noshouting'),
       image: require('@assets/NoShouting.png'),
     }, 
     {
-      text: "Ensure you use a tissue or your clothing to cover both your mouth and nose.",
+      text: t('advice_text_covermouth'),
       image: require('@assets/CoverMouth.png'),
     },
     {
-      text: "Refrain from igniting anything flambable.",
+      text: t('advice_text_nofire'),
       image: require('@assets/NoFire.png'),
     },
     {
-      text: "Find a tool to make sound outside by hitting concrete blocks in the coming hours.",
+      text: t('advice_text_toolnoise'),
       image: require('@assets/ToolNoise.png'),
     },
   ];
@@ -78,7 +83,7 @@ const Advice_Screen = () => {
   const itemWidth = 300; // Adjust the width as needed
 return (
     <View style={styles.container}>
-      <Text style={[styles.helpNotif, {color: theme.color}]}>Help is on the way!</Text>
+      <Text style={[styles.helpNotif, {color: theme.color}]}>{t('advice_text_helpnotif')}</Text>
 
       <Carousel
         data={advices}

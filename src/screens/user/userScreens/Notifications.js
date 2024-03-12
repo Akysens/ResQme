@@ -3,6 +3,9 @@ import { View, Text, StyleSheet, TouchableOpacity, FlatList, SafeAreaView } from
 
 import themeContext from '../../../theme/themeContext';
 
+import i18next from '../../../../services/i18next';
+import { useTranslation } from 'react-i18next';
+
 // Mock data for notifications with date and time
 const initialNotifications = [
   { id: '1', text: 'Your order has been shipped.', dateTime: 'Feb 8, 4:30 PM' },
@@ -10,19 +13,26 @@ const initialNotifications = [
   // ... other notifications
 ];
 
-const NotificationItem = ({ text, dateTime, onDismiss }) => (
-  <View style={styles.notificationItem}>
-    <View style={styles.notificationContent}>
-      <Text style={styles.notificationText}>{text}</Text>
-      <Text style={styles.notificationDateTime}>{dateTime}</Text>
+
+const NotificationItem = ({ text, dateTime, onDismiss, t }) => (
+  
+  (
+    <View style={styles.notificationItem}>
+      <View style={styles.notificationContent}>
+        <Text style={styles.notificationText}>{text}</Text>
+        <Text style={styles.notificationDateTime}>{dateTime}</Text>
+      </View>
+      <TouchableOpacity onPress={onDismiss} style={styles.dismissButton}>
+        <Text>{t('notifications_button_dismiss')}</Text>
+      </TouchableOpacity>
     </View>
-    <TouchableOpacity onPress={onDismiss} style={styles.dismissButton}>
-      <Text>Dismiss</Text>
-    </TouchableOpacity>
-  </View>
+  )
+  
 );
 
 const NotificationsScreen = () => {
+  const {t} = useTranslation();
+
   const theme = useContext(themeContext);
 
   const [notifications, setNotifications] = useState(initialNotifications);
@@ -38,9 +48,9 @@ const NotificationsScreen = () => {
   return (
     <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor}]}>
       <View style={styles.header}>
-        <Text style={[styles.headerText, {color: theme.color}]}>Notifications</Text>
+        <Text style={[styles.headerText, {color: theme.color}]}>{t('notifications_header_notifications')}</Text>
         <TouchableOpacity onPress={dismissAllNotifications} style={styles.dismissAllButton}>
-          <Text style={{color: theme.color}}>Dismiss All</Text>
+          <Text style={{color: theme.color}}>{t('notifications_button_dismissall')}</Text>
         </TouchableOpacity>
       </View>
       <FlatList
@@ -51,6 +61,7 @@ const NotificationsScreen = () => {
             text={item.text}
             dateTime={item.dateTime}
             onDismiss={() => dismissNotification(item.id)}
+            t = {t}
           />
         )}
         ItemSeparatorComponent={() => <View style={styles.separator} />} // Add space between items
