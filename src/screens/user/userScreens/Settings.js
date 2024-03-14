@@ -21,7 +21,9 @@ const Settings = () => {
   // More languages to be added into the future
   const [items, setItems] = useState([
     {label: 'English', value: 'en'},
-    {label: 'Español', value: 'es'}
+    {label: 'Español', value: 'es'},
+    {label: 'Türkçe', value: 'tr'},
+    {label: 'اردو', value: 'ur'}
   ]);
   
   const [pushNotifications, setPushNotifications] = React.useState(false);
