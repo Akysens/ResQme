@@ -1,7 +1,6 @@
 import { View, StyleSheet, Alert, FlatList, Pressable, TextInput, Dimensions } from "react-native";
 import { Text } from "react-native-paper";
 import * as Colors from "../styles/Colors"
-import { ScrollView } from "react-native-gesture-handler";
 import { useState } from "react";
 import Icon from "@expo/vector-icons/MaterialIcons";
 import { useNavigation, useRoute } from "@react-navigation/native";
