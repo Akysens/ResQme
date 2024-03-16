@@ -3,7 +3,6 @@ import { Pressable, StyleSheet, Alert } from 'react-native';
 import {useEffect, useContext, useState} from "react";
 import * as Colors from "../styles/Colors";
 import { NavigationContainer } from '@react-navigation/native';
-import OfflineModeMap from './OfflineModeMap';
 import OfflineModeConnect from './OfflineModeConnect';
 import Icon from "@expo/vector-icons/MaterialIcons"
 
