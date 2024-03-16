@@ -13,6 +13,9 @@ import Requests from './screens/user/userScreens/Requests';
 import Notifications from './screens/user/userScreens/Notifications';
 import Profile from './screens/user/userScreens/profile/Profile';
 import Settings from './screens/user/userScreens/Settings';
+
+import OfflineModeMain from './screens/user/userScreens/OfflineModeMain';
+
 import NetInfo from "@react-native-community/netinfo";
 import { MenuProvider } from "react-native-popup-menu";
 import { AccModeContext, AccIdContext } from './Contexts';
@@ -154,13 +157,14 @@ function App() {
           <AccIdContext.Provider value={{ AccId, setAccId }}>
             <NavigationContainer theme={darkMode === true ? DarkTheme : DefaultTheme}>
               <RootStack.Navigator screenOptions={{ headerShown: false }}>
-                {/* {internetReachable ? 
-                ( <> */}
+                {internetReachable ?
+                  (<>
                     <RootStack.Screen name="Auth" component={AuthStackScreen} />
-                      <RootStack.Screen name="MainApp" component={MainTabScreen} />
-                      <RootStack.Screen name="Advice_Screen" component={Advice_Screen} />
-                    {/* </>) : */}
-                {/* // (<RootStack.Screen name="OfflineMode" component={OfflineMode} />)} */}
+                    <RootStack.Screen name="MainApp" component={MainTabScreen} />
+                    <RootStack.Screen name="Advice_Screen" component={Advice_Screen} />
+                  </>)
+                    :
+                 (<RootStack.Screen name="OfflineModeMain" component={OfflineModeMain} />)}
             </RootStack.Navigator>
             </NavigationContainer>
           </AccIdContext.Provider>
