@@ -1,14 +1,14 @@
 module.exports = {
   expo: {
-    scheme: "helphub",
-    name: "HelpHub",
-    slug: "HelpHub",
+    scheme: "resqme",
+    name: "ResQme",
+    slug: "ResQme",
     version: "1.0.0",
     orientation: "portrait",
-    icon: "./src/assets/logo.png",
+    icon: "./src/assets/ResQme_Icon.png",
     userInterfaceStyle: "light",
     splash: {
-      image: "./src/assets/splash.png",
+      image: "./src/assets/ResQme_splash.png",
       resizeMode: "contain",
       backgroundColor: "#D9D9D9",
     },
@@ -39,7 +39,7 @@ module.exports = {
       },
     },
     web: {
-      favicon: "./src/assets/favicon.png",
+      favicon: "./src/assets/ResQme_favicon.png",
     },
     plugins: [
       [
