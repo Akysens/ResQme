@@ -5,10 +5,10 @@ module.exports = {
     slug: "ResQme",
     version: "1.0.0",
     orientation: "portrait",
-    icon: "./src/assets/ResQme_Icon.png",
+    icon: "./src/assets/logo.png",
     userInterfaceStyle: "light",
     splash: {
-      image: "./src/assets/ResQme_splash.png",
+      image: "./src/assets/splash.png",
       resizeMode: "contain",
       backgroundColor: "#D9D9D9",
     },
