@@ -1,4 +1,4 @@
-rootProject.name = 'HelpHub'
+rootProject.name = 'ResQme'
 
 dependencyResolutionManagement {
   versionCatalogs {
