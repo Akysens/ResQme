@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Alert } from 'react-native';
 import {useEffect, useContext, useState} from "react";
 import * as Colors from "../styles/Colors";
 import { NavigationContainer } from '@react-navigation/native';
+import OfflineModeMap from "./OfflineModeMap";
 import OfflineModeConnect from './OfflineModeConnect';
 import Icon from "@expo/vector-icons/MaterialIcons"
 
@@ -162,6 +163,17 @@ export default function OfflineModeMain() {
                                             userName={userName} setUserName={setUserName}
                                             connectedDevices={connectedDevices} discoveredDevices={discoveredDevices}
                                             setConnectedDevices={setConnectedDevicesUnique}/>)}
+            </Tab.Screen>
+
+            <Tab.Screen 
+                name="OMMap"
+                options={{
+                    tabBarIcon: ({focused}) => (
+                        <Icon name="pin-drop" size={35} color={focused ? Colors.magenta : Colors.snow}/>
+                    )
+                }}
+            >
+                {() => (<OfflineModeMap/>)}
             </Tab.Screen>
 
             <Tab.Screen 
