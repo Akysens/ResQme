@@ -58,7 +58,8 @@ export default function OfflineModeMain() {
                 console.log(discoveredDevices);
                 console.log(connectedDevices);
             });
-    
+
+
             // Informs when a new connection is initiated (by user or someone else)
             const onConnectionInitiated = Nearby.addNewConnectionListener((event) => {
                 if (event.isIncomingConnection) {
@@ -117,9 +118,6 @@ export default function OfflineModeMain() {
                     case 7:
                         Alert.alert("Connection Lost", "A network error occurred. Please try again. Error code: " + event.status, [{text: "OK"}]);
                         setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
-                        break;
-                    case 15:
-                        Alert.alert("Connection Failed", "Timeout while trying to connect. Error code: " + event.status, [{text: "OK"}]);
                         break;
                     case 13: 
                         Alert.alert("Connection Lost", "Disconnected. Error code: " + event.status, [{text: "OK"}]);
