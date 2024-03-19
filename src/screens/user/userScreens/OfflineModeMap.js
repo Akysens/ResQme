@@ -3,52 +3,73 @@ import { Text } from "react-native-paper";
 import * as Colors from "../styles/Colors";
 import * as Location from "expo-location";
 import { useState, useEffect } from "react";
-import MapView, { LocalTile } from "react-native-maps";
-
-
-function lon2tile(lon,zoom) { return (Math.floor((lon+180)/360*Math.pow(2,zoom))); }
-function lat2tile(lat,zoom)  { return (Math.floor((1-Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180))/Math.PI)/2 *Math.pow(2,zoom))); }
-
+import MapView, { Marker, LocalTile, UrlTile, Circle } from "react-native-maps";
 
 export default function OfflineModeMap() {
     const [location, setLocation] = useState(null);
 
+    /*
     useEffect(() => {
         (async () => {
-            let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.Highest});
-
+            let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.Balanced});
+            console.log(location);
             setLocation(location);
         })();
-    }, []);
 
-    let text = "waiting...";
+    }, []);
+    */
+
+    useEffect(() => {
+        (async () => {
+            const subscription = await Location.watchPositionAsync({accuracy: Location.Accuracy.Highest}, (result) => {
+                setLocation(result);
+            });
+
+            return (() => {subscription.remove();})
+        })();
+    }, [location]);
+
+    let data;
+    let text;
+  
     if (location) {
         data = location["coords"];
         text = data["latitude"] + " " + data["longitude"];
-        console.log(data);
-        console.log("X: ", lon2tile(data["longitude"], 19));
-        console.log("Y: ", lat2tile(data["latitude"], 19));
+        // console.log(location["coords"]);
+
+        return (
+            <View style={styles.container}>
+                <Text style={styles.text}>Your location: {text}</Text>
+                <MapView       
+                    style={{
+                        flex: 1,
+                    }}
+                    minZoomLevel={19}
+                    maxZoomLevel={19}
+                    mapType="none"
+                    initialRegion={{latitude: data["latitude"], longitude: data["longitude"], latitudeDelta: 0.01, longitudeDelta: 0.01}}
+                >
+                    <Marker
+                        coordinate={{latitude: data["latitude"], longitude: data["longitude"]}}
+                        title="Your Location"
+                        description={"Accuracy: " + Math.round(data["accuracy"])+ "m"} 
+                    />
+                    <Circle
+                        center={{latitude: data["latitude"], longitude: data["longitude"]}}
+                        radius={data["accuracy"]}
+                        strokeColor="rgba(136, 20, 177, 0.5)"
+                        strokeWidth={1}
+                        fillColor="rgba(136, 20, 177, 0.1)"
+                    />
+                    <LocalTile pathTemplate={"/data/user/0/com.Help.Hub/files/map/{z}/{x}/{y}.png"} tileSize={256} zIndex={-1}/>                            
+                </MapView>
+            </View>
+        );
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>{text}</Text>
-            <MapView       
-                style={{
-                    flex: 1,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    top: 0,
-                    position: "absolute",
-                }}
-                minZoomLevel={19}
-                maxZoomLevel={19}  
-                initialRegion={{latitude: 53.166345, longitude: 8.6550214, latitudeDelta: 0.01, longitudeDelta: 0.01}}
-                mapType="none"
-            >
-                <LocalTile pathTemplate={"C:/Users/enesy/Documents/webprojects/resqme_old/src/screens/user/map/{z}/{x}/{y}.png"} tileSize={256} zIndex={-1}/>                            
-            </MapView>
+        <View style={{...styles.container, justifyContent: "center", alignItems: "center"}}>
+            <Text style={styles.text}>Please wait a moment while we figure out your location.</Text>
         </View>
     );
 };
@@ -65,5 +86,6 @@ const styles = StyleSheet.create({
         fontSize: 10,
         fontWeight: 900,
         color: Colors.gray,
+        marginBottom: 10,
     },
 })
