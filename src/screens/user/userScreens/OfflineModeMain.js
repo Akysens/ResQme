@@ -5,10 +5,29 @@ import * as Colors from "../styles/Colors";
 import { NavigationContainer } from '@react-navigation/native';
 import OfflineModeMap from "./OfflineModeMap";
 import OfflineModeConnect from './OfflineModeConnect';
-import Icon from "@expo/vector-icons/MaterialIcons"
+import Icon from "@expo/vector-icons/MaterialIcons";
+import * as Location from "expo-location";
 
 import * as Nearby from "../../../../modules/helphub-nearby";
 import OfflineModeMessageScreen from './OfflineModeMessage';
+
+function isLocationData(str) {
+    try {
+        let data = JSON.parse(str);
+        if (typeof data != Object) {
+            return false;
+        }
+
+        if (data["coords"]) {
+            return true;
+        }
+        
+        return false;
+    }
+    catch (error) {
+        return false;
+    }
+}
 
 const Tab = createBottomTabNavigator();
 
@@ -18,9 +37,15 @@ export default function OfflineModeMain() {
 
         // Connected devices
         [connectedDevices, setConnectedDevices] = useState([]);
+
+        // Location (managed by Map screen)
+        [location, setLocation] = useState(null);
+
+        // Discovered device locations
+        [locations, setLocations] = useState([]);
     
         // Username
-        [userName, setUserName] = useState("HelphubUser");
+        [userName, setUserName] = useState("ResQmeUser");
     
         // Whether we have showed the warning for the users
         [warned, setWarned] = useState(false);
@@ -32,7 +57,14 @@ export default function OfflineModeMain() {
 
         // Messages
         [messages, setMessages] = useState(new Map());
-    
+
+        const sendLocation = async (endpointId) => {
+            const loc = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.Highest})  
+        
+            Nearby.sendPayload(endpointId, loc);
+            console.log("Location data sent to: " + endpointId); // for debug
+        }
+
         // Adds a device to connectedDevices ONLY IF it is not there
         function setConnectedDevicesUnique(endpoint) {
             if(!connectedDevices.includes(endpoint)) {
@@ -106,22 +138,27 @@ export default function OfflineModeMain() {
                         setConnectedDevicesUnique(event.endpointId);
                         setDiscoveredDevices(discoveredDevices.filter(function(e) {return e !== event.endpointId}));
                         setMessages(new Map(messages.set(event.endpointId, [])));
+                        sendLocation(event.endpointId);
                         break;
                     case 15:
                         Alert.alert("Connection Failed", "Timeout while trying to connect. Error code: " + event.status, [{text: "OK"}]);
-                        setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
+                        setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}));
+                        setLocations(locations.filter(function(e) {return e.device !== event.endpointId }));
                         break;
                     case 16:
                         Alert.alert("Connection Lost", "Connection was cancelled. Error code: " + event.status, [{text: "OK"}]);
-                        setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
+                        setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}));
+                        setLocations(locations.filter(function(e) {return e.device !== event.endpointId }));
                         break;
                     case 7:
                         Alert.alert("Connection Lost", "A network error occurred. Please try again. Error code: " + event.status, [{text: "OK"}]);
-                        setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
+                        setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}));
+                        setLocations(locations.filter(function(e) {return e.device !== event.endpointId }));
                         break;
                     case 13: 
                         Alert.alert("Connection Lost", "Disconnected. Error code: " + event.status, [{text: "OK"}]);
-                        setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
+                        setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}));
+                        setLocations(locations.filter(function(e) {return e.device !== event.endpointId }));
                         break;
                 };
             });
@@ -134,8 +171,14 @@ export default function OfflineModeMain() {
 
             // Informs a payload (message) is received
             const onPayloadReceived = Nearby.addPayloadReceivedListener((event) => {
-                Alert.alert("Received Message", "From: " + event.endpointId + "\n" + event.message);
-                setMessages(new Map(messages.set(event.endpointId, [...messages.get(event.endpointId), {from: event.endpointId, message: event.message}])));
+                if (isLocationData(event.message)) {
+                    let locationData = JSON.parse(event.message); 
+                    setLocations([...locations, {device: endpointId, location: locationData["coords"]}]);
+                }
+                else {
+                    Alert.alert("Received Message", "From: " + event.endpointId + "\n" + event.message);
+                    setMessages(new Map(messages.set(event.endpointId, [...messages.get(event.endpointId), {from: event.endpointId, message: event.message}])));
+                }
             });
         
             return (() => {
@@ -180,7 +223,7 @@ export default function OfflineModeMain() {
                     )
                 }}
             >
-                {() => (<OfflineModeMap/>)}
+                {() => (<OfflineModeMap location={location} setLocation={setLocation} receivedLocations={locations} />)}
             </Tab.Screen>
 
             <Tab.Screen 

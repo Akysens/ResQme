@@ -5,9 +5,7 @@ import * as Location from "expo-location";
 import { useState, useEffect } from "react";
 import MapView, { Marker, LocalTile, UrlTile, Circle } from "react-native-maps";
 
-export default function OfflineModeMap() {
-    const [location, setLocation] = useState(null);
-
+export default function OfflineModeMap({location, setLocation, receivedLocations}) {
     /*
     useEffect(() => {
         (async () => {
@@ -61,6 +59,17 @@ export default function OfflineModeMap() {
                         strokeWidth={1}
                         fillColor="rgba(136, 20, 177, 0.1)"
                     />
+
+                    {receivedLocations.map((item, index) => {
+                        let latitude = item.location["coords"]["latitude"];
+                        let longitude = item.location["coords"]["longitude"];
+
+                        return (
+                            <Marker coordinate={{latitude: latitude, longitude: longitude}}
+                                    title={item.device}
+                                    description={"Accuracy: " + item.location["coords"]["accuracy"]} />
+                        )
+                    })}
                     <LocalTile pathTemplate={"/data/user/0/com.Help.Hub/files/map/{z}/{x}/{y}.png"} tileSize={256} zIndex={-1}/>                            
                 </MapView>
             </View>
