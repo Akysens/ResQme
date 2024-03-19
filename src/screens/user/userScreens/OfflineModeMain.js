@@ -124,19 +124,28 @@ export default function OfflineModeMain() {
                         setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
                         break;
                 };
-                
-                // Informs when a device is disconnected
-                const onDisconnected = Nearby.addDisconnectionListener((event) => {
-                    Alert.alert("Connection Lost", "Disconnected.", [{text: "OK"}]);
-                    setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
-                })
-    
-                // Informs a payload (message) is received
-                const onPayloadReceived = Nearby.addPayloadReceivedListener((event) => {
-                    Alert.alert("Received Message", "From: " + event.endpointId + "\n" + event.message);
-                    setMessages(new Map(messages.set(event.endpointId, [...messages.get(event.endpointId), {from: event.endpointId, message: event.message}])));
-                })
+            });
+
+            // Informs when a device is disconnected
+            const onDisconnected = Nearby.addDisconnectionListener((event) => {
+                Alert.alert("Connection Lost", "Disconnected.", [{text: "OK"}]);
+                setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
+            });
+
+            // Informs a payload (message) is received
+            const onPayloadReceived = Nearby.addPayloadReceivedListener((event) => {
+                Alert.alert("Received Message", "From: " + event.endpointId + "\n" + event.message);
+                setMessages(new Map(messages.set(event.endpointId, [...messages.get(event.endpointId), {from: event.endpointId, message: event.message}])));
+            });
+        
+            return (() => {
+                onNewDeviceDiscovered.remove();
+                onConnectionInitiated.remove();
+                onConnectionUpdate.remove();
+                onDisconnected.remove();
+                onPayloadReceived.remove();
             })
+
         }, [])
 
     return (
