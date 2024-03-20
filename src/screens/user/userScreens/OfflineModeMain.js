@@ -14,7 +14,7 @@ import OfflineModeMessageScreen from './OfflineModeMessage';
 function isLocationData(str) {
     try {
         let data = JSON.parse(str);
-        if (typeof data != Object) {
+        if (typeof data !== 'object') {
             return false;
         }
 
@@ -42,7 +42,7 @@ export default function OfflineModeMain() {
         [location, setLocation] = useState(null);
 
         // Discovered device locations
-        [locations, setLocations] = useState([]);
+        [locations, setLocations] = useState(new Map());
     
         // Username
         [userName, setUserName] = useState("ResQmeUser");
@@ -57,13 +57,6 @@ export default function OfflineModeMain() {
 
         // Messages
         [messages, setMessages] = useState(new Map());
-
-        const sendLocation = async (endpointId) => {
-            const loc = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.Highest})  
-        
-            Nearby.sendPayload(endpointId, loc);
-            console.log("Location data sent to: " + endpointId); // for debug
-        }
 
         // Adds a device to connectedDevices ONLY IF it is not there
         function setConnectedDevicesUnique(endpoint) {
@@ -138,27 +131,30 @@ export default function OfflineModeMain() {
                         setConnectedDevicesUnique(event.endpointId);
                         setDiscoveredDevices(discoveredDevices.filter(function(e) {return e !== event.endpointId}));
                         setMessages(new Map(messages.set(event.endpointId, [])));
-                        sendLocation(event.endpointId);
+                        Location.getCurrentPositionAsync({accuracy: Location.Accuracy.High})
+                        .then((loc) => {
+                            Nearby.sendPayload(event.endpointId, JSON.stringify(loc));// for debug
+                        });
                         break;
                     case 15:
                         Alert.alert("Connection Failed", "Timeout while trying to connect. Error code: " + event.status, [{text: "OK"}]);
                         setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}));
-                        setLocations(locations.filter(function(e) {return e.device !== event.endpointId }));
+                        setLocations(new Map(locations.delete(event.endpointId)));
                         break;
                     case 16:
                         Alert.alert("Connection Lost", "Connection was cancelled. Error code: " + event.status, [{text: "OK"}]);
                         setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}));
-                        setLocations(locations.filter(function(e) {return e.device !== event.endpointId }));
+                        setLocations(new Map(locations.delete(event.endpointId)));
                         break;
                     case 7:
                         Alert.alert("Connection Lost", "A network error occurred. Please try again. Error code: " + event.status, [{text: "OK"}]);
                         setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}));
-                        setLocations(locations.filter(function(e) {return e.device !== event.endpointId }));
+                        setLocations(new Map(locations.delete(event.endpointId)));
                         break;
                     case 13: 
                         Alert.alert("Connection Lost", "Disconnected. Error code: " + event.status, [{text: "OK"}]);
                         setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}));
-                        setLocations(locations.filter(function(e) {return e.device !== event.endpointId }));
+                        setLocations(new Map(locations.delete(event.endpointId)));
                         break;
                 };
             });
@@ -166,14 +162,16 @@ export default function OfflineModeMain() {
             // Informs when a device is disconnected
             const onDisconnected = Nearby.addDisconnectionListener((event) => {
                 Alert.alert("Connection Lost", "Disconnected.", [{text: "OK"}]);
-                setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}))
+                setConnectedDevices(connectedDevices.filter(function(e) {return e !== event.endpointId}));
+                setLocations(new Map(locations.delete(event.endpointId)));
             });
 
             // Informs a payload (message) is received
             const onPayloadReceived = Nearby.addPayloadReceivedListener((event) => {
                 if (isLocationData(event.message)) {
                     let locationData = JSON.parse(event.message); 
-                    setLocations([...locations, {device: endpointId, location: locationData["coords"]}]);
+                    console.log("Received data from " + event.endpointId);
+                    setLocations(new Map(locations.set(event.endpointId, locationData["coords"])));
                 }
                 else {
                     Alert.alert("Received Message", "From: " + event.endpointId + "\n" + event.message);
@@ -219,11 +217,11 @@ export default function OfflineModeMain() {
                 name="OMMap"
                 options={{
                     tabBarIcon: ({focused}) => (
-                        <Icon name="pin-drop" size={35} color={focused ? Colors.magenta : Colors.snow}/>
+                        <Icon name="pin-drop" size={60} color={focused ? Colors.magenta : Colors.snow}/>
                     )
                 }}
             >
-                {() => (<OfflineModeMap location={location} setLocation={setLocation} receivedLocations={locations} />)}
+                {() => (<OfflineModeMap connectedDevices={connectedDevices} location={location} setLocation={setLocation} receivedLocations={locations} />)}
             </Tab.Screen>
 
             <Tab.Screen 

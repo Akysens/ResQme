@@ -5,7 +5,9 @@ import * as Location from "expo-location";
 import { useState, useEffect } from "react";
 import MapView, { Marker, LocalTile, UrlTile, Circle } from "react-native-maps";
 
-export default function OfflineModeMap({location, setLocation, receivedLocations}) {
+import * as Nearby from "../../../../modules/helphub-nearby";
+
+export default function OfflineModeMap({connectedDevices, location, setLocation, receivedLocations}) {
     /*
     useEffect(() => {
         (async () => {
@@ -17,9 +19,27 @@ export default function OfflineModeMap({location, setLocation, receivedLocations
     }, []);
     */
 
+    function renderLocations(locations) {
+        let array = [];
+        for (const [key, value] of locations.entries()) {
+            array.push((
+                <Marker
+                key={key}
+                coordinate={{latitude: value["latitude"], longitude: value["longitude"]}}
+                title={key}
+                description={"Accuracy: " + value["accuracy"]} />
+            ));
+        }
+
+        return array;
+    }
+
     useEffect(() => {
         (async () => {
-            const subscription = await Location.watchPositionAsync({accuracy: Location.Accuracy.Highest}, (result) => {
+            const subscription = await Location.watchPositionAsync({accuracy: Location.Accuracy.Highest, distanceInterval: 2, timeInterval: 500000}, (result) => {
+                connectedDevices.map((item, index) => {
+                    Nearby.sendPayload(item, JSON.stringify(result));
+                })
                 setLocation(result);
             });
 
@@ -60,16 +80,8 @@ export default function OfflineModeMap({location, setLocation, receivedLocations
                         fillColor="rgba(136, 20, 177, 0.1)"
                     />
 
-                    {receivedLocations.map((item, index) => {
-                        let latitude = item.location["coords"]["latitude"];
-                        let longitude = item.location["coords"]["longitude"];
+                    {renderLocations(receivedLocations)}
 
-                        return (
-                            <Marker coordinate={{latitude: latitude, longitude: longitude}}
-                                    title={item.device}
-                                    description={"Accuracy: " + item.location["coords"]["accuracy"]} />
-                        )
-                    })}
                     <LocalTile pathTemplate={"/data/user/0/com.Help.Hub/files/map/{z}/{x}/{y}.png"} tileSize={256} zIndex={-1}/>                            
                 </MapView>
             </View>
