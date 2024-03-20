@@ -36,7 +36,7 @@ export default function OfflineModeMap({connectedDevices, location, setLocation,
 
     useEffect(() => {
         (async () => {
-            const subscription = await Location.watchPositionAsync({accuracy: Location.Accuracy.Highest, distanceInterval: 2, timeInterval: 500000}, (result) => {
+            const subscription = await Location.watchPositionAsync({accuracy: Location.Accuracy.Highest, timeInterval: 500000}, (result) => {
                 connectedDevices.map((item, index) => {
                     Nearby.sendPayload(item, JSON.stringify(result));
                 })
