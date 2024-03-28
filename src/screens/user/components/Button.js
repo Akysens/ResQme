@@ -65,4 +65,10 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.magenta,
         elevation: 5,
     },
+        buttonText: {
+        fontFamily: "OpenSans",
+        fontSize: 16,
+        color: Colors.snow,
+        fontWeight: 900,
+    },
 });

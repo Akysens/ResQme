@@ -2,12 +2,15 @@ import { View, StyleSheet, Alert, FlatList, Pressable, TextInput } from "react-n
 import { Text } from "react-native-paper";
 import * as Colors from "../styles/Colors";
 import * as Location from "expo-location";
+import Button from "../components/Button";
 import { useState, useEffect } from "react";
 import MapView, { Marker, LocalTile, UrlTile, Circle } from "react-native-maps";
 
 import * as Nearby from "../../../../modules/helphub-nearby";
 
 export default function OfflineModeMap({connectedDevices, location, setLocation, receivedLocations}) {
+    [lastSentLocation, setLastSentLocation] = useState("None");
+    
     /*
     useEffect(() => {
         (async () => {
@@ -34,18 +37,25 @@ export default function OfflineModeMap({connectedDevices, location, setLocation,
         return array;
     }
 
+    function updateLocationToConnectedDevices() {
+        connectedDevices.map((item, index) => {
+            Nearby.sendPayload(item, JSON.stringify(location));
+        });
+        data = location["coords"];
+        text = data["latitude"] + " " + data["longitude"];
+
+        setLastSentLocation(text);
+    }
+
     useEffect(() => {
         (async () => {
-            const subscription = await Location.watchPositionAsync({accuracy: Location.Accuracy.Highest, timeInterval: 500000}, (result) => {
-                connectedDevices.map((item, index) => {
-                    Nearby.sendPayload(item, JSON.stringify(result));
-                })
+            const subscription = await Location.watchPositionAsync({accuracy: Location.Accuracy.High}, (result) => {
                 setLocation(result);
             });
 
             return (() => {subscription.remove();})
         })();
-    }, [location]);
+    }, []);
 
     let data;
     let text;
@@ -57,10 +67,9 @@ export default function OfflineModeMap({connectedDevices, location, setLocation,
 
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>Your location: {text}</Text>
                 <MapView       
                     style={{
-                        flex: 1,
+                        flex: 5,
                     }}
                     minZoomLevel={19}
                     maxZoomLevel={19}
@@ -84,6 +93,22 @@ export default function OfflineModeMap({connectedDevices, location, setLocation,
 
                     <LocalTile pathTemplate={"/data/user/0/com.Help.Hub/files/map/{z}/{x}/{y}.png"} tileSize={256} zIndex={-1}/>                            
                 </MapView>
+                <View style={styles.mapUtility}>   
+                    <View style={styles.mapLocationInfo}>
+                        <View style={styles.mapLocationInfoTextBox}>
+                            <Text style={styles.text}>Current location:</Text>
+                            <Text style={styles.text}>{text}</Text>
+                        </View>
+                        <View style={styles.mapLocationInfoTextBox}>
+                            <Text style={styles.text}>Your last update:</Text>
+                            <Text style={styles.text}>{lastSentLocation}</Text>
+                        </View>
+                    </View>
+                    
+                    <Button onPress={updateLocationToConnectedDevices} primary={true}>
+                        <Text style={styles.buttonText}>Update Location</Text>
+                    </Button>
+                </View>
             </View>
         );
     }
@@ -98,6 +123,8 @@ export default function OfflineModeMap({connectedDevices, location, setLocation,
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        flexDirection: "column",
+        justifyContent: "space-evenly",
         backgroundColor: Colors.background,
         padding: 20,
         paddingTop: 40,
@@ -108,5 +135,27 @@ const styles = StyleSheet.create({
         fontWeight: 900,
         color: Colors.gray,
         marginBottom: 10,
+    },
+    mapUtility: {
+        flex: 1,
+        padding: 10,
+        flexDirection: "column",
+        justifyContent: "space-evenly",
+        alignItems: "center",
+    },
+    mapLocationInfo: {
+        width: "100%",
+        flexDirection: "row",
+        justifyContent: "space-between",
+    },
+    mapLocationInfoTextBox: {
+        flexDirection: "column", 
+        alignItems: "center"
+    },
+    buttonText: {
+        fontFamily: "OpenSans",
+        fontSize: 14,
+        color: Colors.snow,
+        fontWeight: 900,
     },
 })
