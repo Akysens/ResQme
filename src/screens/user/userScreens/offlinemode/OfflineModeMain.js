@@ -1,14 +1,14 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Pressable, StyleSheet, Alert } from 'react-native';
 import {useEffect, useContext, useState} from "react";
-import * as Colors from "../styles/Colors";
+import * as Colors from "../../styles/Colors";
 import { NavigationContainer } from '@react-navigation/native';
 import OfflineModeMap from "./OfflineModeMap";
 import OfflineModeConnect from './OfflineModeConnect';
 import Icon from "@expo/vector-icons/MaterialIcons";
 import * as Location from "expo-location";
 
-import * as Nearby from "../../../../modules/helphub-nearby";
+import * as Nearby from "../../../../../modules/helphub-nearby";
 import OfflineModeMessageScreen from './OfflineModeMessage';
 
 function isLocationData(str) {

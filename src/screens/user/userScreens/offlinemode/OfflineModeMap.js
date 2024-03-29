@@ -1,12 +1,12 @@
 import { View, StyleSheet, Alert, FlatList, Pressable, TextInput } from "react-native";
 import { Text } from "react-native-paper";
-import * as Colors from "../styles/Colors";
+import * as Colors from "../../styles/Colors";
 import * as Location from "expo-location";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 import { useState, useEffect } from "react";
 import MapView, { Marker, LocalTile, UrlTile, Circle } from "react-native-maps";
 
-import * as Nearby from "../../../../modules/helphub-nearby";
+import * as Nearby from "../../../../../modules/helphub-nearby";
 
 export default function OfflineModeMap({connectedDevices, location, setLocation, receivedLocations}) {
     [lastSentLocation, setLastSentLocation] = useState("None");

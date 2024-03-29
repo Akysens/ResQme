@@ -14,7 +14,7 @@ import Notifications from './screens/user/userScreens/Notifications';
 import Profile from './screens/user/userScreens/profile/Profile';
 import Settings from './screens/user/userScreens/Settings';
 
-import OfflineModeMain from './screens/user/userScreens/OfflineModeMain';
+import OfflineModeMain from './screens/user/userScreens/offlinemode/OfflineModeMain';
 
 import NetInfo from "@react-native-community/netinfo";
 import { MenuProvider } from "react-native-popup-menu";

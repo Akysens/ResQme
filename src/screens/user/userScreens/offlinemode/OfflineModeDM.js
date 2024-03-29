@@ -1,11 +1,11 @@
 import { View, StyleSheet, Alert, FlatList, Pressable, TextInput, Dimensions } from "react-native";
 import { Text } from "react-native-paper";
-import * as Colors from "../styles/Colors"
+import * as Colors from "../../styles/Colors"
 import { useState } from "react";
 import Icon from "@expo/vector-icons/MaterialIcons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
-import * as Nearby from "../../../../modules/helphub-nearby";
+import * as Nearby from "../../../../../modules/helphub-nearby";
 
 
 function ReceivedMessageBubble({endpointId, message}) {

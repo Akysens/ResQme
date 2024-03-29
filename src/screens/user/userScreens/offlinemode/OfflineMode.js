@@ -8,7 +8,7 @@ import { SegmentedButtons, Banner, Text, Button } from "react-native-paper";
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from "react-native-popup-menu";
 import Dialog from "react-native-dialog";
 
-import * as Nearby from "../../../../modules/helphub-nearby/index";
+import * as Nearby from "../../../../../modules/helphub-nearby/index";
 
 /**
  * Button Component
