@@ -4,6 +4,7 @@ import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/
 import { LogBox, Alert } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useNavigation } from '@react-navigation/native';
 import LoginScreen from './screens/auth/LoginScreen';
 import SignInScreen from './screens/auth/SignInScreen';
 import Slider_Screen from './screens/user/userScreens/Slider_Screen';
@@ -16,12 +17,14 @@ import Settings from './screens/user/userScreens/Settings';
 
 import OfflineModeMain from './screens/user/userScreens/offlinemode/OfflineModeMain';
 
+import EmergencyBag from './screens/user/userScreens/emergencybag/EmergencyBag';
+import EmergencyBagButton from './screens/user/userScreens/emergencybag/EmergencyBagButton';
+
 import NetInfo from "@react-native-community/netinfo";
 import { MenuProvider } from "react-native-popup-menu";
 import { AccModeContext, AccIdContext } from './Contexts';
 
 import { EventRegister } from 'react-native-event-listeners';
-import { dataDetectorType } from 'deprecated-react-native-prop-types/DeprecatedTextPropTypes';
 import theme from './theme/theme';
 import themeContext from './theme/themeContext';
 // import { OfflineMode } from './screens/user/userScreens';
@@ -42,14 +45,23 @@ function AuthStackScreen() {
 
 const MainTab = createBottomTabNavigator();
 
-function MainTabScreen() {
+function MainTabScreen({navigation}) {
   const {t} = useTranslation();
 
   const { accMode } = useContext(AccModeContext);
   const theme = useContext(themeContext);
   
+  function goToEmergencyBag() {
+    navigation.navigate("EmergencyBag");
+  };
+
   return ( 
-    <MainTab.Navigator screenOptions={{ headerShown: true, headerTitleAlign: 'center', headerTitleStyle: { fontWeight: 'bold' } }}>
+    <MainTab.Navigator screenOptions={{ 
+          headerShown: true, 
+          headerTitleAlign: 'center', 
+          headerTitleStyle: { fontWeight: 'bold' }, 
+          headerRight: () => <EmergencyBagButton onPress={goToEmergencyBag}/>
+        }}>
       <MainTab.Screen name={t('app_screenname_requests')} component={Requests} options={{
         tabBarIcon: () => (
           <Image
@@ -58,6 +70,7 @@ function MainTabScreen() {
           />
         ),
       }} />
+
       <MainTab.Screen name={t('app_screenname_notifications')} component={Notifications} options={{
         tabBarIcon: () => (
           <Image
@@ -161,6 +174,7 @@ function App() {
                   (<>
                     <RootStack.Screen name="Auth" component={AuthStackScreen} />
                     <RootStack.Screen name="MainApp" component={MainTabScreen} />
+                    <RootStack.Screen name="EmergencyBag" component={EmergencyBag}/>
                     <RootStack.Screen name="Advice_Screen" component={Advice_Screen} />
                   </>)
                     :
